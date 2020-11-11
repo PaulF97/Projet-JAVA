@@ -9,10 +9,6 @@ package Interface;
  *
  * @author charl
  */
-public class Interface {
-    
-    public static void main(String[] args) {
-        
-    }
+public class Menu {
     
 }
