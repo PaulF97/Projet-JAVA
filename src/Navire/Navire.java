@@ -11,4 +11,6 @@ package Navire;
  */
 public class Navire {
     
+    debut
+    
 }
