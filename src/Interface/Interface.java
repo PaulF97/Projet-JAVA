@@ -15,4 +15,24 @@ public class Interface {
         
     }
     
+    public void sauvegarde(){
+        
+    }
+    
+    public void chargement(){
+        
+    }
+    
+    public void jeu(){
+        
+    }
+    
+    public void création(){
+        
+    }
+    
+    public void menu(){
+         
+    }
+    
 }

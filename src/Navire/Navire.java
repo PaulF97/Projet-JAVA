@@ -9,8 +9,18 @@ package Navire;
  *
  * @author charl
  */
-public class Navire {
+ abstract class Navire {
     
-    int a;
+     protected int m_taille;
+     protected int m_puissanceTir;
+     protected Coord[] m_coord;
+     
+     abstract void tirer();
+     
+     public void deplacer(Coord[] caseOccupe){
+         
+     }
+     
+     
     
 }
