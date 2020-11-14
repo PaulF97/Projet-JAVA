@@ -16,6 +16,7 @@ public class SousMarin extends Navire{
     public SousMarin(){
         m_taille = 1;
         m_puissanceTir = 1;
+        m_initCoord = false;
     }
 
     @Override

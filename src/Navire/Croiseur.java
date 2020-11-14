@@ -16,6 +16,8 @@ public class Croiseur extends Navire{
     public Croiseur(){
         m_taille = 5;
         m_puissanceTir = 4;
+        m_initCoord = false;
+        
     }
 
     @Override

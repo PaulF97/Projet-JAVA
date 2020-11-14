@@ -16,6 +16,7 @@ public class Destroyer extends Navire{
     public Destroyer(){
         m_taille = 3;
         m_puissanceTir = 1;
+        m_initCoord = false;
     }
 
     @Override

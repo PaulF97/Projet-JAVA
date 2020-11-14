@@ -16,6 +16,7 @@ public class Cuirasse extends Navire{
     public Cuirasse (){
         m_taille = 7;
         m_puissanceTir = 9;
+        m_initCoord = false;
     }
 
     @Override

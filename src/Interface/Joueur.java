@@ -33,11 +33,25 @@ public class Joueur {
         
     }
     
-    public void initNavires(Navire navire){
+    public void initNaviresCoord(Navire navire){
         
-        m_navires.add(navire);
+        boolean boucle = true;
         
+        for(Navire elem : m_navires){
+            
+            if(elem.getTaille() == navire.getTaille() && !elem.getInitCoord() && boucle){
+                
+                 elem.addCoord(navire.getCoord());
+                 boucle = false;
+                 
+            }
+        } 
     }
     
+    public void initGrille(){
+        
+        m_grilles.add(new Grille(m_navires));
+        m_grilles.add(new Grille());
+    }
             
 }
