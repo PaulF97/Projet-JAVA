@@ -4,16 +4,17 @@
  * and open the template in the editor.
  */
 package Navire;
+import java.util.ArrayList;
 
 /**
  *
  * @author charl
  */
- abstract class Navire {
+    public abstract class Navire {
     
      protected int m_taille;
      protected int m_puissanceTir;
-     protected Coord[] m_coord;
+     protected ArrayList<Coord> m_coord;
      
      abstract void tirer();
      
@@ -21,6 +22,10 @@ package Navire;
          
      }
      
+     public void addCoord(ArrayList<Coord> coord){
+         m_coord = new ArrayList<Coord>();
+         m_coord = coord;
+     }
      
     
 }

@@ -9,6 +9,6 @@ package Interface;
  *
  * @author charl
  */
-public class Humain {
+public class Humain extends Joueur{
     
 }

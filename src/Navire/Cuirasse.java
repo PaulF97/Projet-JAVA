@@ -5,10 +5,21 @@
  */
 package Navire;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author charl
  */
-public class Cuirasse {
+public class Cuirasse extends Navire{
     
+    public Cuirasse (){
+        m_taille = 7;
+        m_puissanceTir = 9;
+    }
+
+    @Override
+    void tirer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
