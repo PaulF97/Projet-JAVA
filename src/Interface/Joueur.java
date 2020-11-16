@@ -11,7 +11,7 @@ import Navire.*;
  *
  * @author charl
  */
-public class Joueur {
+public abstract class Joueur {
     
     private ArrayList<Grille> m_grilles;
     private ArrayList<Navire> m_navires;
@@ -20,32 +20,11 @@ public class Joueur {
         m_grilles = new ArrayList<>();
         m_navires = new ArrayList<>();
         
-        m_navires.add(new Cuirasse());
-        m_navires.add(new Croiseur());
-        m_navires.add(new Croiseur());
-        m_navires.add(new Destroyer());
-        m_navires.add(new Destroyer());
-        m_navires.add(new Destroyer());
-        m_navires.add(new SousMarin());
-        m_navires.add(new SousMarin());
-        m_navires.add(new SousMarin());
-        m_navires.add(new SousMarin());
-        
     }
     
-    public void initNaviresCoord(Navire navire){
+    public void initNavires(ArrayList<Navire> navires){
         
-        boolean boucle = true;
-        
-        for(Navire elem : m_navires){
-            
-            if(elem.getTaille() == navire.getTaille() && !elem.getInitCoord() && boucle){
-                
-                 elem.addCoord(navire.getCoord());
-                 boucle = false;
-                 
-            }
-        } 
+        m_navires = navires;
     }
     
     public void initGrille(){
@@ -53,5 +32,13 @@ public class Joueur {
         m_grilles.add(new Grille(m_navires));
         m_grilles.add(new Grille());
     }
+    
+    public void affichageConsole(){
+        for(Grille elem : m_grilles){
+            elem.affichageConsole();
+        }
+    }
+    
+    public abstract void tourJeu();
             
 }
