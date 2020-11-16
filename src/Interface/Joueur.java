@@ -25,10 +25,7 @@ public abstract class Joueur {
     public void initNavires(ArrayList<Navire> navires){
         
         m_navires = navires;
-    }
     
-    public void initGrille(){
-        
         m_grilles.add(new Grille(m_navires));
         m_grilles.add(new Grille());
     }
