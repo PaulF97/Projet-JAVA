@@ -31,7 +31,6 @@ public class Interface {
     public static void main(String[] args) {
         
         
-        
     }
     
     public void sauvegarde(){
@@ -83,52 +82,66 @@ public class Interface {
         two.add(new SousMarin());
         two.add(new SousMarin());
         two.add(new SousMarin());
-        
+         
         coordAlea(buffer,one);
         coordAlea(buffer,two);
         
         m_joueurs.get(0).initNavires(one);
         m_joueurs.get(1).initNavires(two);
         
+        
     }
     
     public void coordAlea(ArrayList<Coord> coord, ArrayList<Navire> navire){
         
         navire.forEach((elem) -> {
+        
             ArrayList<Coord> buffer_coord = new ArrayList<Coord>();
             boolean existant = false;
             Coord buffer; 
             int direction = intAlea(0,1);
-            
-            for(int i =0;i<elem.getTaille();++i){
+               
                 do{
                     buffer = new Coord(intAlea(0,14), intAlea(0,14));
+                    existant = false;
                     
-                    for(Coord auto : coord){
-                        if(direction == 0){
-                            if(auto.getX() == buffer.getX()+i && auto.getY() == buffer.getY())
-                                existant = true; 
+                    for(int i =0;i<elem.getTaille();++i){
+
+                        for(Coord auto : coord){
+
+                            if(direction == 0){
+                                if(auto.getX() == buffer.getX()+i && auto.getY() == buffer.getY())
+                                    existant = true; 
+                            }
+                            else{
+                                if(auto.getX() == buffer.getX() && auto.getY() == buffer.getY()+i)
+                                    existant = true;
+                            }
                         }
-                        else{
-                            if(auto.getX() == buffer.getX() && auto.getY() == buffer.getY()+i)
-                                existant = true;
+                    }
+                    
+                    if(!existant){
+                        for(int i =0;i<elem.getTaille();++i){
+                            if(direction == 0)
+                                 buffer_coord.add(new Coord(buffer.getX()+i,buffer.getY()));
+                              else
+                                buffer_coord.add(new Coord(buffer.getX(),buffer.getY()+i));
                         }
                     }
                 }while(existant);
                 
-                if(direction == 0)
-                    buffer_coord.add(new Coord(buffer.getX()+i,buffer.getY()));
-                else
-                    buffer_coord.add(new Coord(buffer.getX(),buffer.getY()+i));
-                
                 elem.addCoord(buffer_coord);
-            }
+           
+           
+            for(Coord c : buffer_coord)
+                coord.add(c);
         });
+        
     }
     
     public int intAlea(int a, int b){
         Random rand = new Random();
-        return rand.nextInt(b-a)+a;
+        return rand.nextInt(b-a+1)+a;
     }
     
     public void menu(){
@@ -138,7 +151,7 @@ public class Interface {
     }
     
     public void affichageMenu(){
-        
+      
     }
     
     public void aide(){
