@@ -16,6 +16,7 @@ import java.util.Random;
 public class Interface {
     
     private ArrayList<Joueur> m_joueurs;
+    private boolean m_sauvegarde; 
     
     public Interface(boolean deuxHumain){
         
@@ -43,10 +44,10 @@ public class Interface {
         
     }
     
-    public void jeu(boolean sauvegarde){
+    public void jeu(){
         
-        if(sauvegarde){
-            //charger depuis sauvegarde
+        if(m_sauvegarde){
+            chargement();
         }
         else
             création();

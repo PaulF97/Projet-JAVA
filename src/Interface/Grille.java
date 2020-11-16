@@ -24,8 +24,7 @@ public class Grille {
         m_navire = new ArrayList<Navire>();
         m_navire = navires;
         m_boolNavire = true;
-        
-        
+  
     }
     
     public Grille(){
