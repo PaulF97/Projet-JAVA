@@ -31,7 +31,7 @@ public class Interface {
     
     public static void main(String[] args) {
         
-        
+        int i;
     }
     
     public void sauvegarde(){
