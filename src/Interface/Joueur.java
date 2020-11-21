@@ -13,11 +13,13 @@ import Navire.*;
  */
 public abstract class Joueur {
     
-    private ArrayList<Grille> m_grilles;
+    private ArrayList<Coord> m_attaque;
+    private ArrayList<Coord> m_defense;
     private ArrayList<Navire> m_navires;
     
     public Joueur(){
-        m_grilles = new ArrayList<>();
+        m_attaque = new ArrayList<>();
+        m_defense = new ArrayList<>();
         m_navires = new ArrayList<>();
         
     }
@@ -25,15 +27,29 @@ public abstract class Joueur {
     public void initNavires(ArrayList<Navire> navires){
         
         m_navires = navires;
-    
-        m_grilles.add(new Grille(m_navires));
-        m_grilles.add(new Grille());
     }
     
     public void affichageConsole(){
-        for(Grille elem : m_grilles){
-            elem.affichageConsole();
-        }
+      
+    }
+    
+    public void addPoint(Coord coord,int choix){
+        if(choix == 0)
+            m_attaque.add(coord);
+        else
+            m_defense.add(coord);
+    }
+    
+    public ArrayList<Coord> getAttaque (){
+        return m_attaque;
+    }
+    
+    public ArrayList<Coord> getDefense(){
+        return m_defense;
+    }
+    
+    public ArrayList<Navire> getNavire(){
+        return m_navires;
     }
     
     public abstract void tourJeu();
