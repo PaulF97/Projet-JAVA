@@ -14,7 +14,7 @@ import java.util.ArrayList;
     
      protected int m_taille;
      protected int m_puissanceTir;
-     protected ArrayList<Coord> m_coord;
+     protected Coord m_coord;
      protected boolean m_initCoord;
      
      abstract void tirer();
@@ -23,8 +23,7 @@ import java.util.ArrayList;
          
      }
      
-     public void addCoord(ArrayList<Coord> coord){
-         m_coord = new ArrayList<Coord>();
+     public void addCoord(Coord coord){
          m_coord = coord;
          m_initCoord = true;
      }
@@ -37,7 +36,7 @@ import java.util.ArrayList;
         return m_initCoord;
     }
     
-    public ArrayList<Coord> getCoord(){
+    public Coord getCoord(){
         return m_coord;
     }
 }
