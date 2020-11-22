@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,8 +38,8 @@ public class Interface {
             m_joueurs.add(new Ordinateur());
     }
     
-    public static void main(String[] args) {    
-
+    public static void main(String[] args) {
+        
     }
     
     public void sauvegarde(){
@@ -310,8 +311,29 @@ public class Interface {
     
     public void menu(){
         
-        //switch 
-         
+        Object[] options = {"lancer une partie", "charger une partie", "Aide", "Quitter"};
+        //switch
+        int choix = JOptionPane.showOptionDialog(null, this, "Bataille Naval", JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+        
+        affichageMenu();
+        
+        switch(choix){
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case JOptionPane.CLOSED_OPTION:
+                
+                break;
+        }  
     }
     
     public void affichageMenu(){
