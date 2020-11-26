@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -34,6 +36,7 @@ public class Interface extends JFrame{
     
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde; 
+    private Object panneau;
     
     public Interface(boolean deuxHumain){
         
@@ -350,22 +353,47 @@ public class Interface extends JFrame{
     }
     
     public void affichageMenu(){
-       
+        
         boutonValider();
+        choix();
     }
     
     public void boutonValider(){
         
-        
         JButton BoutonValider;
-
         setTitle("-- Menu --");
         Container contentPane = this.getContentPane();
         contentPane.setLayout(new FlowLayout());
-        BoutonValider = new JButton(" -- Valider --");
-        contentPane.add(BoutonValider);
-        setSize(400, 400);
+        BoutonValider = new JButton(" -- Valider --"); // création du bouton
+        contentPane.add(BoutonValider); 
+        setSize(400, 400); // taille de la fenêtre
         setVisible(true);
+        
+    }
+    
+    public void choix(){
+        
+        // création des boutons
+        JCheckBox choix1 = new JCheckBox("commencer la partie");
+        JCheckBox choix2 = new JCheckBox("charger une partie");
+        JCheckBox choix3 = new JCheckBox("aide");
+        JCheckBox choix4 = new JCheckBox("quitter");
+        // affichage
+        add(choix1);
+        add(choix2);
+        add(choix3);
+        add(choix4);
+        
+        // traitement en fonction du choix
+        if(choix1.isSelected()){
+             
+        }else if(choix2.isSelected()){
+            
+        } else if(choix3.isSelected()){
+            aide();
+        } else{
+            return;
+        }
     }
     
     public void aide(){
