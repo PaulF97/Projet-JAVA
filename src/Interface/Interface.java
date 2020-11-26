@@ -10,7 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
-import java.awt.Label;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -23,10 +23,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -355,44 +355,45 @@ public class Interface extends JFrame{
     public void affichageMenu(){
         
         boutonValider();
-        choix();
+        
     }
     
     public void boutonValider(){
         
-        JButton BoutonValider;
-        setTitle("-- Menu --");
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new FlowLayout());
-        BoutonValider = new JButton(" -- Valider --"); // création du bouton
-        contentPane.add(BoutonValider); 
-        setSize(400, 400); // taille de la fenêtre
-        setVisible(true);
-        
-    }
-    
-    public void choix(){
-        
-        // création des boutons
+        // créations des boutons
         JCheckBox choix1 = new JCheckBox("commencer la partie");
         JCheckBox choix2 = new JCheckBox("charger une partie");
         JCheckBox choix3 = new JCheckBox("aide");
         JCheckBox choix4 = new JCheckBox("quitter");
-        // affichage
-        add(choix1);
-        add(choix2);
-        add(choix3);
-        add(choix4);
         
-        // traitement en fonction du choix
-        if(choix1.isSelected()){
-             
-        }else if(choix2.isSelected()){
+        
+        // création de la boite de dialogue
+        setTitle(" Menu "); // texte d'entrée
+        Container Demarrage = this.getContentPane();
+        Demarrage.setLayout(new FlowLayout());; 
+        setSize(400, 400); // taille du container
+        // affichage des checkboxs
+        Demarrage.add(choix1);
+        Demarrage.add(choix2);
+        Demarrage.add(choix3);
+        Demarrage.add(choix4);
+        Demarrage.setVisible(true);
+        
+        
+        traitement(choix1, choix2, choix3, choix4);
+    }
+    
+    // traitement du choix
+    public void traitement(JCheckBox premier, JCheckBox deuxieme, JCheckBox troisieme, JCheckBox quatrieme){
+        
+        if(premier.isSelected()){
+
+        } else if(deuxieme.isSelected()){
             
-        } else if(choix3.isSelected()){
-            aide();
-        } else{
-            return;
+        } else if(troisieme.isSelected()){
+            
+        } else {
+            
         }
     }
     
