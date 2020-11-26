@@ -6,6 +6,7 @@
 package Interface;
 
 import Navire.*;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
@@ -13,6 +14,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -360,17 +363,16 @@ public class Interface extends JFrame{
     
     public void boutonValider(){
         
-        // créations des boutons
+        // créations des check box boutons
         JCheckBox choix1 = new JCheckBox("commencer la partie");
         JCheckBox choix2 = new JCheckBox("charger une partie");
         JCheckBox choix3 = new JCheckBox("aide");
         JCheckBox choix4 = new JCheckBox("quitter");
         
-        
         // création de la boite de dialogue
         setTitle(" Menu "); // texte d'entrée
         Container Demarrage = this.getContentPane();
-        Demarrage.setLayout(new FlowLayout());; 
+        Demarrage.setLayout(new FlowLayout());
         setSize(400, 400); // taille du container
         // affichage des checkboxs
         Demarrage.add(choix1);
@@ -379,21 +381,25 @@ public class Interface extends JFrame{
         Demarrage.add(choix4);
         Demarrage.setVisible(true);
         
-        
+        choix1.setSelected(true);
+
         traitement(choix1, choix2, choix3, choix4);
     }
+  
     
     // traitement du choix
     public void traitement(JCheckBox premier, JCheckBox deuxieme, JCheckBox troisieme, JCheckBox quatrieme){
         
         if(premier.isSelected()){
-
+             System.out.println("test1");
         } else if(deuxieme.isSelected()){
-            
+             System.out.println("test2");
         } else if(troisieme.isSelected()){
-            
-        } else {
-            
+             System.out.println("test3");
+        } else if(quatrieme.isSelected()){
+             System.out.println("test4");
+        } else{
+           // System.out.println("default");
         }
     }
     
