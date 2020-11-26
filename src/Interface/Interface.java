@@ -12,6 +12,8 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -26,8 +28,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -369,11 +374,18 @@ public class Interface extends JFrame{
         JCheckBox choix3 = new JCheckBox("aide");
         JCheckBox choix4 = new JCheckBox("quitter");
         
-        // création de la boite de dialogue
+        
+         // création de la boite de dialogue
         setTitle(" Menu "); // texte d'entrée
-        Container Demarrage = this.getContentPane();
-        Demarrage.setLayout(new FlowLayout());
+        Container Demarrage = this.getContentPane(); // création du container
+        Demarrage.setLayout(new GridLayout(0,1)); // dimensionnement des cases
+        
+        JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
+        
         setSize(400, 400); // taille du container
+        
+        Demarrage.add(label);
+        
         // affichage des checkboxs
         Demarrage.add(choix1);
         Demarrage.add(choix2);
@@ -381,12 +393,13 @@ public class Interface extends JFrame{
         Demarrage.add(choix4);
         Demarrage.setVisible(true);
         
-        choix1.setSelected(true);
-
+        
+        //choix1.setSelected(true);
         traitement(choix1, choix2, choix3, choix4);
     }
+ 
+   
   
-    
     // traitement du choix
     public void traitement(JCheckBox premier, JCheckBox deuxieme, JCheckBox troisieme, JCheckBox quatrieme){
         
