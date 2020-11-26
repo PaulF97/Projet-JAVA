@@ -6,6 +6,12 @@
 package Interface;
 
 import Navire.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,13 +22,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author charl
  */
-public class Interface {
+public class Interface extends JFrame{
     
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde; 
@@ -38,8 +46,16 @@ public class Interface {
             m_joueurs.add(new Ordinateur());
     }
     
+    public Interface(){
+   
+        affichageMenu();
+    }
+   
     public static void main(String[] args) {
         
+        Interface test = new Interface();
+        test.setVisible(true);
+
     }
     
     public void sauvegarde(){
@@ -214,8 +230,7 @@ public class Interface {
         
         création();
         
-        //suite
-        
+        //suite  
     }
     
     public void création(){
@@ -310,34 +325,47 @@ public class Interface {
     }
     
     public void menu(){
-        
+       
         Object[] options = {"lancer une partie", "charger une partie", "Aide", "Quitter"};
-        //switch
         int choix = JOptionPane.showOptionDialog(null, this, "Bataille Naval", JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, options, options[1]);
-        
+   
         affichageMenu();
-        
+  
+        //switch
         switch(choix){
             case 1:
-                
                 break;
             case 2:
-                
                 break;
             case 3:
-                
+  
+                aide();
                 break;
             case 4:
                 
                 break;
             case JOptionPane.CLOSED_OPTION:
-                
-                break;
+                return;
         }  
     }
     
     public void affichageMenu(){
-      
+       
+        boutonValider();
+    }
+    
+    public void boutonValider(){
+        
+        
+        JButton BoutonValider;
+
+        setTitle("-- Menu --");
+        Container contentPane = this.getContentPane();
+        contentPane.setLayout(new FlowLayout());
+        BoutonValider = new JButton(" -- Valider --");
+        contentPane.add(BoutonValider);
+        setSize(400, 400);
+        setVisible(true);
     }
     
     public void aide(){
@@ -365,4 +393,6 @@ public class Interface {
                 
             }
     }
+
+   
 }
