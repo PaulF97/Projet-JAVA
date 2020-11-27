@@ -361,14 +361,12 @@ public class Interface extends JFrame{
     
     public void boutonValider(){
         
-       // créations des check box boutons
-       JCheckBox choix1 = new JCheckBox("commencer la partie");
-       JCheckBox choix2 = new JCheckBox("charger une partie");
-       JCheckBox choix3 = new JCheckBox("aide");
-       JCheckBox choix4 = new JCheckBox("quitter");
-        
-
-        
+        // créations des check box boutons
+        JCheckBox choix1 = new JCheckBox("commencer la partie");
+        JCheckBox choix2 = new JCheckBox("charger une partie");
+        JCheckBox choix3 = new JCheckBox("aide");
+        JCheckBox choix4 = new JCheckBox("quitter");
+       
         JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
         
          // création de la boite de dialogue
