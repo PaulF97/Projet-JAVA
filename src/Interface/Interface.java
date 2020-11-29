@@ -9,7 +9,8 @@ import Navire.*;
 
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,7 +23,6 @@ import java.util.Random;
 import java.util.Scanner;
 import javax.swing.DefaultButtonModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,11 +32,16 @@ import javax.swing.JOptionPane;
  *
  * @author charl
  */
-public class Interface extends JFrame{
+public class Interface extends JFrame implements ActionListener{
     
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde; 
     private Object panneau;
+    
+    private JButton choix1 = new JButton("commencer la partie");
+    private JButton choix2 = new JButton("charger une partie");
+    private JButton choix3 = new JButton("aide");
+    private JButton choix4 = new JButton("quitter");
     
 
     public Interface(boolean deuxHumain){
@@ -361,12 +366,7 @@ public class Interface extends JFrame{
     
     public void boutonValider(){
         
-        // créations des check box boutons
-        JCheckBox choix1 = new JCheckBox("commencer la partie");
-        JCheckBox choix2 = new JCheckBox("charger une partie");
-        JCheckBox choix3 = new JCheckBox("aide");
-        JCheckBox choix4 = new JCheckBox("quitter");
-       
+        // phrase
         JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
         
          // création de la boite de dialogue
@@ -376,34 +376,43 @@ public class Interface extends JFrame{
     
         setSize(400, 400); // taille du container
         
+        // capturer les évènements de chaque boutons
+        choix1.addActionListener(this);
+        choix2.addActionListener(this);
+        choix3.addActionListener(this);
+        choix4.addActionListener(this);
+        
         // affichage dans le conteneur
         Demarrage.add(label);
         Demarrage.add(choix1);
         Demarrage.add(choix2);
         Demarrage.add(choix3);
         Demarrage.add(choix4);
-
-       
-    //traitement(choix1, choix2, choix3, choix4);
-       
+ 
     }
-
     
-     // traitement du choix
-    public void traitement(JCheckBox premier, JCheckBox deuxieme, JCheckBox troisieme, JCheckBox quatrieme){
-    
-    if(premier.isSelected()){
-        System.out.println("test1");
-    } else if(deuxieme.isSelected()){
-        System.out.println("test2");
-    } else if(troisieme.isSelected()){
-        System.out.println("test3");
-    } else if(quatrieme.isSelected()){
-        System.out.println("test4");
-    } else{
-        System.out.println("default");
+      @Override // excécution après capture
+      public void actionPerformed(ActionEvent ae) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (ae.getSource() == choix1){ // lorsque le premier bouton est sélectionné
+            System.out.println("commencer");
+            
+        }else if (ae.getSource() == choix2){ // lorsque le deuxième bouton est sélectionné
+            System.out.println("charger");
+            
+        }else if (ae.getSource() == choix3){ // lorsque le trosième bouton est sélectionné
+            System.out.println("aide");
+            
+        }else if (ae.getSource() == choix4){ // lorsque le quatrième bouton est sélectionné
+            System.out.println("quitter");
+            
+        }else {
+            //System.out.println("erreur");
+            
+        }
     }
-    }
+
+ 
     
     public void aide(){
         //affichage
@@ -431,6 +440,4 @@ public class Interface extends JFrame{
             }
     }
 
- 
-   
 }
