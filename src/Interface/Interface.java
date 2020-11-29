@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import javax.swing.DefaultButtonModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -333,38 +332,13 @@ public class Interface extends JFrame implements ActionListener{
         return rand.nextInt(b-a+1)+a;
     }
     
-    public void menu(){
-       
-        Object[] options = {"lancer une partie", "charger une partie", "Aide", "Quitter"};
-        int choix = JOptionPane.showOptionDialog(null, this, "Bataille Naval", JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, options, options[1]);
-   
-        affichageMenu();
-  
-        //switch
-        switch(choix){
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-  
-                aide();
-                break;
-            case 4:
-                
-                break;
-            case JOptionPane.CLOSED_OPTION:
-                return;
-        }  
-    }
-    
     public void affichageMenu(){
         
-        boutonValider();
+        Container();
         
     }
     
-    public void boutonValider(){
+    public void Container(){
         
         // phrase
         JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
@@ -413,7 +387,6 @@ public class Interface extends JFrame implements ActionListener{
     }
 
  
-    
     public void aide(){
         //affichage
     }  
