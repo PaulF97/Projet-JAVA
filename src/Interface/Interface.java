@@ -356,13 +356,13 @@ public class Interface extends JFrame implements ActionListener{
         choix3.addActionListener(this);
         choix4.addActionListener(this);
         
-        // affichage dans le conteneur
+        // ajout des boutons informations dans le conteneur
         Demarrage.add(label);
         Demarrage.add(choix1);
         Demarrage.add(choix2);
         Demarrage.add(choix3);
         Demarrage.add(choix4);
- 
+        
     }
     
       @Override // excécution après capture
@@ -378,8 +378,9 @@ public class Interface extends JFrame implements ActionListener{
             System.out.println("aide");
             
         }else if (ae.getSource() == choix4){ // lorsque le quatrième bouton est sélectionné
-            System.out.println("quitter");
-            
+           // System.out.println("quitter");
+            System.exit(0); // arret du programme
+
         }else {
             //System.out.println("erreur");
             
