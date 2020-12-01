@@ -6,26 +6,50 @@
 package Interface;
 
 import Navire.*;
+
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author charl
  */
-public class Interface {
+public class Interface extends JFrame implements ActionListener{
     
     private ArrayList<Joueur> m_joueurs;
-    private boolean m_sauvegarde; 
+    private boolean m_sauvegarde = false; 
+    private Object panneau;
     
+    private JButton choix1 = new JButton("commencer la partie");
+    private JButton choix2 = new JButton("charger une partie");
+    private JButton choix3 = new JButton("aide");
+    private JButton choix4 = new JButton("quitter");
+    
+
     public Interface(boolean deuxHumain){
         
         m_joueurs = new ArrayList<Joueur>();
@@ -37,7 +61,12 @@ public class Interface {
             m_joueurs.add(new Ordinateur());
     }
     
-    public static void main(String[] args) {    
+   
+    public static void main(String[] args) {
+        
+        Interface test = new Interface(false);
+        test.affichageMenu();
+        test.setVisible(true);
 
     }
     
@@ -143,7 +172,7 @@ public class Interface {
         }
         else
             return false;
-        
+      
     }
     
     public void remplirAttributs(ArrayList<Integer> buffer, ArrayList<Navire> one, ArrayList<Navire> two){
@@ -213,8 +242,7 @@ public class Interface {
         
         création();
         
-        //suite
-        
+        //suite  
     }
     
     public void création(){
@@ -308,18 +336,99 @@ public class Interface {
         return rand.nextInt(b-a+1)+a;
     }
     
-    public void menu(){
-        
-        //switch 
-         
-    }
-    
     public void affichageMenu(){
-      
+        
+        Container();
+        
     }
     
+    public void Container(){
+        
+        // phrase
+        JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
+        
+         // création de la boite de dialogue
+        setTitle(" Menu "); // texte d'entrée
+        Container Demarrage = this.getContentPane(); // création du container
+        Demarrage.setLayout(new GridLayout(0,1)); // dimensionnement des cases
+    
+        setSize(400, 400); // taille du container
+        
+        // capturer les évènements de chaque boutons
+        choix1.addActionListener(this);
+        choix2.addActionListener(this);
+        choix3.addActionListener(this);
+        choix4.addActionListener(this);
+        
+        // ajout des boutons & informations dans le conteneur
+        Demarrage.add(label);
+        Demarrage.add(choix1);
+        Demarrage.add(choix2);
+        Demarrage.add(choix3);
+        Demarrage.add(choix4);
+        
+    }
+    
+      @Override // excécution après capture
+      public void actionPerformed(ActionEvent ae) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (ae.getSource() == choix1){ // création de la partie
+            System.out.println("commencer");
+            m_sauvegarde = false;
+            jeu(); 
+
+            
+        }else if (ae.getSource() == choix2){ // chargé une partie
+            //System.out.println("charger");
+            m_sauvegarde = true;
+            jeu();
+            
+        }else if (ae.getSource() == choix3){ // afficher les règles du jeu
+            // lorsque le trosième bouton est sélectionné
+            System.out.println("aide");
+            aide();
+         
+            
+        }else if (ae.getSource() == choix4){ // quitter
+           // System.out.println("quitter");
+            System.exit(0); // arret du programme
+
+        }else {
+            //System.out.println("erreur");
+            
+        }
+    }
+
+ 
     public void aide(){
-        //affichage
+       
+        JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
+        
+        aide.showMessageDialog(null, " " , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage des règles du jeu
+        
+        /*         // ArrayList<Integer> buffer = new ArrayList<>();
+        FileReader monFichier = null;
+        BufferedReader tampon = null;
+        try {
+        monFichier = new FileReader("test.txt");
+        tampon = new BufferedReader(monFichier);
+        while (true) {
+        String ligne = tampon.readLine();
+        if (ligne == null)
+        break;
+        buffer.add(Integer.valueOf(ligne));
+        }
+        } catch (IOException exception) {
+        exception.printStackTrace();
+        } finally {
+        try {
+        tampon.close();
+        monFichier.close();
+        } catch(IOException exception1) {
+        exception1.printStackTrace();
+        }
+        }*/
+       
     }  
     
     public void affichage()
@@ -427,6 +536,7 @@ public class Interface {
             {
                 Bateau_Grille_Joueur[Position+i]='¦';                
             }
+
         }
         //Cas bateau vertical : 
         if (Orientation_Bateau==false)
@@ -438,4 +548,5 @@ public class Interface {
         }
         return Bateau_Grille_Joueur;
     } 
+
 }
