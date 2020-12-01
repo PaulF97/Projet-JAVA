@@ -431,26 +431,122 @@ public class Interface extends JFrame implements ActionListener{
        
     }  
     
-    public void affichage(){
-        //a faire, suite pour tester
+    public void affichage()
+    {
+       //----------------------------------------------------      
+    int cote = 15;
+    int numero_case =1;
+    int numero_case2 =1;
+        char[] alphabet = new char[]{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'};
+        char[] Bateau_Grille_Joueur1 = new char[227];
+        char[] Bateau_Grille_Joueur2 = new char[227];
+        for(int j=0;j<227;j++)
+        {
+            Bateau_Grille_Joueur1[j]=' ';
+            Bateau_Grille_Joueur2[j]=' ';
+        }
+        //Modifier la valeur d'une case : 
+        Bateau_Grille_Joueur1[Case('c',2)]='¦'; 
         
-        for(Joueur joueur : m_joueurs){
+        //Initialiser les bateaux en début de partie :
+        Bateau_Grille_Joueur1=Initialisation_Bateau('j',8,5,true);
+        Bateau_Grille_Joueur2=Initialisation_Bateau('c',3,3,false);
+        
+           
+        System.out.println("                                                     GRILLE JOUEUR                                                                                                                 GRILLE ADVERSAIRE");
+        System.out.println("      1       2       3       4       5       6       7       8       9      10      11      12      13      14      15      "+" "+"*"+" "+"      1       2       3       4       5       6       7       8       9      10      11      12      13      14      15      ");
+        System.out.println("   _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______    *"+" "+"   _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______ _______    ");
+        for (int i=0;i<cote;i++)
+        {
+            System.out.println("  |       |       |       |       |       |       |       |       |       |       |       |       |       |       |       |   *"+" "+"  |       |       |       |       |       |       |       |       |       |       |       |       |       |       |       |   ");
+            System.out.println(alphabet[i]+" |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   "+Bateau_Grille_Joueur1[numero_case++]+"   |   *"+" "+alphabet[i]+" |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   "+Bateau_Grille_Joueur2[numero_case2++]+"   |   ");
+            System.out.println("  |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|   *"+" "+"  |_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|_______|   ");
+        }
+    }   
+    
+    public static int Case(char y,int x)
+    {    
+    int resultat=0;   
+    switch (y) {
+            case 'a':
+            resultat = x;
+            break;
+            case 'b' :
+            resultat = x+15;
+            break;
+            case 'c' :
+            resultat = x+(15)*2;
+            break;
+            case 'd' :
+            resultat = x+(15)*3;
+            break;
+            case 'e' :
+            resultat = x+(15)*4;
+            break;
+            case 'f' :
+            resultat = x+(15)*5;
+            break;
+            case 'g' :
+            resultat = x+(15)*6;
+            break;
+            case 'h' :
+            resultat = x+(15)*7;
+            break;
+            case 'i' :
+            resultat = x+(15)*8;
+            break;
+            case 'j' :
+            resultat = x+(15)*9;
+            break;
+            case 'k' :
+            resultat = x+(15)*10;
+            break;
+            case 'l' :
+            resultat = x+(15)*11;
+            break;
+            case 'm' :
+            resultat = x+(15)*12;
+            break;
+            case 'n' :
+            resultat = x+(15)*13;
+            break;
+            case 'o' :
+            resultat = x+(15)*14;
+            break;
+            default :
+            resultat = 0;
+            break;
+        }
+    return resultat;
+ }
+    
+     public static char[] Initialisation_Bateau(char y,int x, int Taille_Bateau, boolean Orientation_Bateau)
+    {  
+        int Position = Case(y,x);
+        char[] Bateau_Grille_Joueur = new char[227];
+        for(int k=0;k<227;k++)
+        {
             
-            System.out.println("\nJ");
-              
-            for(Navire navire : joueur.getNavire())
-                System.out.println("N: "+navire.getCoord().getX()+" "+navire.getCoord().getY());
-                
-                             
-                
-             for(Coord coord : joueur.getAttaque())
-                System.out.println("A: "+coord.getX()+" "+coord.getY());
-                
-                                
-            for(Coord coord : joueur.getDefense())
-                 System.out.println("D: "+coord.getX()+" "+coord.getY());
-                
+            Bateau_Grille_Joueur[k]=' ';       
+        }
+        //Cas bateau horizontal :
+        if (Orientation_Bateau == true)
+        {
+            for(int i=0;i<Taille_Bateau;i++)
+            {
+                Bateau_Grille_Joueur[Position+i]='¦';                
             }
-    }
+
+        }
+        //Cas bateau vertical : 
+        if (Orientation_Bateau==false)
+        {
+            for(int j=0;j<Taille_Bateau;j++)
+            {
+                Bateau_Grille_Joueur[Position+(15*j)]='¦';
+            }
+        }
+        return Bateau_Grille_Joueur;
+    } 
 
 }
