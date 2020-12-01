@@ -16,11 +16,18 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,7 +41,7 @@ import javax.swing.JOptionPane;
 public class Interface extends JFrame implements ActionListener{
     
     private ArrayList<Joueur> m_joueurs;
-    private boolean m_sauvegarde; 
+    private boolean m_sauvegarde = false; 
     private Object panneau;
     
     private JButton choix1 = new JButton("commencer la partie");
@@ -54,14 +61,11 @@ public class Interface extends JFrame implements ActionListener{
             m_joueurs.add(new Ordinateur());
     }
     
-    public Interface(){
-   
-        affichageMenu();
-    }
    
     public static void main(String[] args) {
         
-        Interface test = new Interface();
+        Interface test = new Interface(false);
+        test.affichageMenu();
         test.setVisible(true);
 
     }
@@ -356,7 +360,7 @@ public class Interface extends JFrame implements ActionListener{
         choix3.addActionListener(this);
         choix4.addActionListener(this);
         
-        // ajout des boutons informations dans le conteneur
+        // ajout des boutons & informations dans le conteneur
         Demarrage.add(label);
         Demarrage.add(choix1);
         Demarrage.add(choix2);
@@ -368,16 +372,24 @@ public class Interface extends JFrame implements ActionListener{
       @Override // excécution après capture
       public void actionPerformed(ActionEvent ae) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        if (ae.getSource() == choix1){ // lorsque le premier bouton est sélectionné
+        if (ae.getSource() == choix1){ // création de la partie
             System.out.println("commencer");
+            m_sauvegarde = false;
+            jeu(); 
+
             
-        }else if (ae.getSource() == choix2){ // lorsque le deuxième bouton est sélectionné
-            System.out.println("charger");
+        }else if (ae.getSource() == choix2){ // chargé une partie
+            //System.out.println("charger");
+            m_sauvegarde = true;
+            jeu();
             
-        }else if (ae.getSource() == choix3){ // lorsque le trosième bouton est sélectionné
+        }else if (ae.getSource() == choix3){ // afficher les règles du jeu
+            // lorsque le trosième bouton est sélectionné
             System.out.println("aide");
+            aide();
+         
             
-        }else if (ae.getSource() == choix4){ // lorsque le quatrième bouton est sélectionné
+        }else if (ae.getSource() == choix4){ // quitter
            // System.out.println("quitter");
             System.exit(0); // arret du programme
 
@@ -389,7 +401,34 @@ public class Interface extends JFrame implements ActionListener{
 
  
     public void aide(){
-        //affichage
+       
+        JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
+        
+        aide.showMessageDialog(null, " " , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage des règles du jeu
+        
+        /*         // ArrayList<Integer> buffer = new ArrayList<>();
+        FileReader monFichier = null;
+        BufferedReader tampon = null;
+        try {
+        monFichier = new FileReader("test.txt");
+        tampon = new BufferedReader(monFichier);
+        while (true) {
+        String ligne = tampon.readLine();
+        if (ligne == null)
+        break;
+        buffer.add(Integer.valueOf(ligne));
+        }
+        } catch (IOException exception) {
+        exception.printStackTrace();
+        } finally {
+        try {
+        tampon.close();
+        monFichier.close();
+        } catch(IOException exception1) {
+        exception1.printStackTrace();
+        }
+        }*/
+       
     }  
     
     public void affichage(){
