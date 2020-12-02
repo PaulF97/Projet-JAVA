@@ -43,7 +43,7 @@ import javax.swing.JTextField;
 public class Interface extends JFrame implements ActionListener{
     
     private ArrayList<Joueur> m_joueurs;
-    private boolean m_sauvegarde = false; 
+    private boolean m_sauvegarde = false;
     private Object panneau;
     
     private JTextField données = new JTextField();
@@ -384,12 +384,25 @@ public class Interface extends JFrame implements ActionListener{
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
        
-        String nom = saisie.showInputDialog(null, message, " Options ", JOptionPane.QUESTION_MESSAGE);
+         String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
         return nom;
     }
     
+    public void MenuCommence(){
+          
+      JOptionPane commence = new JOptionPane();
+
+      commence.showMessageDialog(null, "Bonjour vous disposer de \n "
+              + "1 cuirassé\n "
+              + "2 croisseurs\n"
+              + "3 destroyeurs\n"
+              + "4 sous-marins\n"
+              +"Vous pouvez jouer contre un humain ou un ordinateur\n"
+              + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
+      
+    }
       @Override // excécution après capture
       public void actionPerformed(ActionEvent ae) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -398,7 +411,7 @@ public class Interface extends JFrame implements ActionListener{
             m_sauvegarde = false;
             jeu();
             affichage();
-
+            MenuCommence();
             
         }else if (ae.getSource() == choix2){ // chargé une partie
             //System.out.println("charger");
@@ -445,7 +458,7 @@ public class Interface extends JFrame implements ActionListener{
             Bateau_Grille_Joueur2[j]=' ';
         }
         //Modifier la valeur d'une case : 
-        Bateau_Grille_Joueur1[Case('c',2)]='¦'; 
+        Bateau_Grille_Joueur1[Case('c',2)]='X'; 
         
         //Initialiser les bateaux en début de partie :
         Bateau_Grille_Joueur1=Initialisation_Bateau('j',8,5,true);
