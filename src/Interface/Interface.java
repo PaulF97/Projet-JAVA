@@ -26,12 +26,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
+import java.util.logging.Level; 
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 /**
@@ -44,6 +46,8 @@ public class Interface extends JFrame implements ActionListener{
     private boolean m_sauvegarde = false; 
     private Object panneau;
     
+    private JTextField données = new JTextField();
+    private JButton entrée = new JButton("ok");
     private JButton choix1 = new JButton("commencer la partie");
     private JButton choix2 = new JButton("charger une partie");
     private JButton choix3 = new JButton("aide");
@@ -65,9 +69,13 @@ public class Interface extends JFrame implements ActionListener{
     public static void main(String[] args) {
         
         Interface test = new Interface(false);
+        Interface test1 = new Interface(false);
+        
         test.affichageMenu();
         test.setVisible(true);
-
+        //test1.utilisateur("test");
+        System.out.println(test1.utilisateur("test"));
+       
     }
     
     public void sauvegarde(){
@@ -351,9 +359,9 @@ public class Interface extends JFrame implements ActionListener{
         setTitle(" Menu "); // texte d'entrée
         Container Demarrage = this.getContentPane(); // création du container
         Demarrage.setLayout(new GridLayout(0,1)); // dimensionnement des cases
-    
+     
         setSize(400, 400); // taille du container
-        
+      
         // capturer les évènements de chaque boutons
         choix1.addActionListener(this);
         choix2.addActionListener(this);
@@ -367,15 +375,29 @@ public class Interface extends JFrame implements ActionListener{
         Demarrage.add(choix3);
         Demarrage.add(choix4);
         
+        
+        
+        
+    }
+    
+    public String utilisateur(String message){
+        
+        JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
+       
+        String nom = saisie.showInputDialog(null, message, " Options ", JOptionPane.QUESTION_MESSAGE);
+        //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
+        
+        return nom;
     }
     
       @Override // excécution après capture
       public void actionPerformed(ActionEvent ae) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if (ae.getSource() == choix1){ // création de la partie
-            System.out.println("commencer");
+           // System.out.println("commencer");
             m_sauvegarde = false;
-            jeu(); 
+            jeu();
+            affichage();
 
             
         }else if (ae.getSource() == choix2){ // chargé une partie
@@ -395,7 +417,6 @@ public class Interface extends JFrame implements ActionListener{
 
         }else {
             //System.out.println("erreur");
-            
         }
     }
 
@@ -403,32 +424,10 @@ public class Interface extends JFrame implements ActionListener{
     public void aide(){
        
         JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
+        String test = "Bonjour";
         
-        aide.showMessageDialog(null, " " , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage des règles du jeu
+        aide.showMessageDialog(null, test , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage des règles du jeu
         
-        /*         // ArrayList<Integer> buffer = new ArrayList<>();
-        FileReader monFichier = null;
-        BufferedReader tampon = null;
-        try {
-        monFichier = new FileReader("test.txt");
-        tampon = new BufferedReader(monFichier);
-        while (true) {
-        String ligne = tampon.readLine();
-        if (ligne == null)
-        break;
-        buffer.add(Integer.valueOf(ligne));
-        }
-        } catch (IOException exception) {
-        exception.printStackTrace();
-        } finally {
-        try {
-        tampon.close();
-        monFichier.close();
-        } catch(IOException exception1) {
-        exception1.printStackTrace();
-        }
-        }*/
-       
     }  
     
     public void affichage()
