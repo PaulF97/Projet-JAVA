@@ -14,11 +14,13 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -66,6 +68,7 @@ public class Interface extends JFrame implements ActionListener{
     }
     
    
+   
     public static void main(String[] args) {
         
         Interface test = new Interface(false);
@@ -73,9 +76,8 @@ public class Interface extends JFrame implements ActionListener{
         
         test.affichageMenu();
         test.setVisible(true);
-        //test1.utilisateur("test");
-        System.out.println(test1.utilisateur("test"));
-       
+        System.out.println(test1.utilisateur("Comment tu t'appelles ?"));
+
     }
     
     public void sauvegarde(){
@@ -374,20 +376,18 @@ public class Interface extends JFrame implements ActionListener{
         Demarrage.add(choix2);
         Demarrage.add(choix3);
         Demarrage.add(choix4);
-        
-        
-        
-        
+
     }
     
     public String utilisateur(String message){
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
-       
-         String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
+        
+        String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
         return nom;
+      
     }
     
     public void MenuCommence(){
@@ -403,6 +403,27 @@ public class Interface extends JFrame implements ActionListener{
               + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
       
     }
+    
+    public void MenuCharger(){
+          
+      JOptionPane charger = new JOptionPane();
+
+      charger.showMessageDialog(null, "Veuillez dire la partie que vous souhaiter charger\n"
+              + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.INFORMATION_MESSAGE);
+      
+    }
+    
+    public void MenuQuitter(){
+          
+      JOptionPane quitter = new JOptionPane();
+
+     int dernier_message =  quitter.showConfirmDialog(null, "voulez vous vraiment quitter la partie ?", "arret", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+      
+        if(dernier_message != JOptionPane.NO_OPTION && dernier_message != JOptionPane.CANCEL_OPTION && dernier_message != JOptionPane.CLOSED_OPTION){
+          System.exit(0); // quitte si appuie sur OUI
+        }
+    }
+    
       @Override // excécution après capture
       public void actionPerformed(ActionEvent ae) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -416,30 +437,33 @@ public class Interface extends JFrame implements ActionListener{
         }else if (ae.getSource() == choix2){ // chargé une partie
             //System.out.println("charger");
             m_sauvegarde = true;
+            MenuCharger();
             jeu();
+           
             
         }else if (ae.getSource() == choix3){ // afficher les règles du jeu
-            // lorsque le trosième bouton est sélectionné
-            System.out.println("aide");
-            aide();
-         
+            Menuaide();
             
         }else if (ae.getSource() == choix4){ // quitter
-           // System.out.println("quitter");
-            System.exit(0); // arret du programme
-
+            MenuQuitter();
+            this.setResizable(false); // ferme le menu
         }else {
             //System.out.println("erreur");
         }
     }
 
  
-    public void aide(){
+    public void Menuaide(){
        
         JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
-        String test = "Bonjour";
+        File regle = new File("C:\\Users\\fishe\\OneDrive\\Documents\\ECE - INGE 3\\java\\projet java\\Projet-JAVA\\Projet-JAVA\\src\\files\\test.txt");
         
-        aide.showMessageDialog(null, test , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage des règles du jeu
+        /*        // test existance
+        if(regle.exists()){
+        System.out.println("existe");
+        }*/
+     aide.showMessageDialog(null, "in progress.. " , "Règles du jeu", JOptionPane.WARNING_MESSAGE); // affichage des règles du jeu
+
         
     }  
     
@@ -560,5 +584,4 @@ public class Interface extends JFrame implements ActionListener{
         }
         return Bateau_Grille_Joueur;
     } 
-
 }
