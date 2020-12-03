@@ -463,8 +463,7 @@ public class Interface extends JFrame implements ActionListener{
         System.out.println("existe");
         }*/
      aide.showMessageDialog(null, "in progress.. " , "Règles du jeu", JOptionPane.WARNING_MESSAGE); // affichage des règles du jeu
-
-        
+     
     }  
     
     public void affichage()
