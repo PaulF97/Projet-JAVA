@@ -138,10 +138,12 @@ public class Interface extends JFrame implements ActionListener{
         String nom;
         
         do{
-            System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
+            /*            System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
             Scanner scanner = new Scanner(System.in);
             nom = scanner.nextLine();
-            unFichier = new File(nom);
+            unFichier = new File(nom);*/
+            
+            nom = MenuCharger();
             
             if("exit".equals(nom))
                 break;
@@ -390,6 +392,7 @@ public class Interface extends JFrame implements ActionListener{
       
     }
     
+    
     public void MenuCommence(){
           
       JOptionPane commence = new JOptionPane();
@@ -404,13 +407,14 @@ public class Interface extends JFrame implements ActionListener{
       
     }
     
-    public void MenuCharger(){
+    public String MenuCharger(){
           
       JOptionPane charger = new JOptionPane();
 
-      charger.showMessageDialog(null, "Veuillez dire la partie que vous souhaiter charger\n"
-              + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.INFORMATION_MESSAGE);
-      
+      String nom = charger.showInputDialog(null, "Veuillez dire la partie que vous souhaiter charger\n"
+              + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE);
+        return nom;
+     
     }
     
     public void MenuQuitter(){
@@ -437,7 +441,7 @@ public class Interface extends JFrame implements ActionListener{
         }else if (ae.getSource() == choix2){ // chargé une partie
             //System.out.println("charger");
             m_sauvegarde = true;
-            MenuCharger();
+           // MenuCharger();
             jeu();
            
             
@@ -452,7 +456,6 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
 
- 
     public void Menuaide(){
        
         JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
