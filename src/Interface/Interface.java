@@ -20,7 +20,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -138,10 +140,11 @@ public class Interface extends JFrame implements ActionListener{
         String nom;
         
         do{
-            /*            System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
+          /*System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
             Scanner scanner = new Scanner(System.in);
             nom = scanner.nextLine();
-            unFichier = new File(nom);*/
+            unFichier = new File(nom);
+            */
             
             nom = MenuCharger();
             
@@ -412,8 +415,9 @@ public class Interface extends JFrame implements ActionListener{
       JOptionPane charger = new JOptionPane();
 
       String nom = charger.showInputDialog(null, "Veuillez dire la partie que vous souhaiter charger\n"
-              + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE);
-        return nom;
+              + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
+        
+      return nom;
      
     }
     
@@ -446,7 +450,29 @@ public class Interface extends JFrame implements ActionListener{
            
             
         }else if (ae.getSource() == choix3){ // afficher les règles du jeu
-            Menuaide();
+           // Menuaide();
+           
+            JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
+            File regle = new File("C:\\Users\\fishe\\OneDrive\\Documents\\ECE - INGE 3\\java\\projet java\\Projet-JAVA\\Projet-JAVA\\src\\files\\test.txt");
+            ArrayList<String> données = new ArrayList<String>();
+            
+                try{
+                   BufferedReader lecture = new BufferedReader(new InputStreamReader(new FileInputStream(regle), "UTF-8")); // lecture en utilisant le bon encodage
+                   String ligne = lecture.readLine(); // lecture ligne par ligne
+
+                   while(ligne != null){
+                      données.add(ligne); // stockage d'une ligne dans un ArrayList
+                      données.add("\n");
+                      ligne = lecture.readLine();
+                   }
+
+                    aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage des règles du jeu
+
+                    lecture.close(); // fermeture de la mémoire tampon
+
+                } catch(IOException e){
+                    e.printStackTrace();
+                }
             
         }else if (ae.getSource() == choix4){ // quitter
             MenuQuitter();
@@ -456,17 +482,27 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
 
-    public void Menuaide(){
+    public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
         JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
         File regle = new File("C:\\Users\\fishe\\OneDrive\\Documents\\ECE - INGE 3\\java\\projet java\\Projet-JAVA\\Projet-JAVA\\src\\files\\test.txt");
         
-        /*        // test existance
+        try{
+           BufferedReader lecture = new BufferedReader(new InputStreamReader(new FileInputStream(regle), "UTF-8"));
+           String ligne = lecture.readLine();
+           
+           while(ligne != null){
+              aide.showMessageDialog(null, "in progress.. " , "Règles du jeu", JOptionPane.WARNING_MESSAGE); // affichage des règles du jeu
+           }
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        
+     
+     /*    // test existance
         if(regle.exists()){
         System.out.println("existe");
         }*/
-     aide.showMessageDialog(null, "in progress.. " , "Règles du jeu", JOptionPane.WARNING_MESSAGE); // affichage des règles du jeu
-     
     }  
     
     public void affichage()

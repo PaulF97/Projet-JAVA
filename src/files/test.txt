@@ -1,1 +1,7 @@
 Bonjour
+Voici les règles du jeu.
+Vous disposez des navires suivants : 
+1 cuirassé
+2 croisseurs
+3 destroyeurs
+4 sous-marins
