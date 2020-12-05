@@ -449,31 +449,17 @@ public class Interface extends JFrame implements ActionListener{
             jeu();
            
             
-        }else if (ae.getSource() == choix3){ // afficher les règles du jeu
-           // Menuaide();
+        }else if (ae.getSource() == choix3){ 
+            // afficher les règles du jeu
+            
+            try { 
+                Menuaide();
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            } 
            
-            JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
-            File regle = new File("C:\\Users\\fishe\\OneDrive\\Documents\\ECE - INGE 3\\java\\projet java\\Projet-JAVA\\Projet-JAVA\\src\\files\\test.txt");
-            ArrayList<String> données = new ArrayList<String>();
-            
-                try{
-                   BufferedReader lecture = new BufferedReader(new InputStreamReader(new FileInputStream(regle), "UTF-8")); // lecture en utilisant le bon encodage
-                   String ligne = lecture.readLine(); // lecture ligne par ligne
-
-                   while(ligne != null){
-                      données.add(ligne); // stockage d'une ligne dans un ArrayList
-                      données.add("\n");
-                      ligne = lecture.readLine();
-                   }
-
-                    aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage des règles du jeu
-
-                    lecture.close(); // fermeture de la mémoire tampon
-
-                } catch(IOException e){
-                    e.printStackTrace();
-                }
-            
         }else if (ae.getSource() == choix4){ // quitter
             MenuQuitter();
             this.setResizable(false); // ferme le menu
@@ -484,25 +470,29 @@ public class Interface extends JFrame implements ActionListener{
 
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
-        JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
-        File regle = new File("C:\\Users\\fishe\\OneDrive\\Documents\\ECE - INGE 3\\java\\projet java\\Projet-JAVA\\Projet-JAVA\\src\\files\\test.txt");
-        
-        try{
-           BufferedReader lecture = new BufferedReader(new InputStreamReader(new FileInputStream(regle), "UTF-8"));
-           String ligne = lecture.readLine();
-           
-           while(ligne != null){
-              aide.showMessageDialog(null, "in progress.. " , "Règles du jeu", JOptionPane.WARNING_MESSAGE); // affichage des règles du jeu
-           }
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-        
-     
-     /*    // test existance
-        if(regle.exists()){
-        System.out.println("existe");
-        }*/
+         JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
+         File regle = new File("src\\files\\test.txt"); // emplacement du fichier
+         ArrayList<String> données = new ArrayList<String>();
+         String ligne;
+
+                try{
+                    FileReader lecture_fichier = new FileReader(regle); // fichier qu'on souhaite lire
+                    BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
+                    
+                    
+                        while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
+                            données.add(ligne); // stockage d'une ligne dans un ArrayList
+                            données.add("\n");
+                            ligne = lecture.readLine();
+                        }
+                        
+                    aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage de la liste dans PopUp
+                    lecture.close(); // fermeture de la mémoire tampon
+
+                // Exception     
+                } catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
+                    System.err.println("le fichier " + regle.toString() + " est introuvable");
+                } 
     }  
     
     public void affichage()
