@@ -442,7 +442,7 @@ public class Interface extends JFrame implements ActionListener{
         
       return nom;
      
-    }s
+    }
     
     /**
     *@author Paul
@@ -464,7 +464,7 @@ public class Interface extends JFrame implements ActionListener{
     /**
     * @author Paul
     * but : méthode exécuter lorsqu'on clique sur un bouton
-    * param : action de la sourie
+    * param : ae
     * return : rien
     */
       @Override // excécution après capture
@@ -508,8 +508,8 @@ public class Interface extends JFrame implements ActionListener{
     * but : création du PopUp affichant les règles du jeu
     * param : rien
     * return : rien
-     * @throws java.io.FileNotFoundException
-     * @throws java.io.UnsupportedEncodingException
+    * @throws java.io.FileNotFoundException
+    * @throws java.io.UnsupportedEncodingException
     */
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
@@ -536,7 +536,7 @@ public class Interface extends JFrame implements ActionListener{
                 // Exception     
                 } catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
                     System.err.println("le fichier " + regle.toString() + " est introuvable");
-                } 
+                 } 
     }  
     
     public void affichage()
