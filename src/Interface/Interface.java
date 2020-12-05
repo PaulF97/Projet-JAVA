@@ -357,6 +357,12 @@ public class Interface extends JFrame implements ActionListener{
         
     }
     
+    /**
+    * @author Paul
+    * but : création du conteneur et des boutons
+    * param : rien
+    * return : rien
+    */
     public void Container(){
         
         // phrase
@@ -384,6 +390,12 @@ public class Interface extends JFrame implements ActionListener{
 
     }
     
+    /**
+    *@author Paul
+    * but : création du popUp d'identification
+    * param : chaine de caractère
+    * return : chaine saisie
+    */
     public String utilisateur(String message){
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
@@ -395,7 +407,12 @@ public class Interface extends JFrame implements ActionListener{
       
     }
     
-    
+    /**
+    * @author Paul
+    * but : création du PopUp lorsqu'on commence la partie
+    * param : rien
+    * return : rien
+    */
     public void MenuCommence(){
           
       JOptionPane commence = new JOptionPane();
@@ -410,6 +427,12 @@ public class Interface extends JFrame implements ActionListener{
       
     }
     
+    /**
+    * @author Paul
+    * But : création du popUp permettant de charger une partie
+    * param : rien
+    * return : nom de la partie que l'on souhaite charger
+    */
     public String MenuCharger(){
           
       JOptionPane charger = new JOptionPane();
@@ -421,6 +444,12 @@ public class Interface extends JFrame implements ActionListener{
      
     }
     
+    /**
+    *@author Paul
+    * but : création du popUp de sortie de jeu
+    * param : rien
+    * return : rien
+    */
     public void MenuQuitter(){
           
       JOptionPane quitter = new JOptionPane();
@@ -432,6 +461,12 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
     
+    /**
+    * @author Paul
+    * but : méthode exécuter lorsqu'on clique sur un bouton
+    * param : action de la sourie
+    * return : rien
+    */
       @Override // excécution après capture
       public void actionPerformed(ActionEvent ae) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -468,6 +503,12 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
 
+    /**
+    * @author Paul
+    * but : création du PopUp affichant les règles du jeu
+    * param : rien
+    * return : rien
+    */
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
          JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
@@ -483,12 +524,13 @@ public class Interface extends JFrame implements ActionListener{
                         while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
                             données.add(ligne); // stockage d'une ligne dans un ArrayList
                             données.add("\n");
-                            ligne = lecture.readLine();
                         }
-                        
-                    aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage de la liste dans PopUp
+                    
+                    System.out.println(données);
+                    aide.showMessageDialog(null, données, "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
+                    
                     lecture.close(); // fermeture de la mémoire tampon
-
+  
                 // Exception     
                 } catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
                     System.err.println("le fichier " + regle.toString() + " est introuvable");
