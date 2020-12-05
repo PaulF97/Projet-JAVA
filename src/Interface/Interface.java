@@ -431,7 +431,7 @@ public class Interface extends JFrame implements ActionListener{
     * @author Paul
     * But : création du popUp permettant de charger une partie
     * param : rien
-    * return : nom de la partie que l'on souhaite charger
+    * @return : nom de la partie que l'on souhaite charger
     */
     public String MenuCharger(){
           
@@ -442,7 +442,7 @@ public class Interface extends JFrame implements ActionListener{
         
       return nom;
      
-    }
+    }s
     
     /**
     *@author Paul
@@ -508,6 +508,8 @@ public class Interface extends JFrame implements ActionListener{
     * but : création du PopUp affichant les règles du jeu
     * param : rien
     * return : rien
+     * @throws java.io.FileNotFoundException
+     * @throws java.io.UnsupportedEncodingException
     */
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
