@@ -528,7 +528,7 @@ public class Interface extends JFrame implements ActionListener{
                             données.add("\n");
                         }
                     
-                    System.out.println(données);
+                
                     aide.showMessageDialog(null, données, "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
                     
                     lecture.close(); // fermeture de la mémoire tampon
