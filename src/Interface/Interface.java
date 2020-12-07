@@ -368,7 +368,7 @@ public class Interface extends JFrame implements ActionListener{
     
     public void affichageMenu(){
     
-    Container();
+        Container();
     
     }
     
@@ -403,13 +403,12 @@ public class Interface extends JFrame implements ActionListener{
     
     public String utilisateur(String message){
     
-    JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
-    
-    String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
-    //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
-    
-    return nom;
-    
+        JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
+
+        String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
+        //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
+
+        return nom; 
     }
     
     
