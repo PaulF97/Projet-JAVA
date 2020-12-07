@@ -45,7 +45,7 @@ import javax.swing.JTextField;
  *
  * @author charl
  */
-public class Interface extends JFrame implements ActionListener{
+public class Interface extends JFrame implements ActionListener {
     
     private ArrayList<Joueur> m_joueurs;
     protected boolean m_sauvegarde = false;
@@ -57,7 +57,7 @@ public class Interface extends JFrame implements ActionListener{
     private JButton choix2 = new JButton("charger une partie");
     private JButton choix3 = new JButton("aide");
     private JButton choix4 = new JButton("quitter");
-    Graphique essai;
+    Graphique graph = new Graphique();
     
 
     public Interface(boolean deuxHumain){
@@ -65,6 +65,8 @@ public class Interface extends JFrame implements ActionListener{
         m_joueurs = new ArrayList<Joueur>();
         m_joueurs.add(new Humain());
         
+        System.out.println(graph.utilisateur("Comment tu t'appelles ?"));
+
         if(deuxHumain)
             m_joueurs.add(new Humain());
         else
@@ -75,27 +77,13 @@ public class Interface extends JFrame implements ActionListener{
    
     public static void main(String[] args) {
         
-        Interface test = new Interface(false);
-        Interface test1 = new Interface(false);
+        Interface excecution = new Interface(false);
         
-        test.affichageMenu();
-        test.setVisible(true);
-        System.out.println(test1.utilisateur("Comment tu t'appelles ?"));
-        
-        /*        Graphique essai = new Graphique();
-        Graphique essai1 = new Graphique();
-        
-        essai.affichageMenu();
-        essai.setVisible(true);
-        System.out.println(essai1.utilisateur("Comment tu t'appelles ?"));*/
-
+        excecution.Container();
+        excecution.setVisible(true);
+       
     }
-
-    Interface() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
+  
     public void sauvegarde(){
         
         FileWriter monFichier = null;
@@ -160,7 +148,7 @@ public class Interface extends JFrame implements ActionListener{
             unFichier = new File(nom);
             */
             
-            nom = MenuCharger();
+            nom = graph.MenuCharger();
             
             if("exit".equals(nom))
                 break;
@@ -366,12 +354,7 @@ public class Interface extends JFrame implements ActionListener{
     }
     
     
-    public void affichageMenu(){
-    
-        Container();
-    
-    }
-    
+   
     
     public void Container(){
     
@@ -401,84 +384,34 @@ public class Interface extends JFrame implements ActionListener{
     }
     
     
-    public String utilisateur(String message){
-    
-        JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
-
-        String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
-        //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
-
-        return nom; 
-    }
-    
-    
-    public void MenuCommence(){
-    
-    JOptionPane commence = new JOptionPane();
-    
-    commence.showMessageDialog(null, "Bonjour vous disposer de \n "
-    + "1 cuirassé\n "
-    + "2 croisseurs\n"
-    + "3 destroyeurs\n"
-    + "4 sous-marins\n"
-    +"Vous pouvez jouer contre un humain ou un ordinateur\n"
-    + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
-    
-    }
-    
-    
-    public String MenuCharger(){
-    
-    JOptionPane charger = new JOptionPane();
-    
-    String nom = charger.showInputDialog(null, "Veuillez dire la partie que vous souhaiter charger\n"
-    + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
-    
-    return nom;
-    
-    }
-    
- 
-    public void MenuQuitter(){
-    
-    JOptionPane quitter = new JOptionPane();
-    
-    int dernier_message =  quitter.showConfirmDialog(null, "voulez vous vraiment quitter la partie ?", "arret", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-    
-        if(dernier_message != JOptionPane.NO_OPTION &&  dernier_message != JOptionPane.CLOSED_OPTION){
-            System.exit(0); // quitte si appuie sur OUI
-        }
-    }
-    
-    
     @Override // excécution après capture
     public void actionPerformed(ActionEvent ae) {
-        
+    
         if (ae.getSource() == choix1){ // création de la partie
             m_sauvegarde = false;
             jeu();
             affichage();
-            MenuCommence();
-
+            graph.MenuCommence();
+    
         }else if (ae.getSource() == choix2){ // chargé une partie
             m_sauvegarde = true;
             jeu();
-
-
+            
+    
         }else if (ae.getSource() == choix3){  // afficher les règles du jeu
-
+    
             try {
-            Menuaide();
+                graph.Menuaide();
             } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }else if (ae.getSource() == choix4){ // quitter
-        MenuQuitter();
+            }else if (ae.getSource() == choix4){ // quitter
+                graph.MenuQuitter();
 
-        }else {
+            }else {
         //System.out.println("erreur");
         }
     }
@@ -486,30 +419,30 @@ public class Interface extends JFrame implements ActionListener{
     
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
     
-    JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
-    File regle = new File("src\\files\\test.txt"); // emplacement du fichier
-    ArrayList<String> données = new ArrayList<String>();
-    String ligne;
+        JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
+        File regle = new File("src\\files\\test.txt"); // emplacement du fichier
+        ArrayList<String> données = new ArrayList<String>();
+        String ligne;
 
-    
+
         try{
             FileReader lecture_fichier = new FileReader(regle); // fichier qu'on souhaite lire
             BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
 
-                while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
-                    données.add(ligne); // stockage d'une ligne dans un ArrayList
-                    données.add("\n");
-                    System.out.println(ligne);
-                }
-                
-            données.remove(",");
-            aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
+        while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
+        données.add(ligne); // stockage d'une ligne dans un ArrayList
+        données.add("\n");
+        System.out.println(ligne);
+        }
 
-            lecture.close(); // fermeture de la mémoire tampon
+        données.remove(",");
+        aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
 
-            // Exception
+        lecture.close(); // fermeture de la mémoire tampon
+
+        // Exception
         } catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
-            System.err.println("le fichier " + regle.toString() + " est introuvable");
+        System.err.println("le fichier " + regle.toString() + " est introuvable");
         }
     }
     
