@@ -28,6 +28,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level; 
@@ -47,7 +48,7 @@ import javax.swing.JTextField;
 public class Interface extends JFrame implements ActionListener{
     
     private ArrayList<Joueur> m_joueurs;
-    private boolean m_sauvegarde = false;
+    protected boolean m_sauvegarde = false;
     private Object panneau;
     
     private JTextField données = new JTextField();
@@ -56,6 +57,7 @@ public class Interface extends JFrame implements ActionListener{
     private JButton choix2 = new JButton("charger une partie");
     private JButton choix3 = new JButton("aide");
     private JButton choix4 = new JButton("quitter");
+    Graphique essai;
     
 
     public Interface(boolean deuxHumain){
@@ -79,8 +81,20 @@ public class Interface extends JFrame implements ActionListener{
         test.affichageMenu();
         test.setVisible(true);
         System.out.println(test1.utilisateur("Comment tu t'appelles ?"));
+        
+        /*        Graphique essai = new Graphique();
+        Graphique essai1 = new Graphique();
+        
+        essai.affichageMenu();
+        essai.setVisible(true);
+        System.out.println(essai1.utilisateur("Comment tu t'appelles ?"));*/
 
     }
+
+    Interface() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     public void sauvegarde(){
         
@@ -351,193 +365,154 @@ public class Interface extends JFrame implements ActionListener{
         return rand.nextInt(b-a+1)+a;
     }
     
+    
     public void affichageMenu(){
-        
-        Container();
-        
+    
+    Container();
+    
     }
     
-    /**
-    * @author Paul
-    * but : création du conteneur et des boutons
-    * param : rien
-    * return : rien
-    */
+    
     public void Container(){
-        
-        // phrase
-        JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
-        
-         // création de la boite de dialogue
-        setTitle(" Menu "); // texte d'entrée
-        Container Demarrage = this.getContentPane(); // création du container
-        Demarrage.setLayout(new GridLayout(0,1)); // dimensionnement des cases
-     
-        setSize(400, 400); // taille du container
-      
-        // capturer les évènements de chaque boutons
-        choix1.addActionListener(this);
-        choix2.addActionListener(this);
-        choix3.addActionListener(this);
-        choix4.addActionListener(this);
-        
-        // ajout des boutons & informations dans le conteneur
-        Demarrage.add(label);
-        Demarrage.add(choix1);
-        Demarrage.add(choix2);
-        Demarrage.add(choix3);
-        Demarrage.add(choix4);
-
+    
+    // phrase
+    JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
+    
+    // création de la boite de dialogue
+    setTitle(" Menu "); // texte d'entrée
+    Container Demarrage = this.getContentPane(); // création du container
+    Demarrage.setLayout(new GridLayout(0,1)); // dimensionnement des cases
+    
+    setSize(400, 400); // taille du container
+    
+    // capturer les évènements de chaque boutons
+    choix1.addActionListener(this);
+    choix2.addActionListener(this);
+    choix3.addActionListener(this);
+    choix4.addActionListener(this);
+    
+    // ajout des boutons & informations dans le conteneur
+    Demarrage.add(label);
+    Demarrage.add(choix1);
+    Demarrage.add(choix2);
+    Demarrage.add(choix3);
+    Demarrage.add(choix4);
+    
     }
     
-    /**
-    *@author Paul
-    * but : création du popUp d'identification
-    * param : chaine de caractère
-    * return : chaine saisie
-    */
+    
     public String utilisateur(String message){
-        
-        JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
-        
-        String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
-        //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
-        
-        return nom;
-      
+    
+    JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
+    
+    String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
+    //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
+    
+    return nom;
+    
     }
     
-    /**
-    * @author Paul
-    * but : création du PopUp lorsqu'on commence la partie
-    * param : rien
-    * return : rien
-    */
+    
     public void MenuCommence(){
-          
-      JOptionPane commence = new JOptionPane();
-
-      commence.showMessageDialog(null, "Bonjour vous disposer de \n "
-              + "1 cuirassé\n "
-              + "2 croisseurs\n"
-              + "3 destroyeurs\n"
-              + "4 sous-marins\n"
-              +"Vous pouvez jouer contre un humain ou un ordinateur\n"
-              + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
-      
+    
+    JOptionPane commence = new JOptionPane();
+    
+    commence.showMessageDialog(null, "Bonjour vous disposer de \n "
+    + "1 cuirassé\n "
+    + "2 croisseurs\n"
+    + "3 destroyeurs\n"
+    + "4 sous-marins\n"
+    +"Vous pouvez jouer contre un humain ou un ordinateur\n"
+    + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
+    
     }
     
-    /**
-    * @author Paul
-    * But : création du popUp permettant de charger une partie
-    * param : rien
-    * @return : nom de la partie que l'on souhaite charger
-    */
+    
     public String MenuCharger(){
-          
-      JOptionPane charger = new JOptionPane();
-
-      String nom = charger.showInputDialog(null, "Veuillez dire la partie que vous souhaiter charger\n"
-              + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
-        
-      return nom;
-     
+    
+    JOptionPane charger = new JOptionPane();
+    
+    String nom = charger.showInputDialog(null, "Veuillez dire la partie que vous souhaiter charger\n"
+    + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
+    
+    return nom;
+    
     }
     
-    /**
-    *@author Paul
-    * but : création du popUp de sortie de jeu
-    * param : rien
-    * return : rien
-    */
+ 
     public void MenuQuitter(){
-          
-      JOptionPane quitter = new JOptionPane();
-
-     int dernier_message =  quitter.showConfirmDialog(null, "voulez vous vraiment quitter la partie ?", "arret", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-      
-        if(dernier_message != JOptionPane.NO_OPTION && dernier_message != JOptionPane.CANCEL_OPTION && dernier_message != JOptionPane.CLOSED_OPTION){
-          System.exit(0); // quitte si appuie sur OUI
+    
+    JOptionPane quitter = new JOptionPane();
+    
+    int dernier_message =  quitter.showConfirmDialog(null, "voulez vous vraiment quitter la partie ?", "arret", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    
+        if(dernier_message != JOptionPane.NO_OPTION &&  dernier_message != JOptionPane.CLOSED_OPTION){
+            System.exit(0); // quitte si appuie sur OUI
         }
     }
     
-    /**
-    * @author Paul
-    * but : méthode exécuter lorsqu'on clique sur un bouton
-    * param : ae
-    * return : rien
-    */
-      @Override // excécution après capture
-      public void actionPerformed(ActionEvent ae) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    @Override // excécution après capture
+    public void actionPerformed(ActionEvent ae) {
+        
         if (ae.getSource() == choix1){ // création de la partie
-           // System.out.println("commencer");
             m_sauvegarde = false;
             jeu();
             affichage();
             MenuCommence();
-            
+
         }else if (ae.getSource() == choix2){ // chargé une partie
-            //System.out.println("charger");
             m_sauvegarde = true;
-           // MenuCharger();
             jeu();
-           
-            
-        }else if (ae.getSource() == choix3){ 
-            // afficher les règles du jeu
-            
-            try { 
-                Menuaide();
+
+
+        }else if (ae.getSource() == choix3){  // afficher les règles du jeu
+
+            try {
+            Menuaide();
             } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-           
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }else if (ae.getSource() == choix4){ // quitter
-            MenuQuitter();
-            this.setResizable(false); // ferme le menu
+        MenuQuitter();
+
         }else {
-            //System.out.println("erreur");
+        //System.out.println("erreur");
         }
     }
-
-    /**
-    * @author Paul
-    * but : création du PopUp affichant les règles du jeu
-    * param : rien
-    * return : rien
-    * @throws java.io.FileNotFoundException
-    * @throws java.io.UnsupportedEncodingException
-    */
+    
+    
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
-       
-         JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
-         File regle = new File("src\\files\\test.txt"); // emplacement du fichier
-         ArrayList<String> données = new ArrayList<String>();
-         String ligne;
+    
+    JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
+    File regle = new File("src\\files\\test.txt"); // emplacement du fichier
+    ArrayList<String> données = new ArrayList<String>();
+    String ligne;
 
-                try{
-                    FileReader lecture_fichier = new FileReader(regle); // fichier qu'on souhaite lire
-                    BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
-                    
-                    
-                        while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
-                            données.add(ligne); // stockage d'une ligne dans un ArrayList
-                            données.add("\n");
-                        }
-                    
+    
+        try{
+            FileReader lecture_fichier = new FileReader(regle); // fichier qu'on souhaite lire
+            BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
+
+                while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
+                    données.add(ligne); // stockage d'une ligne dans un ArrayList
+                    données.add("\n");
+                    System.out.println(ligne);
+                }
                 
-                    aide.showMessageDialog(null, données, "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
-                    
-                    lecture.close(); // fermeture de la mémoire tampon
-  
-                // Exception     
-                } catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
-                    System.err.println("le fichier " + regle.toString() + " est introuvable");
-                 } 
-    }  
+            données.remove(",");
+            aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
+
+            lecture.close(); // fermeture de la mémoire tampon
+
+            // Exception
+        } catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
+            System.err.println("le fichier " + regle.toString() + " est introuvable");
+        }
+    }
     
     public void affichage()
     {
