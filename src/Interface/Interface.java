@@ -353,9 +353,8 @@ public class Interface extends JFrame implements ActionListener {
         return rand.nextInt(b-a+1)+a;
     }
     
-    
-   
-    
+
+
     public void Container(){
     
     // phrase
@@ -413,36 +412,6 @@ public class Interface extends JFrame implements ActionListener {
 
             }else {
         //System.out.println("erreur");
-        }
-    }
-    
-    
-    public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
-    
-        JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
-        File regle = new File("src\\files\\test.txt"); // emplacement du fichier
-        ArrayList<String> données = new ArrayList<String>();
-        String ligne;
-
-
-        try{
-            FileReader lecture_fichier = new FileReader(regle); // fichier qu'on souhaite lire
-            BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
-
-        while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
-        données.add(ligne); // stockage d'une ligne dans un ArrayList
-        données.add("\n");
-        System.out.println(ligne);
-        }
-
-        données.remove(",");
-        aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
-
-        lecture.close(); // fermeture de la mémoire tampon
-
-        // Exception
-        } catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
-        System.err.println("le fichier " + regle.toString() + " est introuvable");
         }
     }
     

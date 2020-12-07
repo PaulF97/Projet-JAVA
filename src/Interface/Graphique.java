@@ -5,12 +5,7 @@
  */
 package Interface;
 
-import Interface.*;
 
-import java.awt.Container;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,13 +13,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+
 
 /**
  * gère les sous-menus de l'interface graphique
@@ -33,13 +24,19 @@ import javax.swing.JTextField;
 
 public class Graphique extends JFrame{
  
+   
     public String utilisateur(String message){
     
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
 
         String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
-        //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
-
+        
+        if(nom == null){
+          nom = saisie.showInputDialog(null, "Veuillez vous identifier", " Identification", JOptionPane.QUESTION_MESSAGE);
+        }
+        
+        saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
+        
         return nom;
     }
    
@@ -47,7 +44,7 @@ public class Graphique extends JFrame{
     
         JOptionPane charger = new JOptionPane();
 
-        String nom = charger.showInputDialog(null, "Veuillez dire la partie que vous souhaiter charger\n"
+        String nom = charger.showInputDialog(null, "Veuillez saisir la partie que vous souhaiter charger\n"
         + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
 
         return nom;
@@ -59,7 +56,7 @@ public class Graphique extends JFrame{
     
         JOptionPane quitter = new JOptionPane();
 
-        int dernier_message =  quitter.showConfirmDialog(null, "voulez vous vraiment quitter la partie ?", "arret", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int dernier_message =  quitter.showConfirmDialog(null, "voulez vous vraiment quitter la partie ?", "arrêt", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if(dernier_message != JOptionPane.NO_OPTION &&  dernier_message != JOptionPane.CLOSED_OPTION){
             System.exit(0); // quitte si appuie sur OUI
@@ -70,18 +67,16 @@ public class Graphique extends JFrame{
           
       JOptionPane commence = new JOptionPane();
 
-      commence.showMessageDialog(null, "Bonjour vous disposer de \n "
+      commence.showMessageDialog(null, "Bonjour vous disposez de \n "
               + "1 cuirassé\n "
               + "2 croisseurs\n"
               + "3 destroyeurs\n"
               + "4 sous-marins\n"
-              +"Vous pouvez jouer contre un humain ou un ordinateur\n"
+              +"Vous pouvez jouer contre un humain où un ordinateur\n"
               + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
       
     }
     
-   
- 
     /**
     * @author Paul
     * but : création du PopUp affichant les règles du jeu
