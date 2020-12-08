@@ -17,8 +17,10 @@ public class Main {
     public static void main(String[] args) {
         
         Interface test = new Interface(false);
-        
+        test.Container();
+        test.setVisible(true);
         test.jeu();
+
     }
     
 }
