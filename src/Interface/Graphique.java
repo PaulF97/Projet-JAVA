@@ -25,6 +25,12 @@ import javax.swing.JOptionPane;
 public class Graphique extends JFrame{
  
    
+ /**
+ * Le pop up d'identification
+ * @author fishe
+ * @param message
+ * @return nom
+ */
     public String utilisateur(String message){
     
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
@@ -43,6 +49,10 @@ public class Graphique extends JFrame{
    
         
     
+ /**
+ * gère le popUp pour quitter la partie
+ * @author fishe
+ */
     public void MenuQuitter(){
     
         JOptionPane quitter = new JOptionPane();
@@ -55,6 +65,11 @@ public class Graphique extends JFrame{
     }
     
     
+ /**
+ * gère le popUp pour charger la partie
+ * @author fishe
+ * @return nom
+ */
     public String MenuCharger(){
     
         JOptionPane charger = new JOptionPane();
@@ -67,6 +82,10 @@ public class Graphique extends JFrame{
     }
 
     
+ /**
+ * gère le popUp quand la partie commence
+ * @author fishe
+ */
     public void MenuCommence(){
           
       JOptionPane commence = new JOptionPane();
@@ -81,14 +100,13 @@ public class Graphique extends JFrame{
       
     }
     
-    /**
-    * @author Paul
-    * but : création du PopUp affichant les règles du jeu
-    * param : rien
-    * return : rien
-    * @throws java.io.FileNotFoundException
-    * @throws java.io.UnsupportedEncodingException
-    */
+    
+ /**
+ * gère le popUp affichant les règles du jeu
+ * @author fishe
+     * @throws java.io.FileNotFoundException
+     * @throws java.io.UnsupportedEncodingException
+ */
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
          JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
