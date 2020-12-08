@@ -18,5 +18,6 @@ public class N_Cuirasse extends Navire{
         m_puissanceTir = 9;
         m_initCoord = false;
         m_caractere = 'I';
+         m_nom = "Cuirasse";
     }
 }
