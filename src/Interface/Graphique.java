@@ -32,7 +32,8 @@ public class Graphique extends JFrame{
         String nom = saisie.showInputDialog(null, message, " Identification ", JOptionPane.QUESTION_MESSAGE);
         
         if(nom == null){
-          nom = saisie.showInputDialog(null, "Veuillez vous identifier", " Identification", JOptionPane.QUESTION_MESSAGE);
+            saisie.showMessageDialog(null,"Vous avez quittez le jeu ! ", "Identification", JOptionPane.CLOSED_OPTION);
+          System.exit(0);
         }
         
         saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
@@ -40,17 +41,7 @@ public class Graphique extends JFrame{
         return nom;
     }
    
-    public String MenuCharger(){
-    
-        JOptionPane charger = new JOptionPane();
-
-        String nom = charger.showInputDialog(null, "Veuillez saisir la partie que vous souhaiter charger\n"
-        + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
-
-        return nom;
-    
-    }
-    
+        
     
     public void MenuQuitter(){
     
@@ -62,6 +53,19 @@ public class Graphique extends JFrame{
             System.exit(0); // quitte si appuie sur OUI
         }
     }
+    
+    
+    public String MenuCharger(){
+    
+        JOptionPane charger = new JOptionPane();
+
+        String nom = charger.showInputDialog(null, "Veuillez saisir la partie que vous souhaiter charger\n"
+        + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
+
+        return nom;
+    
+    }
+
     
     public void MenuCommence(){
           

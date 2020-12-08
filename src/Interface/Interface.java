@@ -51,12 +51,11 @@ public class Interface extends JFrame implements ActionListener {
     protected boolean m_sauvegarde = false;
     private Object panneau;
     
-    private JTextField données = new JTextField();
-    private JButton entrée = new JButton("ok");
-    private JButton choix1 = new JButton("commencer la partie");
-    private JButton choix2 = new JButton("charger une partie");
-    private JButton choix3 = new JButton("aide");
-    private JButton choix4 = new JButton("quitter");
+    private final JButton choix1 = new JButton("commencer la partie");
+    private final JButton choix2 = new JButton("charger une partie");
+    private final JButton choix3 = new JButton("aide");
+    private final JButton choix4 = new JButton("quitter");
+    private final String id;
     Graphique graph = new Graphique();
     
 
@@ -65,7 +64,8 @@ public class Interface extends JFrame implements ActionListener {
         m_joueurs = new ArrayList<Joueur>();
         m_joueurs.add(new Humain());
         
-        System.out.println(graph.utilisateur("Comment tu t'appelles ?"));
+        id = graph.utilisateur("Comment tu t'appelles");
+        System.out.println(id);
 
         if(deuxHumain)
             m_joueurs.add(new Humain());
@@ -142,13 +142,9 @@ public class Interface extends JFrame implements ActionListener {
         String nom;
         
         do{
-          /*System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
-            Scanner scanner = new Scanner(System.in);
-            nom = scanner.nextLine();
-            unFichier = new File(nom);
-            */
-            
+ 
             nom = graph.MenuCharger();
+            unFichier = new File(nom);
             
             if("exit".equals(nom))
                 break;
