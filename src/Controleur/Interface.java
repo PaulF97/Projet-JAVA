@@ -45,6 +45,7 @@ import javax.swing.JTextField;
  * @author charl
  */
 public class Interface extends JFrame implements ActionListener{
+    
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde;
     private boolean m_console;
@@ -372,9 +373,7 @@ public class Interface extends JFrame implements ActionListener{
         Demarrage.add(choix2);
         Demarrage.add(choix3);
         Demarrage.add(choix4);
-       
-        
-        
+ 
     }
     @Override // excécution après capture
     public void actionPerformed(ActionEvent ae) {
