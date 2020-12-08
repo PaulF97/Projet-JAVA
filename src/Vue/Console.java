@@ -172,7 +172,7 @@ public class Console {
         }
     } 
 
-    public static void clearScreen() {  
+    public void clearScreen() {  
      
       try {
        

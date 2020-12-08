@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -34,27 +36,39 @@ public class Interface {
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde;
     private boolean m_console;
+    private boolean m_deuxHumain;
     
 
-    public Interface(boolean deuxHumain){
+    public Interface(){
         
         m_joueurs = new ArrayList<Joueur>();
+    }
+    
+    public void jeu(){
+            
+            m_console = true;
+            m_deuxHumain = true;
+    
+            m_sauvegarde = true;
+            
+            création();
+            affichage(0);
+            
+            
+    }
+       
+    public void addJoueur(){
+        
+        m_joueurs.clear();
+        
         m_joueurs.add(new J_Humain());
         
-        if(deuxHumain)
+        if(m_deuxHumain)
             m_joueurs.add(new J_Humain());
         else
             m_joueurs.add(new J_Ordinateur());
     }
-    
-        public void jeu(){
-            m_sauvegarde = false;
-            m_console = true;
-    
-            création();
-            affichage(0);
-            
-    }
+      
 
     public void création(){
                 
@@ -81,6 +95,8 @@ public class Interface {
         two.add(new N_SousMarin());
         two.add(new N_SousMarin());
         two.add(new N_SousMarin());
+        
+        addJoueur();
          
         if(m_sauvegarde){
             chargement(one,two);
@@ -327,6 +343,7 @@ public class Interface {
     public void affichage(int nbre){
         if(m_console){
             Console console = new Console(m_joueurs);
+            //console.clearScreen();
             console.affichage(nbre);
         }
         else{
