@@ -383,6 +383,7 @@ public class Interface extends JFrame implements ActionListener{
         m_sauvegarde = false;
         jeu();
         affichage(0);
+        System.out.println("test");
         graph.MenuCommencer();
 
         }else if (ae.getSource() == choix2){ // chargé une partie
