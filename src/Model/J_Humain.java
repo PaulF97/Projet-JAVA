@@ -3,24 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Navire;
+package Model;
 
-import java.util.ArrayList;
+import Model.Joueur;
 
 /**
  *
  * @author charl
  */
-public class Destroyer extends Navire{
-    
-    public Destroyer(){
-        m_taille = 3;
-        m_puissanceTir = 1;
-        m_initCoord = false;
-    }
+public class J_Humain extends Joueur{
 
     @Override
-    void tirer() {
+    public void tourJeu() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

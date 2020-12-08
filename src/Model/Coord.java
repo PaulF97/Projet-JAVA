@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Navire;
+package Model;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Coord{
     private int m_x;
     private int m_y;
     
-    public Coord(int x, int y){
+    public Coord( int x, int y){
         m_x = x;
         m_y = y;
     }
@@ -26,5 +26,4 @@ public class Coord{
     public int getY(){
         return m_y;
     }
-    
 }
