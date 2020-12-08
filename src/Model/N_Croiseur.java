@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Navire;
+package Model;
 
 import java.util.ArrayList;
 
@@ -11,18 +11,13 @@ import java.util.ArrayList;
  *
  * @author charl
  */
-public class Croiseur extends Navire{
+public class N_Croiseur extends Navire{
     
-    public Croiseur(){
+    public N_Croiseur(){
         m_taille = 5;
         m_puissanceTir = 4;
         m_initCoord = false;
-        
+        m_caractere = 'C';
+        m_nom = "Croiseur";
     }
-
-    @Override
-    void tirer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

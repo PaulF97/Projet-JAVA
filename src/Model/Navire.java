@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Navire;
+package Model;
 import java.util.ArrayList;
 
 /**
@@ -14,18 +14,24 @@ import java.util.ArrayList;
     
      protected int m_taille;
      protected int m_puissanceTir;
+     
      protected Coord m_coord;
+     
+     protected char m_caractere;
+     protected String m_nom;
+     
+     protected boolean m_honrizontal;
      protected boolean m_initCoord;
+     protected boolean m_touche;     
      
-     abstract void tirer();
-     
-     public void deplacer(Coord[] caseOccupe){
-         
-     }
      
      public void addCoord(Coord coord){
          m_coord = coord;
          m_initCoord = true;
+     }
+     
+     public void addHonrizontal(boolean honrizontal){
+         m_honrizontal = honrizontal;
      }
      
     public int getTaille (){
@@ -38,5 +44,21 @@ import java.util.ArrayList;
     
     public Coord getCoord(){
         return m_coord;
+    }
+    
+    public boolean getHonrizontal(){
+        return m_honrizontal;
+    }
+    
+    public char getCarac(){
+        return m_caractere;
+    }
+    
+    public String getNom(){
+        return m_nom;
+    }
+    
+    public boolean getTouché(){
+        return m_touche;
     }
 }
