@@ -43,25 +43,44 @@ public class Graphique extends JFrame{
     private JButton choix4 = new JButton("quitter");
     
     
-     
+   
+    
+    public String utilisateur(String message){
+        
+        JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
+       
+        String nom = saisie.showInputDialog(null, message, " Options ", JOptionPane.QUESTION_MESSAGE);
+        //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
+        
+        if(nom == null){
+            saisie.showMessageDialog(null,"Vous avez quittez le jeu ! ", "Identification", JOptionPane.CLOSED_OPTION);
+          System.exit(0);
+        }
+        
+        saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
+        
+        return nom;
+    }
+ 
+       
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
+       
+         JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
+         File regle = new File("src\\files\\test.txt"); // emplacement du fichier
+         ArrayList<String> données = new ArrayList<String>();
+         String ligne;
 
-    JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
-    File regle = new File("src\\files\\test.txt"); // emplacement du fichier
-    ArrayList<String> données = new ArrayList<String>();
-    String ligne;
-
-            try{
-                FileReader lecture_fichier = new FileReader(regle); // fichier qu'on souhaite lire
-                BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
-                   
+                try{
+                    FileReader lecture_fichier = new FileReader(regle); // fichier qu'on souhaite lire
+                    BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
+                    
                     while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
-                        données.add(ligne); // stockage d'une ligne dans un ArrayList
-                        données.add("\n");
-                        System.out.println(ligne);
+                    données.add(ligne); // stockage d'une ligne dans un ArrayList
+                    données.add("\n");
+                    System.out.println(ligne);
                     }
              
-                aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
+                    aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
      
                     lecture.close(); // fermeture de la mémoire tampon
   
@@ -104,6 +123,7 @@ public class Graphique extends JFrame{
         return nom;
     
     }
+  
 
     
  /**

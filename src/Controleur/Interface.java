@@ -71,8 +71,8 @@ public class Interface extends JFrame implements ActionListener{
     public void jeu(){
             
          m_console = true;
-        /*m_deuxHumain = true;
-        m_sauvegarde = true;*/
+         /*      m_deuxHumain = true;
+         m_sauvegarde = true;*/
             
            création();
            /*    //affichage(0);
@@ -290,8 +290,6 @@ public class Interface extends JFrame implements ActionListener{
         Scanner scanner = new Scanner(System.in);
         nom = scanner.nextLine();
         
-     
-
         try {
             monFichier = new FileWriter(nom);
             tampon = new BufferedWriter(monFichier);
@@ -508,7 +506,8 @@ public class Interface extends JFrame implements ActionListener{
             }
 
         }else if (ae.getSource() == choix4){ // quitter
-        graph.MenuQuitter();
+            sauvegarde();    
+            graph.MenuQuitter();
         
         }else {
             
