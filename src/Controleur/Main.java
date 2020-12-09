@@ -6,6 +6,8 @@
  */
 package Controleur;
 
+import Vue.Graphique;
+
 /**
  *
  * @author charl
@@ -17,10 +19,12 @@ public class Main {
      */
     public static void main(String[] args) {
         
+        
         Interface test = new Interface();
         test.Container();
         test.setVisible(true);
         test.jeu();
+ 
 
     }
 

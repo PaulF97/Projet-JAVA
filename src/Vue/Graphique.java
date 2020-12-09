@@ -33,17 +33,11 @@ import javax.swing.JTextField;
  * @author fishe
  */
 
-public class Graphique extends JFrame{
+public class Graphique extends JFrame implements ActionListener{
  
-    private JTextField données = new JTextField();
-    private JButton entrée = new JButton("ok");
-    private JButton choix1 = new JButton("commencer la partie");
-    private JButton choix2 = new JButton("charger une partie");
-    private JButton choix3 = new JButton("aide");
-    private JButton choix4 = new JButton("quitter");
     
-    
-   
+   private JButton choix1 = new JButton("redemmarer");
+   private JButton choix2 = new JButton("quitter");
     
     public String utilisateur(String message){
         
@@ -132,15 +126,37 @@ public class Graphique extends JFrame{
  */
     public void MenuCommencer(){
           
-      JOptionPane commence = new JOptionPane();
+        /*      JOptionPane commence = new JOptionPane();
+        JButton test = new JButton("test");
+        
+        commence.showMessageDialog(null, "Bonjour vous disposez de \n "
+        + "1 cuirassé\n "
+        + "2 croisseurs\n"
+        + "3 destroyeurs\n"
+        + "4 sous-marins\n"
+        +"Vous pouvez jouer contre un humain où un ordinateur\n"
+        + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);*/
+         // création de la boite de dialogue
+        
+        JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
 
-      commence.showMessageDialog(null, "Bonjour vous disposez de \n "
-              + "1 cuirassé\n "
-              + "2 croisseurs\n"
-              + "3 destroyeurs\n"
-              + "4 sous-marins\n"
-              +"Vous pouvez jouer contre un humain où un ordinateur\n"
-              + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
+        setTitle(" Test "); // texte d'entrée
+        Container Container = this.getContentPane(); // création du container
+        Container.setLayout(new GridLayout(0,1)); // dimensionnement des cases
+
+        setSize(400, 400); // taille du container
       
+        // capturer les évènements de chaque boutons
+        choix1.addActionListener(this);
+        choix2.addActionListener(this);
+        
+        Container.add(label);
+        Container.add(choix1);
+        Container.add(choix2);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

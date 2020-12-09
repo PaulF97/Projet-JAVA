@@ -19,6 +19,7 @@ import Model.N_SousMarin;
 import Vue.Console;
 import Vue.Graphique;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -463,9 +464,9 @@ public class Interface extends JFrame implements ActionListener{
         
          // création de la boite de dialogue
         setTitle(" Menu "); // texte d'entrée
-        Container Demarrage = this.getContentPane(); // création du container
-        Demarrage.setLayout(new GridLayout(0,1)); // dimensionnement des cases
-     
+        Container Container = this.getContentPane(); // création du container
+        Container.setLayout(new GridLayout(0,1)); // dimensionnement des cases
+
         setSize(400, 400); // taille du container
       
         // capturer les évènements de chaque boutons
@@ -475,12 +476,12 @@ public class Interface extends JFrame implements ActionListener{
         choix4.addActionListener(this);
         
         // ajout des boutons & informations dans le conteneur
-        Demarrage.add(label);
-        Demarrage.add(choix1);
-        Demarrage.add(choix2);
-        Demarrage.add(choix3);
-        Demarrage.add(choix4);
- 
+        Container.add(label);
+        Container.add(choix1);
+        Container.add(choix2);
+        Container.add(choix3);
+        Container.add(choix4);
+        
     }
        
     @Override // excécution après capture
@@ -491,6 +492,8 @@ public class Interface extends JFrame implements ActionListener{
         jeu();
         affichage(0);
         graph.MenuCommencer();
+        graph.setVisible(true); // affichage du sous-menu démarrer
+        
 
         }else if (ae.getSource() == choix2){ // chargé une partie
         m_sauvegarde = true;
