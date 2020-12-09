@@ -28,10 +28,6 @@ public abstract class Joueur {
         m_navires = navires;
     }
     
-    public void affichageConsole(){
-      
-    }
-    
     public void addPoint(Coord coord,int choix){
         if(choix == 0)
             m_attaque.add(coord);
