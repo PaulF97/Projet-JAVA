@@ -22,4 +22,3 @@
 -Déplacer : Contrairement à la règle classique, il est possible de déplacer des navires.
 -Un navire peut se déplacer d'une seule case sauf si elle à reçu des dégats.
 -Le deplacement ne peut que se faire verticalement ou horizontalement.
--En cas d'obstacle, le déplacement n'est pas possible.

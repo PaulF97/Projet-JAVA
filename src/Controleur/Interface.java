@@ -375,6 +375,7 @@ public class Interface extends JFrame implements ActionListener{
         Demarrage.add(choix4);
  
     }
+       
     @Override // excécution après capture
     public void actionPerformed(ActionEvent ae) {
     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

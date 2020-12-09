@@ -33,7 +33,7 @@ import javax.swing.JTextField;
  * @author fishe
  */
 
-public class Graphique extends JFrame implements ActionListener{
+public class Graphique extends JFrame{
  
     private JTextField données = new JTextField();
     private JButton entrée = new JButton("ok");
@@ -234,9 +234,9 @@ public class Graphique extends JFrame implements ActionListener{
       
     }
 
-    @Override
+    /*    @Override
     public void actionPerformed(ActionEvent ae) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
  
 }
