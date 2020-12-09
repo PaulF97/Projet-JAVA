@@ -8,6 +8,7 @@ package Vue;
 
 
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -37,7 +38,8 @@ public class Graphique extends JFrame implements ActionListener{
  
     
    private JButton choix1 = new JButton("redemmarer");
-   private JButton choix2 = new JButton("quitter");
+   private JButton choix2 = new JButton("Sauvegarde");
+   private JButton choix3 = new JButton("Quitter");
     
     public String utilisateur(String message){
         
@@ -138,7 +140,7 @@ public class Graphique extends JFrame implements ActionListener{
         + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);*/
          // création de la boite de dialogue
         
-        JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
+        JLabel label = new JLabel(" La partie à démarrer");
 
         setTitle(" Test "); // texte d'entrée
         Container Container = this.getContentPane(); // création du container
@@ -149,10 +151,16 @@ public class Graphique extends JFrame implements ActionListener{
         // capturer les évènements de chaque boutons
         choix1.addActionListener(this);
         choix2.addActionListener(this);
+        choix3.addActionListener(this);
+        
+        choix1.setBackground(Color.ORANGE);
+        choix2.setBackground(Color.BLUE);
+        choix3.setBackground(Color.GREEN);
         
         Container.add(label);
         Container.add(choix1);
         Container.add(choix2);
+        Container.add(choix3);
     }
 
     @Override
