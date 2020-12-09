@@ -81,6 +81,13 @@ public class Graphique extends JFrame{
         String nom = saisie.showInputDialog(null, message, " Options ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
+        if(nom == null){
+            saisie.showMessageDialog(null,"Vous avez quittez le jeu ! ", "Identification", JOptionPane.CLOSED_OPTION);
+          System.exit(0);
+        }
+        
+        saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
+        
         return nom;
     }
     
