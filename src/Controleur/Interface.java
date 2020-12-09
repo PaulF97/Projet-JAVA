@@ -50,7 +50,9 @@ public class Interface extends JFrame implements ActionListener{
     private boolean m_sauvegarde;
     private boolean m_console;
     Graphique graph = new Graphique();
-    private final String id;
+    private String id;
+    private boolean m_deuxHumain;
+
     
     private JTextField données = new JTextField();
     private JButton entrée = new JButton("ok");
@@ -59,26 +61,128 @@ public class Interface extends JFrame implements ActionListener{
     private JButton choix3 = new JButton("aide");
     private JButton choix4 = new JButton("quitter");
 
-    public Interface(boolean deuxHumain){
+    public Interface(){
         
         m_joueurs = new ArrayList<Joueur>();
+    }
+    
+    public void jeu(){
+            
+            m_console = true;
+            m_deuxHumain = true;
+            m_sauvegarde = true;
+            
+           création();
+           affichage(0);
+           
+           sauvegarde();
+            
+           deplacer(0);
+           
+           
+           affichage(0);
+    }
+       
+    public void addJoueur(){
+        
+        m_joueurs.clear();
         m_joueurs.add(new J_Humain());
-         id = graph.utilisateur("Comment tu t'appelles ?");
-         System.out.println(id);
-        if(deuxHumain)
+
+        id = graph.utilisateur("Comment tu t'appelles ?");
+        System.out.println(id);
+         
+        if(m_deuxHumain)
+
             m_joueurs.add(new J_Humain());
         else
             m_joueurs.add(new J_Ordinateur());
     }
-    
-        public void jeu(){
-            m_sauvegarde = false;
-            m_console = true;
-    
-            création();
-           // affichage(0);
+
+      
+    public void deplacer(int joueur){
+        //popup deplacer
+        
+        Coord bateau = caseStringToCoord("K10");
+        Coord deplace = caseStringToCoord("k13");
+        
+        int navire = 0;
+        boolean plusCoord = true;
+        int compt = 0;
+        
+        for(Navire auto : m_joueurs.get(joueur).getNavire()){
+            for(int i = 0; i<auto.getTaille();++i){
+                if(auto.getHonrizontal()){
+                    if(auto.getCoord().getX()+i == bateau.getX()){
+                        navire = compt;
+                        if(deplace.getX() > auto.getCoord().getX())
+                            plusCoord = true;
+                        else
+                            plusCoord = false;
+                    }
+                    
+                }
+                else{
+                    if(auto.getCoord().getY()+i == bateau.getY()){
+                        navire = compt;
+                        if(deplace.getY() > auto.getCoord().getY())
+                            plusCoord = true;
+                        else
+                            plusCoord = false;
+                    }
+                }     
+            }
+
             
+            compt +=1;
+        }
+        
+        
+        if(navireHonrizon(joueur, navire)){
+            
+             if(plusCoord)
+                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0)+1, getCoordNavire(joueur,navire,1)));
+             else
+                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0)-1, getCoordNavire(joueur,navire,1)));
+            
+        }
+        else{
+            
+             if(plusCoord)
+                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0), getCoordNavire(joueur,navire,1)+1));
+             else
+                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0), getCoordNavire(joueur,navire,1)-1));
+             
+        }   
     }
+    
+    public boolean navireHonrizon(int joueur, int navire){
+        return m_joueurs.get(joueur).getNavire().get(navire).getHonrizontal();
+    }
+    
+    public int getCoordNavire(int joueur, int navire, int coordChoix){
+        if(coordChoix == 0)
+            return m_joueurs.get(joueur).getNavire().get(navire).getCoord().getX();
+        else
+            return m_joueurs.get(joueur).getNavire().get(navire).getCoord().getY();
+    }
+    
+    public Coord caseStringToCoord(String coordNom){
+        int y = coordNom.charAt(0)-97;
+        int x;
+        
+        if(y < 0)
+            y+=32;
+        
+        if(coordNom.length() == 2)
+             x = Character.getNumericValue(coordNom.charAt(1));
+        else{
+            x = Character.getNumericValue(coordNom.charAt(1))*10;
+            x += Character.getNumericValue(coordNom.charAt(2))-1;
+        }
+        
+        return new Coord(x,y);
+    }
+    
 
     public void création(){
                 
@@ -105,6 +209,8 @@ public class Interface extends JFrame implements ActionListener{
         two.add(new N_SousMarin());
         two.add(new N_SousMarin());
         two.add(new N_SousMarin());
+        
+        addJoueur();
          
         if(m_sauvegarde){
             chargement(one,two);
@@ -413,15 +519,16 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
     
-    public void affichage(int nbre){
+    public void affichage(int joueur){
         if(m_console){
             Console console = new Console(m_joueurs);
-            console.affichage(nbre);
+            //console.clearScreen();
+            console.affichage(joueur);
         }
         else{
             //mode graphique
             Graphique graph = new Graphique();
-            
         }
     }
+
 }
