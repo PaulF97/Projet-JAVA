@@ -527,5 +527,6 @@ public class Interface extends JFrame implements ActionListener{
            Graphique graph = new Graphique();
         }
     }
+}
 
 
