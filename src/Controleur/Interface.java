@@ -343,9 +343,7 @@ public class Interface extends JFrame implements ActionListener{
         String nom;
         
         do{
-            /*            System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
-            Scanner scanner = new Scanner(System.in);
-            nom = scanner.nextLine();*/
+
             nom = graph.MenuCharger();
             unFichier = new File(nom);
             
@@ -489,14 +487,12 @@ public class Interface extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if (ae.getSource() == choix1){ // création de la partie
-        // System.out.println("commencer");
         m_sauvegarde = false;
         jeu();
         affichage(0);
         graph.MenuCommencer();
 
         }else if (ae.getSource() == choix2){ // chargé une partie
-        //System.out.println("charger");
         m_sauvegarde = true;
         jeu();
         
@@ -515,7 +511,7 @@ public class Interface extends JFrame implements ActionListener{
         graph.MenuQuitter();
         
         }else {
-        //System.out.println("erreur");
+            
         }
     }
     
