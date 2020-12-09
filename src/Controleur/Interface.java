@@ -505,8 +505,7 @@ public class Interface extends JFrame implements ActionListener{
                 Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }else if (ae.getSource() == choix4){ // quitter
-            sauvegarde();    
+        }else if (ae.getSource() == choix4){ // quitter  
             graph.MenuQuitter();
         
         }else {
