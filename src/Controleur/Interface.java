@@ -15,6 +15,9 @@ import Model.Navire;
 import Model.J_Ordinateur;
 import Model.N_SousMarin;
 import Vue.Console;
+import Vue.Graphique;
+import java.awt.Container;
+import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,6 +29,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
 /**
@@ -48,13 +54,17 @@ public class Interface {
             
             m_console = true;
             m_deuxHumain = true;
-    
             m_sauvegarde = true;
             
-            création();
-            affichage(0);
+           création();
+           affichage(0);
+           
+           sauvegarde();
             
-            
+           deplacer(0);
+           
+           
+           affichage(0);
     }
        
     public void addJoueur(){
@@ -69,6 +79,89 @@ public class Interface {
             m_joueurs.add(new J_Ordinateur());
     }
       
+    public void deplacer(int joueur){
+        //popup deplacer
+        
+        Coord bateau = caseStringToCoord("K10");
+        Coord deplace = caseStringToCoord("k13");
+        
+        int navire = 0;
+        boolean plusCoord = true;
+        int compt = 0;
+        
+        for(Navire auto : m_joueurs.get(joueur).getNavire()){
+            for(int i = 0; i<auto.getTaille();++i){
+                if(auto.getHonrizontal()){
+                    if(auto.getCoord().getX()+i == bateau.getX()){
+                        navire = compt;
+                        if(deplace.getX() > auto.getCoord().getX())
+                            plusCoord = true;
+                        else
+                            plusCoord = false;
+                    }
+                    
+                }
+                else{
+                    if(auto.getCoord().getY()+i == bateau.getY()){
+                        navire = compt;
+                        if(deplace.getY() > auto.getCoord().getY())
+                            plusCoord = true;
+                        else
+                            plusCoord = false;
+                    }
+                }     
+            }
+            
+            compt +=1;
+        }
+        
+        
+        if(navireHonrizon(joueur, navire)){
+            
+             if(plusCoord)
+                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0)+1, getCoordNavire(joueur,navire,1)));
+             else
+                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0)-1, getCoordNavire(joueur,navire,1)));
+            
+        }
+        else{
+            
+             if(plusCoord)
+                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0), getCoordNavire(joueur,navire,1)+1));
+             else
+                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0), getCoordNavire(joueur,navire,1)-1));
+             
+        }   
+    }
+    
+    public boolean navireHonrizon(int joueur, int navire){
+        return m_joueurs.get(joueur).getNavire().get(navire).getHonrizontal();
+    }
+    
+    public int getCoordNavire(int joueur, int navire, int coordChoix){
+        if(coordChoix == 0)
+            return m_joueurs.get(joueur).getNavire().get(navire).getCoord().getX();
+        else
+            return m_joueurs.get(joueur).getNavire().get(navire).getCoord().getY();
+    }
+    
+    public Coord caseStringToCoord(String coordNom){
+        int y = coordNom.charAt(0)-97;
+        int x;
+        
+        if(y < 0)
+            y+=32;
+        
+        if(coordNom.length() == 2)
+             x = Character.getNumericValue(coordNom.charAt(1));
+        else{
+            x = Character.getNumericValue(coordNom.charAt(1))*10;
+            x += Character.getNumericValue(coordNom.charAt(2))-1;
+        }
+        
+        return new Coord(x,y);
+    }
+    
 
     public void création(){
                 
@@ -340,16 +433,17 @@ public class Interface {
     }
     
     
-    public void affichage(int nbre){
+    public void affichage(int joueur){
         if(m_console){
             Console console = new Console(m_joueurs);
             //console.clearScreen();
-            console.affichage(nbre);
+            console.affichage(joueur);
         }
         else{
             //mode graphique 
+           
         }
     }
     
-    
+ 
 }
