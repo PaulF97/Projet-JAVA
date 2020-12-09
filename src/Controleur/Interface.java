@@ -64,23 +64,24 @@ public class Interface extends JFrame implements ActionListener{
     public Interface(){
         
         m_joueurs = new ArrayList<Joueur>();
+        id = graph.utilisateur("Comment tu t'appelles ?");
+        System.out.println(id);
     }
     
     public void jeu(){
             
-            m_console = true;
-            m_deuxHumain = true;
-            m_sauvegarde = true;
+         m_console = true;
+        /*m_deuxHumain = true;
+        m_sauvegarde = true;*/
             
            création();
-           affichage(0);
+           /*    //affichage(0);
            
            sauvegarde();
-            
+           
            deplacer(0);
            
-           
-           affichage(0);
+           affichage(0);*/
     }
        
     public void addJoueur(){
@@ -88,8 +89,7 @@ public class Interface extends JFrame implements ActionListener{
         m_joueurs.clear();
         m_joueurs.add(new J_Humain());
 
-        id = graph.utilisateur("Comment tu t'appelles ?");
-        System.out.println(id);
+        
          
         if(m_deuxHumain)
 
@@ -289,6 +289,8 @@ public class Interface extends JFrame implements ActionListener{
         System.out.println("Veuillez saisir le nom de la partie à jouer : ");
         Scanner scanner = new Scanner(System.in);
         nom = scanner.nextLine();
+        
+     
 
         try {
             monFichier = new FileWriter(nom);
@@ -341,9 +343,10 @@ public class Interface extends JFrame implements ActionListener{
         String nom;
         
         do{
-            System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
+            /*            System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
             Scanner scanner = new Scanner(System.in);
-            nom = scanner.nextLine();
+            nom = scanner.nextLine();*/
+            nom = graph.MenuCharger();
             unFichier = new File(nom);
             
             if("exit".equals(nom))
@@ -490,18 +493,16 @@ public class Interface extends JFrame implements ActionListener{
         m_sauvegarde = false;
         jeu();
         affichage(0);
-        System.out.println("test");
         graph.MenuCommencer();
 
         }else if (ae.getSource() == choix2){ // chargé une partie
         //System.out.println("charger");
         m_sauvegarde = true;
         jeu();
-        graph.MenuCharger();
+        
         
         }else if (ae.getSource() == choix3){ // afficher les règles du jeu
         // lorsque le trosième bouton est sélectionné
-       // System.out.println("aide");
             try {
                 graph.Menuaide();
             } catch (UnsupportedEncodingException ex) {
@@ -511,9 +512,8 @@ public class Interface extends JFrame implements ActionListener{
             }
 
         }else if (ae.getSource() == choix4){ // quitter
-        // System.out.println("quitter");
-       // System.exit(0); // arret du programme
         graph.MenuQuitter();
+        
         }else {
         //System.out.println("erreur");
         }
