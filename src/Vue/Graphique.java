@@ -43,64 +43,7 @@ public class Graphique extends JFrame{
     private JButton choix4 = new JButton("quitter");
     
     
-    
-    
-      /* public void Container(){
-        
-        // phrase
-        JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
-        
-         // création de la boite de dialogue
-        setTitle(" Menu "); // texte d'entrée
-        Container Demarrage = this.getContentPane(); // création du container
-        Demarrage.setLayout(new GridLayout(0,1)); // dimensionnement des cases
-    
-        setSize(400, 400); // taille du container
-        
-        // capturer les évènements de chaque boutons
-        choix1.addActionListener(this);
-        choix2.addActionListener(this);
-        choix3.addActionListener(this);
-        choix4.addActionListener(this);
-        
-        // ajout des boutons & informations dans le conteneur
-        Demarrage.add(label);
-        Demarrage.add(choix1);
-        Demarrage.add(choix2);
-        Demarrage.add(choix3);
-        Demarrage.add(choix4);
-        
-    }
-    
-      @Override // excécution après capture
-      public void actionPerformed(ActionEvent ae) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        if (ae.getSource() == choix1){ // création de la partie
-            System.out.println("commencer");
-            m_sauvegarde = false;
-            jeu(); 
-
-            
-        }else if (ae.getSource() == choix2){ // chargé une partie
-            //System.out.println("charger");
-            m_sauvegarde = true;
-            jeu();
-            
-        }else if (ae.getSource() == choix3){ // afficher les règles du jeu
-            // lorsque le trosième bouton est sélectionné
-            System.out.println("aide");
-            aide();
-         
-            
-        }else if (ae.getSource() == choix4){ // quitter
-           // System.out.println("quitter");
-            System.exit(0); // arret du programme
-
-        }else {
-            //System.out.println("erreur");
-            
-        }
-    }*/
+   
     
     public String utilisateur(String message){
         
@@ -109,51 +52,18 @@ public class Graphique extends JFrame{
         String nom = saisie.showInputDialog(null, message, " Options ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
+        if(nom == null){
+            saisie.showMessageDialog(null,"Vous avez quittez le jeu ! ", "Identification", JOptionPane.CLOSED_OPTION);
+          System.exit(0);
+        }
+        
+        saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
+        
         return nom;
     }
-    
-    /*  public int capture(ActionEvent cap) throws UnsupportedEncodingException{
-    
-    if (cap.getSource() == choix1){ // création de la partie
-    // System.out.println("commencer");
-    MenuCommencer();
-    return 1;
-    
-    
-    }else if (cap.getSource() == choix2){ // chargé une partie
-    //System.out.println("charger");
-    MenuCharger();
-    return 2;
-    
-    
-    }else if (cap.getSource() == choix3){
-    // afficher les règles du jeu
-    // lorsque le trosième bouton est sélectionné
-    // System.out.println("aide");
-    try {
-    Menuaide();
-    } catch (IOException ex) {
-    Logger.getLogger(Graphique.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return 3;
-    
-    
-    }else if (cap.getSource() == choix4){ // quitter
-    // System.out.println("quitter");
-    MenuQuitter();
-    return 4;
-    }else {
-    //System.out.println("erreur");
-    
-    }
-    return 0;
-    }
-    */
-    
-    
-
+ 
        
-         public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
+    public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
          JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
          File regle = new File("src\\files\\test.txt"); // emplacement du fichier
@@ -213,6 +123,7 @@ public class Graphique extends JFrame{
         return nom;
     
     }
+  
 
     
  /**
@@ -232,6 +143,4 @@ public class Graphique extends JFrame{
               + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
       
     }
-
- 
 }

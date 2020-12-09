@@ -5,6 +5,8 @@
  */
 package Controleur;
 
+
+
 import Model.Coord;
 import Model.N_Croiseur;
 import Model.N_Cuirasse;
@@ -18,18 +20,22 @@ import Vue.Console;
 import Vue.Graphique;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -38,46 +44,63 @@ import javax.swing.JTextField;
  *
  * @author charl
  */
-public class Interface {
+public class Interface extends JFrame implements ActionListener{
+    
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde;
     private boolean m_console;
+
+    Graphique graph = new Graphique();
+    private String id;
     private boolean m_deuxHumain;
+
     
+    private JTextField données = new JTextField();
+    private JButton entrée = new JButton("ok");
+    private JButton choix1 = new JButton("commencer la partie");
+    private JButton choix2 = new JButton("charger une partie");
+    private JButton choix3 = new JButton("aide");
+    private JButton choix4 = new JButton("quitter");
 
     public Interface(){
         
         m_joueurs = new ArrayList<Joueur>();
+        id = graph.utilisateur("Comment tu t'appelles ?");
+        System.out.println(id);
+
     }
     
     public void jeu(){
             
-            m_console = true;
-            m_deuxHumain = true;
-            m_sauvegarde = true;
+         m_console = true;
+         /*      m_deuxHumain = true;
+         m_sauvegarde = true;*/
             
            création();
-           affichage(0);
+           /*    //affichage(0);
            
            sauvegarde();
-            
+           
            deplacer(0);
            
-           
-           affichage(0);
+           affichage(0);*/
+
     }
        
     public void addJoueur(){
         
         m_joueurs.clear();
-        
         m_joueurs.add(new J_Humain());
-        
+
+
+
         if(m_deuxHumain)
+
             m_joueurs.add(new J_Humain());
         else
             m_joueurs.add(new J_Ordinateur());
     }
+
       
     public void deplacer(int joueur){
         //popup deplacer
@@ -268,7 +291,7 @@ public class Interface {
         System.out.println("Veuillez saisir le nom de la partie à jouer : ");
         Scanner scanner = new Scanner(System.in);
         nom = scanner.nextLine();
-
+        
         try {
             monFichier = new FileWriter(nom);
             tampon = new BufferedWriter(monFichier);
@@ -310,6 +333,8 @@ public class Interface {
           }
         }
     }
+     
+  
     
     public boolean chargement(ArrayList<Navire> one, ArrayList<Navire> two){
         
@@ -318,9 +343,8 @@ public class Interface {
         String nom;
         
         do{
-            System.out.println("Veuillez saisir le nom de la partie à jouer : \nSi vous ne voulez plus charger une partie, taper 'exit'.");
-            Scanner scanner = new Scanner(System.in);
-            nom = scanner.nextLine();
+
+            nom = graph.MenuCharger();
             unFichier = new File(nom);
             
             if("exit".equals(nom))
@@ -432,6 +456,64 @@ public class Interface {
         }
     }
     
+       public void Container(){
+        
+        // phrase
+        JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
+        
+         // création de la boite de dialogue
+        setTitle(" Menu "); // texte d'entrée
+        Container Demarrage = this.getContentPane(); // création du container
+        Demarrage.setLayout(new GridLayout(0,1)); // dimensionnement des cases
+     
+        setSize(400, 400); // taille du container
+      
+        // capturer les évènements de chaque boutons
+        choix1.addActionListener(this);
+        choix2.addActionListener(this);
+        choix3.addActionListener(this);
+        choix4.addActionListener(this);
+        
+        // ajout des boutons & informations dans le conteneur
+        Demarrage.add(label);
+        Demarrage.add(choix1);
+        Demarrage.add(choix2);
+        Demarrage.add(choix3);
+        Demarrage.add(choix4);
+ 
+    }
+       
+    @Override // excécution après capture
+    public void actionPerformed(ActionEvent ae) {
+    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (ae.getSource() == choix1){ // création de la partie
+        m_sauvegarde = false;
+        jeu();
+        affichage(0);
+        graph.MenuCommencer();
+
+        }else if (ae.getSource() == choix2){ // chargé une partie
+        m_sauvegarde = true;
+        jeu();
+        
+        
+        }else if (ae.getSource() == choix3){ // afficher les règles du jeu
+        // lorsque le trosième bouton est sélectionné
+            try {
+                graph.Menuaide();
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }else if (ae.getSource() == choix4){ // quitter  
+            graph.MenuQuitter();
+        
+        }else {
+            
+        }
+    }
     
     public void affichage(int joueur){
         if(m_console){
@@ -440,10 +522,10 @@ public class Interface {
             console.affichage(joueur);
         }
         else{
-            //mode graphique 
-           
+
+            //mode graphique
+           Graphique graph = new Graphique();
         }
     }
-    
- 
-}
+
+
