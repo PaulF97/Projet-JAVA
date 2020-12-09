@@ -49,6 +49,7 @@ public class Interface extends JFrame implements ActionListener{
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde;
     private boolean m_console;
+
     Graphique graph = new Graphique();
     private String id;
     private boolean m_deuxHumain;
@@ -66,6 +67,7 @@ public class Interface extends JFrame implements ActionListener{
         m_joueurs = new ArrayList<Joueur>();
         id = graph.utilisateur("Comment tu t'appelles ?");
         System.out.println(id);
+
     }
     
     public void jeu(){
@@ -82,6 +84,7 @@ public class Interface extends JFrame implements ActionListener{
            deplacer(0);
            
            affichage(0);*/
+
     }
        
     public void addJoueur(){
@@ -89,8 +92,8 @@ public class Interface extends JFrame implements ActionListener{
         m_joueurs.clear();
         m_joueurs.add(new J_Humain());
 
-        
-         
+
+
         if(m_deuxHumain)
 
             m_joueurs.add(new J_Humain());
@@ -131,7 +134,6 @@ public class Interface extends JFrame implements ActionListener{
                     }
                 }     
             }
-
             
             compt +=1;
         }
@@ -520,9 +522,10 @@ public class Interface extends JFrame implements ActionListener{
             console.affichage(joueur);
         }
         else{
+
             //mode graphique
-            Graphique graph = new Graphique();
+           Graphique graph = new Graphique();
         }
     }
 
-}
+
