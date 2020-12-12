@@ -15,6 +15,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -27,7 +32,8 @@ import javax.swing.JOptionPane;
 
 public class Graphique extends JFrame{
  
-     /**
+    
+  /**
  * Affiche règle du jeu à partir d'un .txt.
  * Auteur : Paul Fisher 
  * @param question_id  
@@ -46,7 +52,7 @@ public class Graphique extends JFrame{
         }
         
         saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
-        
+
         return nom;
     }
  

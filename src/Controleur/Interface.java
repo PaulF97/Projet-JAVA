@@ -40,16 +40,19 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+import javax.sound.sampled.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 
 /**
@@ -85,7 +88,7 @@ public class Interface extends JFrame implements ActionListener{
         m_joueurs = new ArrayList<Joueur>();
         id = graph.utilisateur("Comment tu t'appelles ?");
         System.out.println(id);
-
+       
     }
     
     public void jeu(){
@@ -312,6 +315,7 @@ public class Interface extends JFrame implements ActionListener{
             monFichier = new FileWriter(nom);
             tampon = new BufferedWriter(monFichier);
 
+            
             for(Joueur joueur : m_joueurs){
                 for(Navire navire : joueur.getNavire()){
                     tampon.write(Integer.toString(Boolean.compare(navire.getHonrizontal(), false))+"\n");
@@ -516,17 +520,7 @@ public class Interface extends JFrame implements ActionListener{
             jeu();
             affichage(0);
             graph.MenuCommencer();
-            
-            try {
-                JouerSon();
-            } catch (IOException ex) {
-                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (LineUnavailableException ex) {
-                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedAudioFileException ex) {
-                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           
+           // JouerSon();
             
         }else if (ae.getSource() == choix2){ // chargé une partie
             m_sauvegarde = true;
@@ -560,34 +554,25 @@ public class Interface extends JFrame implements ActionListener{
             
         }
     }
-    
-    
-    public void JouerSon() throws FileNotFoundException, IOException, LineUnavailableException, UnsupportedAudioFileException{
+ 
+    public void JouerSon(){
         
-        new Thread( new Runnable() {
-
-            @Override
-            public void run() {
-               // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-               try{
-                   
-                    URL chemin = this.getClass().getClassLoader().getResource("C:\\Users\\fishe\\OneDrive\\Documents\\ECE - INGE 3\\java\\projet java\\Projet-JAVA\\Projet-JAVA\\musique\\son.wav");
-                    AudioInputStream emplacement = AudioSystem.getAudioInputStream(chemin);
-                    Clip musique = AudioSystem.getClip();
-                    musique.open(emplacement);
-                    musique.start();
-                }catch(FileNotFoundException e){
-                    System.out.println("le fichier n'existe pas");
-                }catch(IOException e){
-                    System.out.println("il existe un problème au niveau du fichier");
-                } catch (LineUnavailableException | UnsupportedAudioFileException ex) {
-                    Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        File chemin = new File("son.wav");
+                        Clip clip = AudioSystem.getClip();
+                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(chemin);
+                        clip.open(inputStream);
+                        clip.start();
+                    } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+                        JOptionPane.showMessageDialog(null, "il existe un problème de fichier");
+                    }
                 }
-            }
         }).start();
     }
-    
-    
+      
     public void affichage(int joueur){
         if(m_console){
             Console console = new Console(m_joueurs);
