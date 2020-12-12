@@ -131,15 +131,18 @@ public class Graphique extends JFrame{
  * gère le popUp pour quitter la partie
  * @author fishe
  */
-    public void MenuQuitter(){
+    public boolean MenuQuitter(){
     
         JOptionPane quitter = new JOptionPane();
-
+        boolean etat = false;
         int dernier_message =  quitter.showConfirmDialog(null, "voulez vous vraiment quitter la partie ?", "arrêt", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if(dernier_message != JOptionPane.NO_OPTION &&  dernier_message != JOptionPane.CLOSED_OPTION){
-            System.exit(0); // quitte si appuie sur OUI
+            etat = true;
+           // System.exit(0); // quitte si appuie sur OUI
         }
+        
+        return etat;
     }
     
     

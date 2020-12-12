@@ -44,10 +44,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 
 
 /**
@@ -60,6 +56,7 @@ public class Interface extends JFrame implements ActionListener{
     private boolean m_sauvegarde;
     private boolean m_console;
     private boolean m_partie;
+    private boolean m_quitter;
 
     Graphique graph = new Graphique();
     private String id;
@@ -77,6 +74,7 @@ public class Interface extends JFrame implements ActionListener{
 
     public Interface(){
         
+        m_quitter = false;
         m_partie = false;
         m_joueurs = new ArrayList<Joueur>();
         id = graph.utilisateur("Comment tu t'appelles ?");
@@ -541,7 +539,12 @@ public class Interface extends JFrame implements ActionListener{
             }
         
         }else if (ae.getSource() == choix5){ // quitter
-            graph.MenuQuitter();
+           m_quitter = graph.MenuQuitter();
+           
+           if(m_quitter == true){ // sauvegarde si on souhaite quitter
+               sauvegarde();
+               System.exit(0);
+           }
         }else {
             
         }
