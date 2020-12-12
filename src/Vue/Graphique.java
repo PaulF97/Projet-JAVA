@@ -53,6 +53,7 @@ public class Graphique extends JFrame{
     
  /**
  * PopUp indiquant début de partie
+ * Auteur : Paul Fisher 
  * @author fishe 
  */
     public void MenuCommencer(){
@@ -71,7 +72,7 @@ public class Graphique extends JFrame{
        
  /**
  * gère le popUp pour charger la partie
- * @author fishe
+ * Auteur : Paul Fisher 
  * @return nom
  */
     public String MenuCharger(){
@@ -86,7 +87,7 @@ public class Graphique extends JFrame{
     
      /**
  * Boite de dialogue pour sauvegarder en cours de jeu
- * @author fishe 
+ * Auteur : Paul Fisher 
  * @return nom de la partie  
  */
     public String MenuSauvegarde(){
@@ -100,7 +101,7 @@ public class Graphique extends JFrame{
     
  /**
  * Affiche pop si défault de sauvegarde
- * @author fishe 
+ * Auteur : Paul Fisher 
  */
      public void DefaultSauvegarde(){
         
@@ -112,7 +113,7 @@ public class Graphique extends JFrame{
      
  /**
  * Affiche règle du jeu à partir d'un .txt
- * @author fishe 
+ * Auteur : Paul Fisher 
  * @throws java.io.FileNotFoundException 
  * @throws java.io.UnsupportedEncodingException 
  */
@@ -143,11 +144,9 @@ public class Graphique extends JFrame{
                 } 
     }
     
-    
-         
  /**
  * gère le popUp pour quitter la partie
- * @author fishe
+ * Auteur : Paul Fisher 
  * @return true si quitter false si reste 
  */
     public boolean MenuQuitter(){
@@ -163,12 +162,7 @@ public class Graphique extends JFrame{
         
         return etat;
     }
-    
-    
- 
-  
-
-    
+       
 }
 
    

@@ -34,11 +34,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -511,7 +517,16 @@ public class Interface extends JFrame implements ActionListener{
             affichage(0);
             graph.MenuCommencer();
             
-          
+            try {
+                JouerSon();
+            } catch (IOException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (LineUnavailableException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
             
         }else if (ae.getSource() == choix2){ // chargé une partie
             m_sauvegarde = true;
@@ -545,35 +560,32 @@ public class Interface extends JFrame implements ActionListener{
             
         }
     }
-    /*
-    public void JouerSon() throws FileNotFoundException, IOException{
-    
-    AudioPlayer jouer = AudioPlayer.player;
-    AudioStream chemin;
-    AudioData données;
-    ContinuousAudioDataStream boucle = null;
     
     
-    try{
-    chemin = new AudioStream(new FileInputStream("two-steps-from-hell-star-sky.wav")); // récupère l'emplacement du fichier
-    données = chemin.getData(); // récupère les infos du son
-    boucle = new ContinuousAudioDataStream(données);
-    }catch(IOException e){
-    JOptionPane.showMessageDialog(null, "Un problème existe au niveau du fichier son");
+    public void JouerSon() throws FileNotFoundException, IOException, LineUnavailableException, UnsupportedAudioFileException{
+        
+        new Thread( new Runnable() {
+
+            @Override
+            public void run() {
+               // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+               try{
+                   
+                    URL chemin = this.getClass().getClassLoader().getResource("C:\\Users\\fishe\\OneDrive\\Documents\\ECE - INGE 3\\java\\projet java\\Projet-JAVA\\Projet-JAVA\\musique\\son.wav");
+                    AudioInputStream emplacement = AudioSystem.getAudioInputStream(chemin);
+                    Clip musique = AudioSystem.getClip();
+                    musique.open(emplacement);
+                    musique.start();
+                }catch(FileNotFoundException e){
+                    System.out.println("le fichier n'existe pas");
+                }catch(IOException e){
+                    System.out.println("il existe un problème au niveau du fichier");
+                } catch (LineUnavailableException | UnsupportedAudioFileException ex) {
+                    Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
     }
-    
-    jouer.start(boucle); // jouer en boucle le son
-    
-    /* InputStream son;
-    
-    try{
-    son = new FileInputStream(new File(filepath)); // emplacement du fichier MP3
-    AudioStream audio = new AudioStream(son);
-    AudioPlayer.player.start(audio);
-    
-    }catch(Exception e){
-    JOptionPane.showMessageDialog(null, "Un problème existe au niveau du fichier son");
-    }*/
     
     
     public void affichage(int joueur){
