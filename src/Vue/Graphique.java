@@ -8,6 +8,7 @@ package Vue;
 
 
 
+import Controleur.Interface;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -34,13 +35,8 @@ import javax.swing.JTextField;
  * @author fishe
  */
 
-public class Graphique extends JFrame implements ActionListener{
+public class Graphique extends JFrame{
  
-    
-   private JButton choix1 = new JButton("redemmarer");
-   private JButton choix2 = new JButton("Sauvegarde");
-   private JButton choix3 = new JButton("Quitter");
-    
     public String utilisateur(String message){
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
@@ -58,7 +54,52 @@ public class Graphique extends JFrame implements ActionListener{
         return nom;
     }
  
+    
+    
+    public void MenuCommencer(){
+        
+        JOptionPane commence = new JOptionPane();
+        
+        commence.showMessageDialog(null, "Bonjour vous disposez de \n "
+        + "1 cuirassé\n "
+        + "2 croisseurs\n"
+        + "3 destroyeurs\n"
+        + "4 sous-marins\n"
+        +"Vous pouvez jouer contre un humain où un ordinateur\n"
+        + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
        
+ /**
+ * gère le popUp pour charger la partie
+ * @author fishe
+ * @return nom
+ */
+    public String MenuCharger(){
+    
+        JOptionPane charger = new JOptionPane();
+
+        String nom = charger.showInputDialog(null, "Veuillez saisir la partie que vous souhaiter charger\n"
+        + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
+
+        return nom;
+    }
+    
+    public String MenuSauvegarde(){
+    
+        JOptionPane sauvegarde = new JOptionPane();
+
+        String nom_partie = sauvegarde.showInputDialog(null, " Saisir le nom de la partie ", "Sauvegarder", JOptionPane.QUESTION_MESSAGE); // saisie du message
+
+        return nom_partie;
+    }
+     public void DefaultSauvegarde(){
+        
+        JOptionPane sauvegarde = new JOptionPane();
+        
+        sauvegarde.showMessageDialog(null, " Vous ne pouvez sauvegarder que si une partie est en cours", "Sauvegarder", JOptionPane.WARNING_MESSAGE);
+    }
+    
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
          JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
@@ -84,10 +125,8 @@ public class Graphique extends JFrame implements ActionListener{
                 }catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
                     System.err.println("le fichier " + regle.toString() + " est introuvable");
                 } 
-        }  
+    }  
          
-    
-
  /**
  * gère le popUp pour quitter la partie
  * @author fishe
@@ -104,67 +143,11 @@ public class Graphique extends JFrame implements ActionListener{
     }
     
     
- /**
- * gère le popUp pour charger la partie
- * @author fishe
- * @return nom
- */
-    public String MenuCharger(){
-    
-        JOptionPane charger = new JOptionPane();
-
-        String nom = charger.showInputDialog(null, "Veuillez saisir la partie que vous souhaiter charger\n"
-        + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
-
-        return nom;
-    
-    }
+ 
   
 
     
- /**
- * gère le popUp quand la partie commence
- * @author fishe
- */
-    public void MenuCommencer(){
-          
-        /*      JOptionPane commence = new JOptionPane();
-        JButton test = new JButton("test");
-        
-        commence.showMessageDialog(null, "Bonjour vous disposez de \n "
-        + "1 cuirassé\n "
-        + "2 croisseurs\n"
-        + "3 destroyeurs\n"
-        + "4 sous-marins\n"
-        +"Vous pouvez jouer contre un humain où un ordinateur\n"
-        + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);*/
-         // création de la boite de dialogue
-        
-        JLabel label = new JLabel(" La partie à démarrer");
-
-        setTitle(" Test "); // texte d'entrée
-        Container Container = this.getContentPane(); // création du container
-        Container.setLayout(new GridLayout(0,1)); // dimensionnement des cases
-
-        setSize(400, 400); // taille du container
-      
-        // capturer les évènements de chaque boutons
-        choix1.addActionListener(this);
-        choix2.addActionListener(this);
-        choix3.addActionListener(this);
-        
-        choix1.setBackground(Color.ORANGE);
-        choix2.setBackground(Color.BLUE);
-        choix3.setBackground(Color.GREEN);
-        
-        Container.add(label);
-        Container.add(choix1);
-        Container.add(choix2);
-        Container.add(choix3);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
+
+   
+

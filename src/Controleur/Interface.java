@@ -18,6 +18,7 @@ import Model.J_Ordinateur;
 import Model.N_SousMarin;
 import Vue.Console;
 import Vue.Graphique;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -26,9 +27,12 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,7 +42,12 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 
 /**
@@ -50,6 +59,7 @@ public class Interface extends JFrame implements ActionListener{
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde;
     private boolean m_console;
+    private boolean m_partie;
 
     Graphique graph = new Graphique();
     private String id;
@@ -60,11 +70,14 @@ public class Interface extends JFrame implements ActionListener{
     private JButton entrée = new JButton("ok");
     private JButton choix1 = new JButton("commencer la partie");
     private JButton choix2 = new JButton("charger une partie");
-    private JButton choix3 = new JButton("aide");
-    private JButton choix4 = new JButton("quitter");
+    private JButton choix3 = new JButton("Sauvegarder");
+    private JButton choix4 = new JButton("aide");
+    private JButton choix5 = new JButton("quitter");
+    
 
     public Interface(){
         
+        m_partie = false;
         m_joueurs = new ArrayList<Joueur>();
         id = graph.utilisateur("Comment tu t'appelles ?");
         System.out.println(id);
@@ -289,9 +302,11 @@ public class Interface extends JFrame implements ActionListener{
         BufferedWriter tampon = null;
         String nom;
         
-        System.out.println("Veuillez saisir le nom de la partie à jouer : ");
+        /*        System.out.println("Veuillez saisir le nom de la partie à jouer : ");
         Scanner scanner = new Scanner(System.in);
-        nom = scanner.nextLine();
+        nom = scanner.nextLine();*/
+        
+        nom = graph.MenuSauvegarde();
         
         try {
             monFichier = new FileWriter(nom);
@@ -474,6 +489,13 @@ public class Interface extends JFrame implements ActionListener{
         choix2.addActionListener(this);
         choix3.addActionListener(this);
         choix4.addActionListener(this);
+        choix5.addActionListener(this);
+        
+        choix1.setBackground(Color.BLUE);
+        choix2.setBackground(Color.WHITE);
+        choix3.setBackground(Color.RED);
+        choix4.setBackground(Color.GREEN);
+        choix5.setBackground(Color.MAGENTA);
         
         // ajout des boutons & informations dans le conteneur
         Container.add(label);
@@ -481,6 +503,7 @@ public class Interface extends JFrame implements ActionListener{
         Container.add(choix2);
         Container.add(choix3);
         Container.add(choix4);
+        Container.add(choix5);
         
     }
        
@@ -488,20 +511,27 @@ public class Interface extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if (ae.getSource() == choix1){ // création de la partie
-        m_sauvegarde = false;
-        jeu();
-        affichage(0);
-        graph.MenuCommencer();
-        graph.setVisible(true); // affichage du sous-menu démarrer
-        
-
+            m_sauvegarde = false;
+            m_partie = true;
+            jeu();
+            affichage(0);
+            graph.MenuCommencer();
+            
+          
+            
         }else if (ae.getSource() == choix2){ // chargé une partie
-        m_sauvegarde = true;
-        jeu();
+            m_sauvegarde = true;
+            jeu();
         
-        
-        }else if (ae.getSource() == choix3){ // afficher les règles du jeu
+        }else if (ae.getSource() == choix3){ // Suvegarder durant la partie
         // lorsque le trosième bouton est sélectionné
+            if(m_partie == true){
+                sauvegarde();
+            } else{
+                graph.DefaultSauvegarde();
+            }
+
+        }else if (ae.getSource() == choix4){ // aide
             try {
                 graph.Menuaide();
             } catch (UnsupportedEncodingException ex) {
@@ -509,14 +539,43 @@ public class Interface extends JFrame implements ActionListener{
             } catch (IOException ex) {
                 Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        }else if (ae.getSource() == choix4){ // quitter  
-            graph.MenuQuitter();
         
+        }else if (ae.getSource() == choix5){ // quitter
+            graph.MenuQuitter();
         }else {
             
         }
     }
+    /*
+    public void JouerSon() throws FileNotFoundException, IOException{
+    
+    AudioPlayer jouer = AudioPlayer.player;
+    AudioStream chemin;
+    AudioData données;
+    ContinuousAudioDataStream boucle = null;
+    
+    
+    try{
+    chemin = new AudioStream(new FileInputStream("two-steps-from-hell-star-sky.wav")); // récupère l'emplacement du fichier
+    données = chemin.getData(); // récupère les infos du son
+    boucle = new ContinuousAudioDataStream(données);
+    }catch(IOException e){
+    JOptionPane.showMessageDialog(null, "Un problème existe au niveau du fichier son");
+    }
+    
+    jouer.start(boucle); // jouer en boucle le son
+    
+    /* InputStream son;
+    
+    try{
+    son = new FileInputStream(new File(filepath)); // emplacement du fichier MP3
+    AudioStream audio = new AudioStream(son);
+    AudioPlayer.player.start(audio);
+    
+    }catch(Exception e){
+    JOptionPane.showMessageDialog(null, "Un problème existe au niveau du fichier son");
+    }*/
+    
     
     public void affichage(int joueur){
         if(m_console){
