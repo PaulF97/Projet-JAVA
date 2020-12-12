@@ -8,12 +8,6 @@ package Vue;
 
 
 
-import Controleur.Interface;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,27 +15,29 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 
 /**
  * gère les sous-menus de l'interface graphique
+ * Classe appartient à la partie Vue du pattern MVC
  * @author fishe
  */
 
 public class Graphique extends JFrame{
  
-    public String utilisateur(String message){
+     /**
+ * Affiche règle du jeu à partir d'un .txt.
+ * Auteur : Paul Fisher 
+ * @param question_id  
+ * @return non utilisateur choisit 
+ */
+    public String utilisateur(String question_id){
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
        
-        String nom = saisie.showInputDialog(null, message, " Options ", JOptionPane.QUESTION_MESSAGE);
+        String nom = saisie.showInputDialog(null, question_id, " Options ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
         if(nom == null){
@@ -55,7 +51,10 @@ public class Graphique extends JFrame{
     }
  
     
-    
+ /**
+ * PopUp indiquant début de partie
+ * @author fishe 
+ */
     public void MenuCommencer(){
         
         JOptionPane commence = new JOptionPane();
@@ -85,6 +84,11 @@ public class Graphique extends JFrame{
         return nom;
     }
     
+     /**
+ * Boite de dialogue pour sauvegarder en cours de jeu
+ * @author fishe 
+ * @return nom de la partie  
+ */
     public String MenuSauvegarde(){
     
         JOptionPane sauvegarde = new JOptionPane();
@@ -93,6 +97,11 @@ public class Graphique extends JFrame{
 
         return nom_partie;
     }
+    
+ /**
+ * Affiche pop si défault de sauvegarde
+ * @author fishe 
+ */
      public void DefaultSauvegarde(){
         
         JOptionPane sauvegarde = new JOptionPane();
@@ -100,6 +109,13 @@ public class Graphique extends JFrame{
         sauvegarde.showMessageDialog(null, " Vous ne pouvez sauvegarder que si une partie est en cours", "Sauvegarder", JOptionPane.WARNING_MESSAGE);
     }
     
+     
+ /**
+ * Affiche règle du jeu à partir d'un .txt
+ * @author fishe 
+ * @throws java.io.FileNotFoundException 
+ * @throws java.io.UnsupportedEncodingException 
+ */
     public void Menuaide() throws FileNotFoundException, UnsupportedEncodingException, IOException{
        
          JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
@@ -125,11 +141,14 @@ public class Graphique extends JFrame{
                 }catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
                     System.err.println("le fichier " + regle.toString() + " est introuvable");
                 } 
-    }  
+    }
+    
+    
          
  /**
  * gère le popUp pour quitter la partie
  * @author fishe
+ * @return true si quitter false si reste 
  */
     public boolean MenuQuitter(){
     

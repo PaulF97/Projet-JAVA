@@ -21,7 +21,6 @@ public class Main {
         
         
         Interface test = new Interface();
-
         test.Container();
         test.setVisible(true);
 

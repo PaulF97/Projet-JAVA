@@ -300,10 +300,6 @@ public class Interface extends JFrame implements ActionListener{
         BufferedWriter tampon = null;
         String nom;
         
-        /*        System.out.println("Veuillez saisir le nom de la partie à jouer : ");
-        Scanner scanner = new Scanner(System.in);
-        nom = scanner.nextLine();*/
-        
         nom = graph.MenuSauvegarde();
         
         try {
@@ -543,7 +539,7 @@ public class Interface extends JFrame implements ActionListener{
            
            if(m_quitter == true){ // sauvegarde si on souhaite quitter
                sauvegarde();
-               System.exit(0);
+               System.exit(0); // ferme le jeu
            }
         }else {
             
