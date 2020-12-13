@@ -74,8 +74,6 @@ public class Interface extends JFrame implements ActionListener{
     private boolean m_deuxHumain;
 
     
-    private JTextField données = new JTextField();
-    private JButton entrée = new JButton("ok");
     private JButton choix1 = new JButton("commencer la partie");
     private JButton choix2 = new JButton("charger une partie");
     private JButton choix3 = new JButton("Sauvegarder");
