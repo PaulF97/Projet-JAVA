@@ -6,6 +6,8 @@
  */
 package Controleur;
 
+import Vue.Musique;
+
 
 /**
  *
@@ -20,6 +22,8 @@ public class Main {
         
         
         Interface test = new Interface();
+        /* Musique son = new Musique();
+        son.jouer();*/
         test.Container();
         test.setVisible(true);
         test.jeu();

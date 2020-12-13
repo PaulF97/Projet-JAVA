@@ -15,6 +15,7 @@ import Model.Navire;
 import Model.N_SousMarin;
 import Vue.Console;
 import Vue.Graphique;
+import Vue.Musique;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -69,6 +70,7 @@ public class Interface extends JFrame implements ActionListener{
     private boolean m_quitter;
 
     Graphique graph = new Graphique();
+    Musique son = new Musique();
     private String id;
     private boolean m_deuxHumain;
 
@@ -604,11 +606,11 @@ public class Interface extends JFrame implements ActionListener{
             m_sauvegarde = false;
             m_partie = true;
             graph.MenuCommencer();
+            son.jouer();
             jeu();
             affichage(0);
             choix();
             
-           // JouerSon();
             
         }else if (ae.getSource() == choix2){ // chargé une partie
             m_sauvegarde = true;
@@ -641,24 +643,6 @@ public class Interface extends JFrame implements ActionListener{
         }else {
             
         }
-    }
- 
-    public void JouerSon(){
-        
-        new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        File chemin = new File("son.wav");
-                        Clip clip = AudioSystem.getClip();
-                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(chemin);
-                        clip.open(inputStream);
-                        clip.start();
-                    } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-                        JOptionPane.showMessageDialog(null, "il existe un problème de fichier");
-                    }
-                }
-        }).start();
     }
       
     public void affichage(int joueur){
