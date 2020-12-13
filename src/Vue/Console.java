@@ -19,6 +19,7 @@ import java.util.Scanner;
  *
  * @author charl
  */
+
 public class Console {
     
      private ArrayList<Joueur> m_joueurs;
