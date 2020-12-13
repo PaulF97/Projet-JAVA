@@ -11,6 +11,8 @@ package Vue;
  */
 public class Musique {
 
+    private int test;
+    private boolean test1;
     
     
 }
