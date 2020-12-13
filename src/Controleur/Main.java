@@ -22,8 +22,8 @@ public class Main {
         
         
         Interface test = new Interface();
-        /* Musique son = new Musique();
-        son.jouer();*/
+        Musique son = new Musique();
+        son.jouer();
         test.Container();
         test.setVisible(true);
         test.jeu();
