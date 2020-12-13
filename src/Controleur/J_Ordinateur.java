@@ -5,6 +5,8 @@
  */
 package Controleur;
 
+import Controleur.Joueur;
+
 /**
  *
  * @author charl

@@ -34,6 +34,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Map;
 import java.util.HashMap;
@@ -97,6 +99,7 @@ public class Interface extends JFrame implements ActionListener{
         // m_deuxHumain = true;
         // m_sauvegarde = true;
             
+
            creation();
               //affichage(0);
            
@@ -201,7 +204,7 @@ public class Interface extends JFrame implements ActionListener{
          }
          return coord;
      }
-    
+
        
     public void addJoueur(){
         
@@ -229,14 +232,22 @@ public class Interface extends JFrame implements ActionListener{
         if(m_joueurs.get(joueur).deplacer(caseStringToCoord(bateau), caseStringToCoord(deplacement))){
             //popup deplacment ok
             JOptionPane.showMessageDialog(null, "déplacement ok");
+
+        
+        if(m_joueurs.get(joueur).deplacer(caseStringToCoord("N2"), caseStringToCoord("O2"))){
+            //popup deplacment ok
+
         }
         else
         {
             //deplacement impossible recommmencer saisi
+
             JOptionPane.showMessageDialog(null, "déplacement nok");
+
 
         }
         
+    }
     }
     
     public Coord caseStringToCoord(String coordNom){

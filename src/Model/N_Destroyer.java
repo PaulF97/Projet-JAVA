@@ -22,13 +22,14 @@ public class N_Destroyer extends Navire{
         m_caractere = 'D';
         m_eclairante = true;
         m_nom = "Destroyer";
+
     }
     
     public boolean getEclairante(){
         return m_eclairante;
     }
     
-     public void addEclairante(boolean bool){
+    public void addEclairante(boolean bool){
         m_eclairante = bool;
     }
 }
