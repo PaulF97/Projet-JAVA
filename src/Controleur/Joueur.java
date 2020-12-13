@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controleur;
 import Model.Coord;
+import Model.Coord;
+import Model.Navire;
 import Model.Navire;
 import java.util.ArrayList;
 import java.util.HashMap;
