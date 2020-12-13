@@ -74,6 +74,7 @@ public class Interface extends JFrame implements ActionListener{
     private boolean m_deuxHumain;
 
     
+
     private JButton choix1 = new JButton("commencer la partie");
     private JButton choix2 = new JButton("charger une partie");
     private JButton choix3 = new JButton("Sauvegarder");
@@ -94,26 +95,33 @@ public class Interface extends JFrame implements ActionListener{
     public void jeu(){
             
          m_console = true;
-         /*      m_deuxHumain = true;
-         m_sauvegarde = true;*/
+        // m_deuxHumain = true;
+        // m_sauvegarde = true;
             
            creation();
-           /*    //affichage(0);
+              //affichage(0);
            
-           sauvegarde();
+           //sauvegarde();
            
-           deplacer(0);
+          // deplacer(0);*/
            
-           affichage(0);*/
+          // affichage(0);
            
-           tirer(0,1);
+           //tirer(0,1);
 
     }
     
      public void tirer(int joueur1, int joueur2){
         //popup tirer
-        String bateauSelectionne = "E3";
-        String caseTirer = "F11";
+        
+        /*        String bateauSelectionne = "E3";
+        String caseTirer = "F11";*/
+        
+        String bateauSelectionne = null;
+        String caseTirer = null;
+        
+        bateauSelectionne = graph.SelectionBateau();
+        caseTirer = graph.PopUpTirer();
         
         Map<Coord, Boolean> casetouche = new HashMap<>();
                 
@@ -191,9 +199,14 @@ public class Interface extends JFrame implements ActionListener{
 
     public void deplacer(int joueur){
         //popup deplacer
+        String bateau;
+        String deplacement;
+        
+        bateau = graph.SelectionBateau();
+        deplacement = graph.PopUpDeplacer();
         
         
-        if(m_joueurs.get(joueur).deplacer(caseStringToCoord("N2"), caseStringToCoord("O2"))){
+        if(m_joueurs.get(joueur).deplacer(caseStringToCoord(bateau), caseStringToCoord(deplacement))){
             //popup deplacment ok
         }
         else

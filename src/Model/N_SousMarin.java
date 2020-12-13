@@ -18,6 +18,6 @@ public class N_SousMarin extends Navire{
         m_puissanceTir = 1;
         m_initCoord = false;
         m_caractere = 'S';
-         m_nom = "Sous-marin";
+        m_nom = "Sous-marin";
     }
 }

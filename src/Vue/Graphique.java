@@ -86,6 +86,37 @@ public class Graphique extends JFrame{
         return nom;
     }
     
+    
+    public String PopUpTirer(){
+        
+        JOptionPane tire = new JOptionPane();
+        
+        String tirer = tire.showInputDialog(null, "Veuillez selectionner la case", "choix coordonnées");
+
+        return tirer;
+       
+    }
+    
+      public String PopUpDeplacer(){
+        
+        JOptionPane deplacer = new JOptionPane();
+        
+        String mouvement = deplacer.showInputDialog(null, "Veuillez selectionner la nouvelle case", "choix coordonnées");
+
+        return mouvement;
+       
+    }
+    
+        public String SelectionBateau(){
+        
+        JOptionPane choix = new JOptionPane();
+        
+        String bateau = choix.showInputDialog(null, "Veuillez selectionner le bateau désiré", "choix navire");
+
+        return bateau;
+       
+    }
+    
      /**
  * Boite de dialogue pour sauvegarder en cours de jeu
  * Auteur : Paul Fisher 
