@@ -27,4 +27,8 @@ public class N_Destroyer extends Navire{
     public boolean getEclairante(){
         return m_eclairante;
     }
+    
+     public void addEclairante(boolean bool){
+        m_eclairante = bool;
+    }
 }

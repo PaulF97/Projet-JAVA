@@ -22,7 +22,8 @@ import java.util.ArrayList;
      
      protected boolean m_honrizontal;
      protected boolean m_initCoord;
-     protected boolean m_touche;     
+     protected boolean m_touche;    
+     protected boolean m_vie;    
      
      
      public void addCoord(Coord coord){
@@ -32,6 +33,10 @@ import java.util.ArrayList;
      
      public void addHonrizontal(boolean honrizontal){
          m_honrizontal = honrizontal;
+     }
+     
+     public void addTouche(boolean touche){
+         m_touche = touche;
      }
      
     public int getTaille (){
@@ -58,7 +63,7 @@ import java.util.ArrayList;
         return m_nom;
     }
     
-    public boolean getTouché(){
+    public boolean getTouche(){
         return m_touche;
     }
 }

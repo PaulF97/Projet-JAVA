@@ -15,11 +15,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -135,9 +130,9 @@ public class Graphique extends JFrame{
                     BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
                     
                     while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
-                    données.add(ligne); // stockage d'une ligne dans un ArrayList
-                    données.add("\n");
-                    System.out.println(ligne);
+                        données.add(ligne); // stockage d'une ligne dans un ArrayList
+                        données.add("\n");
+                       //  System.out.println(ligne);
                     }
              
                     aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp

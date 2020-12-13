@@ -6,9 +6,6 @@
  */
 package Controleur;
 
-import java.io.IOException;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -25,7 +22,6 @@ public class Main {
         Interface test = new Interface();
         test.Container();
         test.setVisible(true);
-
         test.jeu();
  
 
