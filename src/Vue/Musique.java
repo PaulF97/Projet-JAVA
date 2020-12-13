@@ -14,22 +14,25 @@ import javazoom.jl.player.Player;
 
 
 
-
-
 /**
- *
- * @author fishe
+ * Classe permet de gérer la musique 
+ * Hérite de la classe Thread pour gérer plusieurs taches
+ * Auteur : Paul Fisher
  */
+
+
 public class Musique extends Thread {
     
     Graphique liaison = new Graphique();
  
 /**
- *
- * @author fishe
+ * Permet de programmer le lancement d'un son à l'aide d'un thread
+ * but : ne pas perturber l'ensemble du programme lors de la musique
+ * Auteur : Paul Fisher
  */
-    public void jouer(){    
-        try {
+    @Override
+    public void run(){
+         try {
             FileInputStream chemin = new FileInputStream("src\\son\\son1.mp3"); // emplacement du fichier MP3
             Player jouer = new Player(chemin);
             jouer.play();
@@ -39,7 +42,7 @@ public class Musique extends Thread {
             JOptionPane.showMessageDialog(null, "le format n'est pas le bon");
         }
     }
-    
- }
+
+}    
 
     
