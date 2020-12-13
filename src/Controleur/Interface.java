@@ -9,10 +9,7 @@ import Model.Coord;
 import Model.N_Croiseur;
 import Model.N_Cuirasse;
 import Model.N_Destroyer;
-import Model.J_Humain;
-import Model.Joueur;
 import Model.Navire;
-import Model.J_Ordinateur;
 import Model.N_SousMarin;
 import Vue.Console;
 import Vue.Graphique;
@@ -25,6 +22,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -58,14 +57,76 @@ public class Interface {
             
            création();
            affichage(0);
+           affichage(1);
+                       
+           tirer(0,1);
            
-           sauvegarde();
-            
-           deplacer(0);
-           
-           
-           affichage(0);
+          affichage(0);
+          affichage(1);
     }
+    
+    public void tirer(int joueur1, int joueur2){
+        //popup tirer
+        String bateauSelectionne = "E3";
+        String caseTirer = "F11";
+        
+        Map<Coord, Boolean> casetouche = new HashMap<>();
+                
+        switch(m_joueurs.get(joueur1).typeNavire(caseStringToCoord(bateauSelectionne))){//navire selectionné
+        
+            case "Sous-marin" :
+                if("Sous-marin".equals(m_joueurs.get(joueur2).typeNavire(caseStringToCoord(caseTirer)))){
+                    casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseStringToCoord(caseTirer), 1));
+                    m_joueurs.get(joueur1).addAttaque(casetouche);
+                }
+            break;
+            case "Destroyer" :
+                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseStringToCoord(caseTirer), 1));
+                 m_joueurs.get(joueur1).addAttaque(casetouche);
+            break;
+            case "Croiseur" :
+                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseStringToCoord(caseTirer), 4));
+                 m_joueurs.get(joueur1).addAttaque(casetouche);
+            break;
+            case "Cuirasse" :
+                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseStringToCoord(caseTirer), 9));
+                 m_joueurs.get(joueur1).addAttaque(casetouche);
+            break;
+            default :
+                //pas de bateau selectionné
+         }
+    }
+    
+    public ArrayList<Coord> coordTouche(Coord tire, int degat){
+         ArrayList<Coord> coord = new ArrayList<>();
+         
+         switch(degat){
+        
+            case 1 :
+                    coord.add(tire);
+            break;
+            case 4 :
+                    coord.add(tire);
+                    coord.add(new Coord(tire.getX()-1, tire.getY()));
+                    coord.add(new Coord(tire.getX()+1, tire.getY()));
+                    coord.add(new Coord(tire.getX(), tire.getY()+1));
+                    coord.add(new Coord(tire.getX(), tire.getY()-1));
+            break;
+            case 9 :
+                    coord.add(tire);
+                    coord.add(new Coord(tire.getX()-1, tire.getY()));
+                    coord.add(new Coord(tire.getX()+1, tire.getY()));
+                    coord.add(new Coord(tire.getX(), tire.getY()+1));
+                    coord.add(new Coord(tire.getX(), tire.getY()-1));
+                    coord.add(new Coord(tire.getX()-1, tire.getY()+1));
+                    coord.add(new Coord(tire.getX()+1, tire.getY()+1));
+                    coord.add(new Coord(tire.getX()-1, tire.getY()-1));
+                    coord.add(new Coord(tire.getX()+1, tire.getY()-1));
+            break;
+           
+         }
+         return coord;
+     }
        
     public void addJoueur(){
         
@@ -82,67 +143,15 @@ public class Interface {
     public void deplacer(int joueur){
         //popup deplacer
         
-        Coord bateau = caseStringToCoord("K10");
-        Coord deplace = caseStringToCoord("k13");
         
-        int navire = 0;
-        boolean plusCoord = true;
-        int compt = 0;
-        
-        for(Navire auto : m_joueurs.get(joueur).getNavire()){
-            for(int i = 0; i<auto.getTaille();++i){
-                if(auto.getHonrizontal()){
-                    if(auto.getCoord().getX()+i == bateau.getX()){
-                        navire = compt;
-                        if(deplace.getX() > auto.getCoord().getX())
-                            plusCoord = true;
-                        else
-                            plusCoord = false;
-                    }
-                    
-                }
-                else{
-                    if(auto.getCoord().getY()+i == bateau.getY()){
-                        navire = compt;
-                        if(deplace.getY() > auto.getCoord().getY())
-                            plusCoord = true;
-                        else
-                            plusCoord = false;
-                    }
-                }     
-            }
-            
-            compt +=1;
+        if(m_joueurs.get(joueur).deplacer(caseStringToCoord("N2"), caseStringToCoord("O2"))){
+            //popup deplacment ok
         }
-        
-        
-        if(navireHonrizon(joueur, navire)){
-            
-             if(plusCoord)
-                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0)+1, getCoordNavire(joueur,navire,1)));
-             else
-                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0)-1, getCoordNavire(joueur,navire,1)));
-            
-        }
-        else{
-            
-             if(plusCoord)
-                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0), getCoordNavire(joueur,navire,1)+1));
-             else
-                  m_joueurs.get(joueur).getNavire().get(navire).addCoord(new Coord(getCoordNavire(joueur,navire,0), getCoordNavire(joueur,navire,1)-1));
-             
-        }   
-    }
-    
-    public boolean navireHonrizon(int joueur, int navire){
-        return m_joueurs.get(joueur).getNavire().get(navire).getHonrizontal();
-    }
-    
-    public int getCoordNavire(int joueur, int navire, int coordChoix){
-        if(coordChoix == 0)
-            return m_joueurs.get(joueur).getNavire().get(navire).getCoord().getX();
         else
-            return m_joueurs.get(joueur).getNavire().get(navire).getCoord().getY();
+        {
+            //deplacement impossible recommmencer saisi
+        }
+        
     }
     
     public Coord caseStringToCoord(String coordNom){
@@ -159,7 +168,7 @@ public class Interface {
             x += Character.getNumericValue(coordNom.charAt(2))-1;
         }
         
-        return new Coord(x,y);
+        return new Coord(x-1,y);
     }
     
 
@@ -282,9 +291,13 @@ public class Interface {
                 
                 tampon.write(Integer.toString(11111)+"\n");
                 
-                for(Coord coord : joueur.getAttaque()){
+                for(Coord coord : joueur.getAttaque().keySet()){
                     tampon.write(Integer.toString(coord.getX())+"\n");
                     tampon.write(Integer.toString(coord.getY())+"\n");
+                    if(joueur.getAttaque().get(coord))
+                         tampon.write("1\n");
+                    else
+                        tampon.write("0\n");
                 }
                 
                 tampon.write(Integer.toString(11111)+"\n");
@@ -368,7 +381,6 @@ public class Interface {
     public void remplirAttributs(ArrayList<Integer> buffer, ArrayList<Navire> one, ArrayList<Navire> two){
         
         boolean numero = true;
-        ArrayList<Integer> honrizon = new ArrayList<>();
         
         for(Joueur joueur : m_joueurs){
 
@@ -378,13 +390,35 @@ public class Interface {
             do{       
                 boolean boucleUne = true;
                 ArrayList<Coord> buffer_coord = new ArrayList<>();
+                ArrayList<Boolean> honrizon = new ArrayList<>();
+                ArrayList<Boolean> buffer_attaque_boolean = new ArrayList<>();
                 
                 do{       
                     if(buffer.get(0) != 11111){
                         
-                        honrizon.add(buffer.get(0));
+                        if(compt == 0){
+                            
+                            if(buffer.get(0) == 1)
+                                honrizon.add(true);
+                            else
+                                honrizon.add(false);
+                            
+                        }
+                        
+                        
                         Coord coord = new Coord(buffer.get(1), buffer.get(2));
                         buffer_coord.add(coord);
+                        
+                        if(compt != 0){
+                            
+                            if(buffer.get(3) == 1)
+                                buffer_attaque_boolean.add(true);
+                            else
+                                buffer_attaque_boolean.add(false);
+                            
+                            buffer.remove(0);
+                        }
+                        
                         buffer.remove(0);
                         buffer.remove(0);
                         buffer.remove(0);
@@ -401,6 +435,8 @@ public class Interface {
                             if(numero){
                                 for(Navire navire : one){
                                     navire.addCoord(buffer_coord.get(0));
+                                    navire.addHonrizontal(honrizon.get(0));
+                                    honrizon.remove(0);
                                     buffer_coord.remove(0);
                                 }
                             
@@ -410,6 +446,8 @@ public class Interface {
                             else{
                                 for(Navire navire : two){
                                     navire.addCoord(buffer_coord.get(0));
+                                    navire.addHonrizontal(honrizon.get(0));
+                                    honrizon.remove(0);
                                     buffer_coord.remove(0);
                                 }
                             
@@ -417,8 +455,8 @@ public class Interface {
                             }
                             break;
                         default:
-                            for(Coord i : buffer_coord)
-                                joueur.addPoint(i, compt-1);
+                            for(int i = 0;i< buffer_coord.size();++i)
+                                joueur.addPoint(buffer_coord.get(i), compt-1, buffer_attaque_boolean.get(i) );
                             break;
                 }
                 

@@ -6,7 +6,7 @@
 package Vue;
 
 import Model.Coord;
-import Model.Joueur;
+import Controleur.Joueur;
 import Model.Navire;
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -157,14 +157,18 @@ public class Console {
                 }
          }
          
-            for(Coord elem : m_joueurs.get(joueur).getAttaque())
+            for(Coord elem : m_joueurs.get(joueur).getDefense())
                Bateau_Grille_Joueur[Case((char)(elem.getY()+97),elem.getX())]='T';
 
             return Bateau_Grille_Joueur;
          }
          else{
-             for(Coord elem : m_joueurs.get(joueur).getDefense())
-                Bateau_Grille_Joueur[Case((char)(elem.getY()+97),elem.getX())]='T';          
+             m_joueurs.get(joueur).getAttaque().keySet().forEach((elem) -> {
+                 if(m_joueurs.get(joueur).getAttaque().get(elem))
+                    Bateau_Grille_Joueur[Case((char)(elem.getY()+97),elem.getX())]='T';        
+                 else
+                    Bateau_Grille_Joueur[Case((char)(elem.getY()+97),elem.getX())]='X'; 
+             });
             
             
             return Bateau_Grille_Joueur;
