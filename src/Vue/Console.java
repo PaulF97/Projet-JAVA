@@ -6,7 +6,7 @@
 package Vue;
 
 import Model.Coord;
-import Model.Joueur;
+import Controleur.Joueur;
 import Model.Navire;
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -225,5 +225,4 @@ public class Console {
     } catch (AWTException ex) {}
       
     }
-         
 }

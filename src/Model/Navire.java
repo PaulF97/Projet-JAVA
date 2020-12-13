@@ -35,6 +35,7 @@ import java.util.ArrayList;
          m_honrizontal = honrizontal;
      }
      
+
      public void addTouche(boolean touche){
          m_touche = touche;
      }
