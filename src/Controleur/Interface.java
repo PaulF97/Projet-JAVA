@@ -595,7 +595,6 @@ public class Interface extends JFrame implements ActionListener{
             m_sauvegarde = false;
             m_partie = true;
             graph.MenuCommencer();
-            son.jouer();
             jeu();
             affichage(0);
             choix();
