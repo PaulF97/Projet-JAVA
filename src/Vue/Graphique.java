@@ -140,6 +140,24 @@ public class Graphique extends JFrame{
 
         return nom_partie;
     }
+   
+    public boolean SauvegardeQuitter(){
+        
+    JOptionPane sauvegardeExit = new JOptionPane();
+    boolean etat = false;
+    
+    String nom_partie = sauvegardeExit.showInputDialog(null, " Si vous voulez sauvegarder la partie tapez tapez oui ", "Quitter", JOptionPane.QUESTION_MESSAGE); // saisie du message
+    
+
+        if(!nom_partie.isEmpty()){
+            etat = true;
+        }else{
+            etat = false;
+        }
+    
+    return etat;
+    }
+    
     
  /**
  * Affiche pop si défault de sauvegarde

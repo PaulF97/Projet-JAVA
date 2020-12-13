@@ -66,6 +66,7 @@ public class Interface extends JFrame implements ActionListener{
     private boolean m_console;
     private boolean m_partie;
     private boolean m_quitter;
+    private boolean m_sauvegardeQuitter;
 
     Graphique graph = new Graphique();
     Musique son = new Musique();
@@ -83,6 +84,7 @@ public class Interface extends JFrame implements ActionListener{
 
     public Interface(){
         
+        m_sauvegardeQuitter = false;
         m_quitter = false;
         m_partie = false;
         m_joueurs = new ArrayList<Joueur>();
@@ -624,10 +626,18 @@ public class Interface extends JFrame implements ActionListener{
         }else if (ae.getSource() == choix5){ // quitter
            m_quitter = graph.MenuQuitter();
            
-           if(m_quitter == true){ // sauvegarde si on souhaite quitter
-               sauvegarde();
-               System.exit(0); // ferme le jeu
-           }
+            if(m_quitter == true){ // sauvegarde si on souhaite quitter
+                m_sauvegardeQuitter = graph.SauvegardeQuitter();
+                System.out.println(m_sauvegardeQuitter);
+                if(m_sauvegardeQuitter){
+                    sauvegarde();
+                    System.exit(0); // ferme le jeu
+                    
+                }else {
+                    System.exit(0);
+                }
+            }
+            
         }else {
             
         }
