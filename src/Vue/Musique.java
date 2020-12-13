@@ -5,14 +5,38 @@
  */
 package Vue;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
+
+
+
+
+
 /**
  *
  * @author fishe
  */
-public class Musique {
+public class Musique extends Thread {
+    
+    
+    public void jouer(){    
+        try {
+            FileInputStream chemin = new FileInputStream("src\\son\\son1.mp3");
+            Player jouer = new Player(chemin);
+            jouer.play();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "le fichier n'est pas trouvé");
+        } catch (JavaLayerException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+ }
 
-    private int test;
-    private boolean test1;
     
-    
-}
