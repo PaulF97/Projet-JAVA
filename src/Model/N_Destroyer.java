@@ -21,10 +21,14 @@ public class N_Destroyer extends Navire{
         m_initCoord = false;
         m_caractere = 'D';
         m_eclairante = true;
-         m_nom = "Destroyer";
+         m_nom = "Destroyer"; 
     }
     
     public boolean getEclairante(){
         return m_eclairante;
+    }
+    
+    public void addEclairante(boolean bool){
+        m_eclairante = bool;
     }
 }
