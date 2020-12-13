@@ -6,7 +6,7 @@
 package Vue;
 
 import Model.Coord;
-import Model.Joueur;
+import Controleur.Joueur;
 import Model.Navire;
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -19,6 +19,7 @@ import java.util.Scanner;
  *
  * @author charl
  */
+
 public class Console {
     
      private ArrayList<Joueur> m_joueurs;
