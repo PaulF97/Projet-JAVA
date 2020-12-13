@@ -122,7 +122,7 @@ public class Graphique extends JFrame{
        
          JOptionPane aide = new JOptionPane(); // création de la boite de dialogue
          File regle = new File("src\\files\\test.txt"); // emplacement du fichier
-         ArrayList<String> données = new ArrayList<String>();
+         ArrayList<String> donnees = new ArrayList<String>();
          String ligne;
 
                 try{
@@ -130,12 +130,12 @@ public class Graphique extends JFrame{
                     BufferedReader lecture = new BufferedReader(lecture_fichier); // permet de lire le fichier ligne par ligne
                     
                     while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
-                        données.add(ligne); // stockage d'une ligne dans un ArrayList
-                        données.add("\n");
+                        donnees.add(ligne); // stockage d'une ligne dans un ArrayList
+                        donnees.add("\n");
                        //  System.out.println(ligne);
                     }
              
-                    aide.showMessageDialog(null, données , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
+                    aide.showMessageDialog(null, donnees , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
      
                     lecture.close(); // fermeture de la mémoire tampon
   
