@@ -103,12 +103,33 @@ public class Interface extends JFrame implements ActionListener{
            
            //sauvegarde();
            
-          // deplacer(0);*/
+          //deplacer(0);*/
            
           // affichage(0);
            
            //tirer(0,1);
+           
+        
 
+    }
+    
+    public void choix(){
+        
+        String choix;
+
+        choix = graph.choixAction();
+        
+            switch(choix){
+                
+                case "tirer":
+                    tirer(0,1);
+                    m_console = true;
+                case "deplacer":
+                    deplacer(0);
+                    m_console = true;
+                default:
+                    System.err.println("problème");
+            }
     }
     
      public void tirer(int joueur1, int joueur2){
@@ -208,10 +229,13 @@ public class Interface extends JFrame implements ActionListener{
         
         if(m_joueurs.get(joueur).deplacer(caseStringToCoord(bateau), caseStringToCoord(deplacement))){
             //popup deplacment ok
+            JOptionPane.showMessageDialog(null, "déplacement ok");
         }
         else
         {
             //deplacement impossible recommmencer saisi
+            JOptionPane.showMessageDialog(null, "déplacement nok");
+
         }
         
     }
@@ -573,6 +597,7 @@ public class Interface extends JFrame implements ActionListener{
             m_partie = true;
             jeu();
             affichage(0);
+            choix();
             graph.MenuCommencer();
            // JouerSon();
             

@@ -86,6 +86,15 @@ public class Graphique extends JFrame{
         return nom;
     }
     
+    public String choixAction(){
+        
+        JOptionPane choix = new JOptionPane();
+        
+        String valeur = choix.showInputDialog(null, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
+                + "Tapez 'tirer' si vous souhaitez effectuer un tir", "Choix action");
+        
+        return valeur;
+    }
     
     public String PopUpTirer(){
         
