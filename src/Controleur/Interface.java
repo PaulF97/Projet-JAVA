@@ -595,10 +595,11 @@ public class Interface extends JFrame implements ActionListener{
         if (ae.getSource() == choix1){ // création de la partie
             m_sauvegarde = false;
             m_partie = true;
+            graph.MenuCommencer();
             jeu();
             affichage(0);
             choix();
-            graph.MenuCommencer();
+            
            // JouerSon();
             
         }else if (ae.getSource() == choix2){ // chargé une partie
