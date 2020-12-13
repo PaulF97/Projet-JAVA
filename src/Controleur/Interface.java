@@ -633,24 +633,6 @@ public class Interface extends JFrame implements ActionListener{
             
         }
     }
- 
-    public void JouerSon(){
-        
-        new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        File chemin = new File("son.wav");
-                        Clip clip = AudioSystem.getClip();
-                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(chemin);
-                        clip.open(inputStream);
-                        clip.start();
-                    } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-                        JOptionPane.showMessageDialog(null, "il existe un problème de fichier");
-                    }
-                }
-        }).start();
-    }
       
     public void affichage(int joueur){
         if(m_console){

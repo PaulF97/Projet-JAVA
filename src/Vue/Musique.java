@@ -7,8 +7,6 @@ package Vue;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
@@ -24,6 +22,7 @@ import javazoom.jl.player.Player;
  */
 public class Musique extends Thread {
     
+    Graphique liaison = new Graphique();
     
     public void jouer(){    
         try {

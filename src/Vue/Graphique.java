@@ -68,6 +68,7 @@ public class Graphique extends JFrame{
         + "4 sous-marins\n"
         +"Vous pouvez jouer contre un humain où un ordinateur\n"
         + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
+         
     }
     
        
