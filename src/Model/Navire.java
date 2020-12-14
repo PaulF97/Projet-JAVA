@@ -14,6 +14,7 @@ import java.util.ArrayList;
     
      protected int m_taille;
      protected int m_puissanceTir;
+     protected int m_toucheNbre;
      
      protected Coord m_coord;
      
@@ -25,6 +26,15 @@ import java.util.ArrayList;
      protected boolean m_touche;    
      protected boolean m_vie;    
      
+     public Navire(){
+         m_touche = false;
+         m_vie = true;
+         m_toucheNbre = 0;
+     }
+     
+     public void addVie(boolean bool){
+         m_vie = bool;
+     }
      
      public void addCoord(Coord coord){
          m_coord = coord;
@@ -35,8 +45,16 @@ import java.util.ArrayList;
          m_honrizontal = honrizontal;
      }
      
+
      public void addTouche(boolean touche){
          m_touche = touche;
+         
+         if(touche)
+             m_toucheNbre +=1;
+     }
+     
+     public int getToucheNbre(){
+         return m_toucheNbre;
      }
      
     public int getTaille (){
@@ -65,5 +83,9 @@ import java.util.ArrayList;
     
     public boolean getTouche(){
         return m_touche;
+    }
+    
+    public boolean getVie(){
+        return m_vie;
     }
 }
