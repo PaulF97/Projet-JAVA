@@ -48,7 +48,7 @@ public class Interface extends JFrame implements ActionListener{
     
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde;
-    private boolean m_config_joueur;
+    private int m_config_joueur;
     private boolean m_console;
     private boolean m_partie;
     private boolean m_quitter;
@@ -78,12 +78,10 @@ public class Interface extends JFrame implements ActionListener{
         m_quitter = false;
         m_partie = false;
         m_joueurs = new ArrayList<Joueur>();
-        m_config_joueur = false;
+        m_config_joueur = 0;
         id = null;
         id1 = null;
         id2 = null;
-        /*        id = graph.utilisateur("Comment tu t'appelles ?");
-        System.out.println(id);*/
        
     }
     
@@ -92,11 +90,13 @@ public class Interface extends JFrame implements ActionListener{
         m_console = true;
         creation();
 
-        int j1 = 0;
-        int j2 = 1;
+        int j1;
+        int j2;
         boolean gagnant = false;
         
         do{
+            j1 = 0;
+            j2 = 1;
             
             for(Joueur elem : m_joueurs){
 
@@ -107,6 +107,7 @@ public class Interface extends JFrame implements ActionListener{
 
                 if(j1 == 0 || (m_deuxHumain && j1 == 1))
                     affichage(j1);
+                
                     j1+=1;
                     j2-=1;
 
@@ -118,14 +119,23 @@ public class Interface extends JFrame implements ActionListener{
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        }
+            }
 
         }while(!gagnant);
         
 
-        m_joueurs.get(j1);
-        graph.PopUpGagne(m_joueurs);
+        
+        graph.PopUpGagne(m_joueurs.get(j1));
  
+    }
+    
+    public boolean coordOK(String one){
+        if(one.length() == 2 || one.length() == 3){
+            return caseStringToCoord(one).getX() > -1 && caseStringToCoord(one).getX() < 15 
+                    && caseStringToCoord(one).getY() > -1 && caseStringToCoord(one).getY() < 15;
+        }
+        else
+            return false;
     }
     
     public void choix(int j1, int j2){
@@ -135,35 +145,48 @@ public class Interface extends JFrame implements ActionListener{
 
         if(m_joueurs.get(j1).getClass() == joueur.getClass()){
             
-            choix = graph.choixAction();
+           do{
+                choix = graph.choixAction();
         
-            switch(choix){
-                
-                case "tirer":
-                    
-                        String bateauSelectionne;
-                        String caseTirer;
-                        bateauSelectionne = graph.SelectionBateau();
-                        caseTirer = graph.PopUpTirer();
-                        tirer(j1,j2, caseStringToCoord(bateauSelectionne), caseStringToCoord(caseTirer));
-                        
-                        break;
-            
-                case "deplacer":
-                    
-                        String bateau;
-                        String deplacement;
-                         bateau = graph.SelectionBateau();
-                        deplacement = graph.PopUpDeplacer();
-                        
-                        if(m_joueurs.get(j1).deplacer(caseStringToCoord(bateau), caseStringToCoord(deplacement)))
-                            JOptionPane.showMessageDialog(null, "déplacement ok");
+                switch(choix){
 
-                        else
-                            JOptionPane.showMessageDialog(null, "déplacement nok");
-                        
-                        break;
-            }
+                    case "tirer":
+
+                            String bateauSelectionne;
+                            String caseTirer;
+                            bateauSelectionne = graph.SelectionBateau();
+                            if(coordOK(bateauSelectionne)){
+                                caseTirer = graph.PopUpTirer();
+                                 if(coordOK(caseTirer)){
+                                      tirer(j1,j2, caseStringToCoord(bateauSelectionne), caseStringToCoord(caseTirer));
+                                 }
+                            }
+
+                            break;
+
+                    case "deplacer":
+
+                            String bateau;
+                            String deplacement;
+                            bateau = graph.SelectionBateau();
+                            if(coordOK(bateau)){
+                                deplacement = graph.PopUpDeplacer();
+
+                                if(coordOK(deplacement)){
+                                    if(m_joueurs.get(j1).deplacer(caseStringToCoord(bateau), caseStringToCoord(deplacement)))
+                                        JOptionPane.showMessageDialog(null, "déplacement ok");
+
+                                    else
+                                        JOptionPane.showMessageDialog(null, "déplacement nok");
+                                }
+                            }
+                            break;
+                    default :
+                            choix = "azerty";
+                            JOptionPane.showMessageDialog(null, "Aucune actions");
+                            break;
+                }
+           }while("azerty".equals(choix));
         
         }
         else{
@@ -623,26 +646,40 @@ public class Interface extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if (ae.getSource() == choix1){ // création de la partie
-            m_config_joueur = graph.nombreJoueur();
-                if(m_config_joueur){ // un seul joueur
-                    id = graph.utilisateur("Comment tu t'appelles ?");
-                    JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id);
-                } else{
-                    id1 = graph.utilisateur("Comment tu t'appelles joueur 1? ");
-                    id2 = graph.utilisateur("Comment tu t'appelles joueur 2 ");
-                    JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id1 + " et " +id2);
-                }
-                
-            m_sauvegarde = false;
-            m_partie = true;
+       
             graph.MenuCommencer();
-            jeu();
+            m_config_joueur = graph.nombreJoueur();
+            if(m_config_joueur == 1){ // un seul joueur
+                id = graph.utilisateur("Comment tu t'appelles ?");
+                
+                if(id != null)
+                    JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id);
+                
+            } else if (m_config_joueur == 2){
+                id1 = graph.utilisateur("Comment tu t'appelles joueur 1? ");
+                
+                if(id1 != null){
+                    id2 = graph.utilisateur("Comment tu t'appelles joueur 2 ");
+                    if(id2 != null){
+                        JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id1 + " et " +id2);
+                        m_deuxHumain = true;
+                    }
+                }
+            }
+            
+            if((m_config_joueur == 1 || m_config_joueur == 2) && (id != null || (id1 != null && id2 != null))){
+                m_sauvegarde = false;
+                m_partie = true;
+                jeu();
+                m_partie = false;
+            }
             
             
         }else if (ae.getSource() == choix2){ // chargé une partie
             m_sauvegarde = true;
             m_partie = true;
             jeu();
+            m_partie = false;
         
         }else if (ae.getSource() == choix3){ // Suvegarder durant la partie
         // lorsque le trosième bouton est sélectionné
@@ -664,17 +701,19 @@ public class Interface extends JFrame implements ActionListener{
         }else if(ae.getSource() == choix5){
             m_quitter = graph.MenuQuitter();
            
-            if(m_quitter == true){ // sauvegarde si on souhaite quitter
-                m_sauvegardeQuitter = graph.SauvegardeQuitter();
-                System.out.println(m_sauvegardeQuitter);
-                if(m_sauvegardeQuitter){
-                    sauvegarde();
-                    System.exit(0); // ferme le jeu
-                }else {
-                    System.exit(0);
-               
+            if(m_quitter){ // sauvegarde si on souhaite quitter
+                if(m_partie){
+                    m_sauvegardeQuitter = graph.SauvegardeQuitter();
+                    System.out.println(m_sauvegardeQuitter);
+                    if(m_sauvegardeQuitter){
+                        sauvegarde();
+                        System.exit(0); // ferme le jeu
+                    }else 
+                        System.exit(0);
                 }
-        }
+                else
+                     System.exit(0);
+            }
             
         }else {
             
