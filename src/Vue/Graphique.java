@@ -1,3 +1,4 @@
+
 package Vue;
 
 /*
@@ -260,5 +261,4 @@ public class Graphique extends JFrame{
        
 }
 
-   
-
+ 

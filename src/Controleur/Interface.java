@@ -18,24 +18,17 @@ import Vue.Graphique;
 import Vue.Musique;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.Map;
 import java.util.HashMap;
@@ -90,6 +83,7 @@ public class Interface extends JFrame implements ActionListener{
             
         m_console = true;
         creation();
+
         int j1 = 0;
         int j2 = 1;
         boolean gagnant = false;
@@ -120,6 +114,7 @@ public class Interface extends JFrame implements ActionListener{
 
         }while(!gagnant);
         
+
         m_joueurs.get(j1);
         graph.PopUpGagne(m_joueurs);
  
