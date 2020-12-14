@@ -5,17 +5,12 @@
  */
 package Controleur;
 
-import Controleur.Joueur;
-
 /**
  *
  * @author charl
  */
 public class J_Ordinateur extends Joueur{
     
-    @Override
-    public void tourJeu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
 }

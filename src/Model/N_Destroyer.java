@@ -16,6 +16,9 @@ public class N_Destroyer extends Navire{
     private boolean m_eclairante;
     
     public N_Destroyer(){
+        
+        super();
+        
         m_taille = 3;
         m_puissanceTir = 1;
         m_initCoord = false;

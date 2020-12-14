@@ -40,6 +40,7 @@ import java.util.Random;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.media.Media;
@@ -95,82 +96,113 @@ public class Interface extends JFrame implements ActionListener{
     
     public void jeu(){
             
-         m_console = true;
-        // m_deuxHumain = true;
-        // m_sauvegarde = true;
-            
-
-           creation();
-              //affichage(0);
-           
-           //sauvegarde();
-           
-          //deplacer(0);*/
-           
-          // affichage(0);
-           
-           //tirer(0,1);
-           
+        m_console = true;
+        creation();
         
-
+        boolean gagnant = false;
+        
+        /*       do{
+        int j1 = 0;
+        int j2 = 1;
+        
+        for(Joueur elem : m_joueurs){
+        
+        if(j1 == 0 || (m_deuxHumain && j1 == 1))
+        affichage(j1);
+        
+        choix(j1,j2);
+        
+        if(j1 == 0 || (m_deuxHumain && j1 == 1))
+        affichage(j1);
+        
+        j1+=1;
+        j2-=1;
+        
+        if(elem.perdant())
+        gagnant = true;
+        
+        try {
+        Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+        Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+        }while(!gagnant);*/
+ 
     }
     
-    public void choix(){
+    public void choix(int j1, int j2){
         
         String choix;
+        J_Humain joueur = new J_Humain();
 
-        choix = graph.choixAction();
+        if(m_joueurs.get(j1).getClass() == joueur.getClass()){
+            
+            choix = graph.choixAction();
         
             switch(choix){
                 
                 case "tirer":
-                    tirer(0,1);
-                    m_console = true;
+                    
+                        String bateauSelectionne;
+                        String caseTirer;
+                        bateauSelectionne = graph.SelectionBateau();
+                        caseTirer = graph.PopUpTirer();
+                        tirer(j1,j2, caseStringToCoord(bateauSelectionne), caseStringToCoord(caseTirer));
+                        
+                        break;
+            
                 case "deplacer":
-                    deplacer(0);
-                    m_console = true;
-                default:
-                    System.err.println("problème");
+                    
+                        String bateau;
+                        String deplacement;
+                         bateau = graph.SelectionBateau();
+                        deplacement = graph.PopUpDeplacer();
+                        
+                        if(m_joueurs.get(j1).deplacer(caseStringToCoord(bateau), caseStringToCoord(deplacement)))
+                            JOptionPane.showMessageDialog(null, "déplacement ok");
+
+                        else
+                            JOptionPane.showMessageDialog(null, "déplacement nok");
+                        
+                        break;
             }
+        
+        }
+        else{
+            //Ordi
+        }
     }
     
-     public void tirer(int joueur1, int joueur2){
-        //popup tirer
+     public void tirer(int joueur1, int joueur2, Coord bateauSelectionne, Coord caseTirer){
         
-        /*        String bateauSelectionne = "E3";
-        String caseTirer = "F11";*/
-        
-        String bateauSelectionne = null;
-        String caseTirer = null;
-        
-        bateauSelectionne = graph.SelectionBateau();
-        caseTirer = graph.PopUpTirer();
         
         Map<Coord, Boolean> casetouche = new HashMap<>();
-                
-        switch(m_joueurs.get(joueur1).typeNavire(caseStringToCoord(bateauSelectionne))){//navire selectionné
-        
+           
+        if(!m_joueurs.get(joueur1).navireMort(bateauSelectionne)){
+            switch(m_joueurs.get(joueur1).typeNavire(bateauSelectionne)){//navire selectionné
+
             case "Sous-marin" :
-                if("Sous-marin".equals(m_joueurs.get(joueur2).typeNavire(caseStringToCoord(caseTirer)))){
-                    casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseStringToCoord(caseTirer), 1));
-                    m_joueurs.get(joueur1).addAttaque(casetouche);
-                }
+                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseTirer, 1), true);
+                m_joueurs.get(joueur1).addAttaque(casetouche);
             break;
             case "Destroyer" :
-                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseStringToCoord(caseTirer), 1));
-                 m_joueurs.get(joueur1).addAttaque(casetouche);
+                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseTirer, 1), false);
+                m_joueurs.get(joueur1).addAttaque(casetouche);
             break;
             case "Croiseur" :
-                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseStringToCoord(caseTirer), 4));
-                 m_joueurs.get(joueur1).addAttaque(casetouche);
+                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseTirer, 4), false);
+                m_joueurs.get(joueur1).addAttaque(casetouche);
             break;
             case "Cuirasse" :
-                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseStringToCoord(caseTirer), 9));
-                 m_joueurs.get(joueur1).addAttaque(casetouche);
+                casetouche = m_joueurs.get(joueur2).tirer(coordTouche(caseTirer, 9), false);
+                m_joueurs.get(joueur1).addAttaque(casetouche);
             break;
             default :
-                //pas de bateau selectionné
-         }
+            //pas de bateau selectionné
+            }
+        }
 
     }
      
@@ -218,36 +250,6 @@ public class Interface extends JFrame implements ActionListener{
             m_joueurs.add(new J_Humain());
         else
             m_joueurs.add(new J_Ordinateur());
-    }
-
-    public void deplacer(int joueur){
-        //popup deplacer
-        String bateau;
-        String deplacement;
-        
-        bateau = graph.SelectionBateau();
-        deplacement = graph.PopUpDeplacer();
-        
-        
-        if(m_joueurs.get(joueur).deplacer(caseStringToCoord(bateau), caseStringToCoord(deplacement))){
-            //popup deplacment ok
-            JOptionPane.showMessageDialog(null, "déplacement ok");
-
-        
-        if(m_joueurs.get(joueur).deplacer(caseStringToCoord("N2"), caseStringToCoord("O2"))){
-            //popup deplacment ok
-
-        }
-        else
-        {
-            //deplacement impossible recommmencer saisi
-
-            JOptionPane.showMessageDialog(null, "déplacement nok");
-
-
-        }
-        
-    }
     }
     
     public Coord caseStringToCoord(String coordNom){
@@ -417,8 +419,6 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
      
-  
-    
     public boolean chargement(ArrayList<Navire> one, ArrayList<Navire> two){
         
         ArrayList<Integer> buffer = new ArrayList<>();
@@ -472,7 +472,7 @@ public class Interface extends JFrame implements ActionListener{
       
     }
     
-        public void remplirAttributs(ArrayList<Integer> buffer, ArrayList<Navire> one, ArrayList<Navire> two){
+    public void remplirAttributs(ArrayList<Integer> buffer, ArrayList<Navire> one, ArrayList<Navire> two){
         
         boolean numero = true;
         
@@ -564,7 +564,7 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
     
-       public void Container(){
+    public void Container(){
         
         // phrase
         JLabel label = new JLabel(" Bienvenue au jeu de la bataille naval ! ");
@@ -607,12 +607,11 @@ public class Interface extends JFrame implements ActionListener{
             m_partie = true;
             graph.MenuCommencer();
             jeu();
-            affichage(0);
-            choix();
             
             
         }else if (ae.getSource() == choix2){ // chargé une partie
             m_sauvegarde = true;
+            m_partie = true;
             jeu();
         
         }else if (ae.getSource() == choix3){ // Suvegarder durant la partie
