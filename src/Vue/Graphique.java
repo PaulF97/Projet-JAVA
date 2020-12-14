@@ -7,6 +7,7 @@ package Vue;
  * and open the template in the editor.
  */
 
+import Controleur.Joueur;
 import java.awt.FlowLayout;
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,17 +29,17 @@ import javax.swing.JOptionPane;
 public class Graphique extends JFrame{
  
     
-    public boolean nombreJoueur(){
+    public int nombreJoueur(){
         JOptionPane nombre = new JOptionPane();
-        boolean config = false;
+        int config = 0;
         
         String saisie = nombre.showInputDialog(null, "Tapez 1 si vous êtes seul,\n"
                 + "Tapez 2 si vous jouez en multijoueur", " Joueurs ", JOptionPane.QUESTION_MESSAGE);
         
         if("1".equals(saisie)){
-                config = true;
+                config = 1;
             }else if("2".equals(saisie)){
-                config = false;
+                config = 2;
             } else{
                 JOptionPane.showMessageDialog(null, "vous n'avez saisie un nombre incorrect","errur", JOptionPane.ERROR_MESSAGE);
             }
@@ -56,15 +57,11 @@ public class Graphique extends JFrame{
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
         
         String nom = saisie.showInputDialog(null, question_id, " Identification ", JOptionPane.QUESTION_MESSAGE);
-        //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
         if(nom == null){
-            saisie.showMessageDialog(null,"Vous avez quittez le jeu ! ", "Identification", JOptionPane.CLOSED_OPTION);
-          System.exit(0);
+            saisie.showMessageDialog(null,"La partie n'a pas commencé ", "Erreur", JOptionPane.CLOSED_OPTION);
         }
         
-       // saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
-
         return nom;
     }
  
@@ -114,9 +111,13 @@ public class Graphique extends JFrame{
         
         JOptionPane choix = new JOptionPane();
         
-        String valeur = choix.showInputDialog(position, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
-                + "Tapez 'tirer' si vous souhaitez effectuer un tir", "Choix action");
+        String valeur;
+        valeur = choix.showInputDialog(position, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
+                + "Tapez 'tirer' si vous souhaitez effectuer un tir,\n"+"(quitter ou sauvegarder)", "Choix action");
         
+        if(valeur ==  null)
+            valeur = "a";
+            
         position.setVisible(false);
         return valeur;
     }
@@ -153,11 +154,14 @@ public class Graphique extends JFrame{
 
         position.setVisible(false);
         
+        if(mouvement ==  null)
+            mouvement = "a";
+        
         return mouvement;
        
     }
       
-    public void PopUpGagne(ArrayList gagnant){
+    public void PopUpGagne(String gagnant){
         JOptionPane gagne = new JOptionPane();
         
         gagne.showMessageDialog(null,  "le "  +gagnant + "a gagné"  , "gagnant", JOptionPane.INFORMATION_MESSAGE);
@@ -176,6 +180,9 @@ public class Graphique extends JFrame{
         String bateau = choix.showInputDialog(position, "Veuillez selectionner le bateau désiré", "choix navire");
 
         position.setVisible(false);
+        
+        if(bateau ==  null)
+            bateau = "a";
         
         return bateau;
        
@@ -201,13 +208,8 @@ public class Graphique extends JFrame{
         boolean etat = false;
 
         String nom_partie = sauvegardeExit.showInputDialog(null, " Si vous voulez sauvegarder la partie tapez tapez oui ", "Quitter", JOptionPane.QUESTION_MESSAGE); // saisie du message
-    
-            if(!nom_partie.isEmpty()){
-                etat = true;
-            }else{
-                etat = false;
-            }
-    
+        etat = "oui".equals(nom_partie);
+            
         return etat;
     }
     
@@ -244,7 +246,6 @@ public class Graphique extends JFrame{
                     while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
                         donnees.add(ligne); // stockage d'une ligne dans un ArrayList
                         donnees.add("\n");
-                       //  System.out.println(ligne);
                     }
              
                     aide.showMessageDialog(null, donnees , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
@@ -253,7 +254,6 @@ public class Graphique extends JFrame{
   
                 // Exception     
                 }catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
-                    System.err.println("le fichier " + regle.toString() + " est introuvable");
                 } 
     }
     

@@ -24,6 +24,7 @@ public class Main {
         
         Interface test = new Interface();
         Musique son = new Musique();
+        
         son.start(); // lancement du thread
         test.Container();
         test.setVisible(true);

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Model;
-import java.util.ArrayList;
 
 /**
  *
@@ -31,10 +30,6 @@ import java.util.ArrayList;
          m_touche = false;
          m_vie = true;
          m_toucheNbre = 0;
-
-     }
-     
-
          m_eclairante = false;
      }
      

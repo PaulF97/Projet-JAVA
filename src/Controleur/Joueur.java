@@ -17,14 +17,46 @@ import java.util.Map;
 public abstract class Joueur {
     
     protected Map<Coord, Boolean>  m_attaque;
+    protected Map<Coord, Character>  m_eclairante;
     protected ArrayList<Coord> m_defense;
     protected ArrayList<Navire> m_navires;
+    protected String m_nom;
+    protected boolean m_destroit;
     
     public Joueur(){
         m_attaque = new HashMap<>();
         m_defense = new ArrayList<>();
         m_navires = new ArrayList<>();
+        m_eclairante = new HashMap<>();
+        m_destroit = false;
         
+    }
+    
+    public boolean getDestroit(){
+        return m_destroit;
+    }
+    
+    public void addDestroit(boolean bool){
+        m_destroit = bool;
+    }
+    
+    public String getNom(){
+        return m_nom;
+    }
+    
+     public Map<Coord, Character> getEclairante(){
+        return m_eclairante;
+    }
+     
+     public void addEclairante(Map<Coord, Character> map){
+         m_eclairante.clear();
+         m_eclairante = new HashMap<>();
+         m_eclairante = map;
+         m_destroit = true;
+     }
+    
+    public void addNom(String nom){
+        m_nom = nom;
     }
     
     public void initNavires(ArrayList<Navire> navires){
@@ -52,11 +84,7 @@ public abstract class Joueur {
     }
     
     public void addAttaque(Map<Coord, Boolean> attaque){
-        
-        attaque.keySet().forEach((coord) -> {
-                System.out.println(coord.getX()+" "+coord.getY()+" "+attaque.get(coord));
-            }); 
-               
+            
         attaque.keySet().forEach((coord) -> {
             if(m_attaque.containsKey(coord)){
                     m_attaque.remove(coord);
@@ -296,4 +324,25 @@ public abstract class Joueur {
          
         return nbre == 10 || sm == 4;
      }
+
+      public Navire navireSelec(Coord coord){
+        
+        int c_x = coord.getX();
+        int c_y = coord.getY();
+        
+        for(Navire elem : m_navires){
+             
+             int n_x = elem.getCoord().getX();
+             int n_y = elem.getCoord().getY();
+                              
+            if(n_x == c_x && n_y == c_y)
+                return elem;
+                       
+        }        
+        
+        return null;
+    }
+
 }
+
+

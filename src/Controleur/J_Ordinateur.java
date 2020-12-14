@@ -8,6 +8,9 @@ import java.util.Random;
  */
 public class J_Ordinateur extends Joueur{
    
+    J_Ordinateur(){
+        m_nom = "Ordinateur";
+    }
     
     //Recuperer les coordonnees sur lesquels l'IA a tiré puis renvoi true / false en fonction de si un navire est touché
     public boolean Cible_Touche()

@@ -170,7 +170,11 @@ public class Console {
                  else
                     Bateau_Grille_Joueur[Case((char)(elem.getY()+97),elem.getX())]='X'; 
              });
-            
+             
+            m_joueurs.get(joueur).getEclairante().keySet().forEach((elem) -> {
+             
+                Bateau_Grille_Joueur[Case((char)(elem.getY()+97),elem.getX())] = m_joueurs.get(joueur).getEclairante().get(elem);       
+           });
             
             return Bateau_Grille_Joueur;
             
@@ -200,21 +204,20 @@ public class Console {
         
         robbie.delay(100);
         
-        Scanner input = new Scanner(System.in); 
-        String line = input.nextLine(); 
-        
-        robbie.delay(100);
-        
-        robbie.keyPress(KeyEvent.VK_SPACE);
-        robbie.keyRelease(KeyEvent.VK_SPACE);
-        
-        
-        robbie.delay(100);
-        
-        robbie.keyPress(KeyEvent.VK_ENTER);
-        robbie.keyRelease(KeyEvent.VK_ENTER);
-        
-        input.close(); 
+          try (Scanner input = new Scanner(System.in)) {
+              //String line = input.nextLine();
+              
+              robbie.delay(100);
+              
+              robbie.keyPress(KeyEvent.VK_SPACE);
+              robbie.keyRelease(KeyEvent.VK_SPACE);
+              
+              
+              robbie.delay(100);
+              
+              robbie.keyPress(KeyEvent.VK_ENTER);
+              robbie.keyRelease(KeyEvent.VK_ENTER);
+          } 
         
         robbie.delay(100);
         
