@@ -8,8 +8,8 @@ package Vue;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
-//import javazoom.jl.decoder.JavaLayerException;
-//import javazoom.jl.player.Player;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 
 
@@ -34,12 +34,12 @@ public class Musique extends Thread {
     public void run(){
          try {
             FileInputStream chemin = new FileInputStream("src\\son\\son1.mp3"); // emplacement du fichier MP3
-           // Player jouer = new Player(chemin);
-           // jouer.play();
-        } catch (FileNotFoundException e) {
+            Player jouer = new Player(chemin);
+            jouer.play(); 
+        } catch (FileNotFoundException e) {  // fichier n'existe pas
             JOptionPane.showMessageDialog(null, "le fichier n'est pas trouvé");
-        //} catch (JavaLayerException ex) { // problème de format
-          //  JOptionPane.showMessageDialog(null, "le format n'est pas le bon");
+        } catch (JavaLayerException ex) { // problème de format
+            JOptionPane.showMessageDialog(null, "le format n'est pas le bon");
         }
     }
 
