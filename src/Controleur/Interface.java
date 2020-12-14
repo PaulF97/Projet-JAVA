@@ -18,44 +18,26 @@ import Vue.Graphique;
 import Vue.Musique;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
-import javax.sound.sampled.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 
 
 /**
@@ -101,7 +83,7 @@ public class Interface extends JFrame implements ActionListener{
         
         boolean gagnant = false;
         
-        /*       do{
+               do{
         int j1 = 0;
         int j2 = 1;
         
@@ -128,7 +110,7 @@ public class Interface extends JFrame implements ActionListener{
         }
         }
         
-        }while(!gagnant);*/
+        }while(!gagnant);
  
     }
     

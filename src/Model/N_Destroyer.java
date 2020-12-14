@@ -13,8 +13,6 @@ import java.util.ArrayList;
  */
 public class N_Destroyer extends Navire{
     
-    private boolean m_eclairante;
-    
     public N_Destroyer(){
         
         super();
@@ -26,13 +24,5 @@ public class N_Destroyer extends Navire{
         m_eclairante = true;
         m_nom = "Destroyer";
 
-    }
-    
-    public boolean getEclairante(){
-        return m_eclairante;
-    }
-    
-    public void addEclairante(boolean bool){
-        m_eclairante = bool;
     }
 }

@@ -8,6 +8,10 @@ package Vue;
 
 
 
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +19,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -37,6 +43,7 @@ public class Graphique extends JFrame{
     public String utilisateur(String question_id){
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
+        
        
         String nom = saisie.showInputDialog(null, question_id, " Options ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
@@ -89,11 +96,23 @@ public class Graphique extends JFrame{
     
     public String choixAction(){
         
-        JOptionPane choix = new JOptionPane();
+        JFrame f = new JFrame();
         
-        String valeur = choix.showInputDialog(null, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
+        setLayout(new FlowLayout());
+        
+        f.setSize(10,10);
+        f.setLocation(200, 500);
+        f.setVisible(true);
+
+        
+        
+        JOptionPane choix = new JOptionPane();
+
+        
+        String valeur = choix.showInputDialog(f, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
                 + "Tapez 'tirer' si vous souhaitez effectuer un tir", "Choix action");
         
+        f.setVisible(false);
         return valeur;
     }
     
