@@ -656,5 +656,3 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
 }
-
-
