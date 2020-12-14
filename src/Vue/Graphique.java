@@ -33,7 +33,7 @@ public class Graphique extends JFrame{
         JOptionPane nombre = new JOptionPane();
         int config = 0;
         
-        String saisie = nombre.showInputDialog(null, "Tapez 1 si vous êtes seul,\n"
+        String saisie = nombre.showInputDialog(null, "Tapez 1 si vous êtes seul(e),\n"
                 + "Tapez 2 si vous jouez en multijoueur", " Joueurs ", JOptionPane.QUESTION_MESSAGE);
         
         if("1".equals(saisie)){
@@ -41,7 +41,7 @@ public class Graphique extends JFrame{
             }else if("2".equals(saisie)){
                 config = 2;
             } else{
-                JOptionPane.showMessageDialog(null, "vous n'avez saisie un nombre incorrect","errur", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Vous avez saisie un nombre incorrect","erreur", JOptionPane.ERROR_MESSAGE);
             }
         return config;
     }
@@ -59,7 +59,7 @@ public class Graphique extends JFrame{
         String nom = saisie.showInputDialog(null, question_id, " Identification ", JOptionPane.QUESTION_MESSAGE);
         
         if(nom == null){
-            saisie.showMessageDialog(null,"La partie n'a pas commencé ", "Erreur", JOptionPane.CLOSED_OPTION);
+            saisie.showMessageDialog(null,"La partie n'a pas commencée ", "Erreur", JOptionPane.CLOSED_OPTION);
         }
         
         return nom;
@@ -75,12 +75,12 @@ public class Graphique extends JFrame{
         
         JOptionPane commence = new JOptionPane();
         
-        commence.showMessageDialog(null, "Bonjour vous disposez de \n "
-        + "1 cuirassé\n "
-        + "2 croisseurs\n"
-        + "3 destroyeurs\n"
-        + "4 sous-marins\n"
-        +"Vous pouvez jouer contre un humain où un ordinateur\n"
+        commence.showMessageDialog(null, "Bonjour vous disposez de :  \n "
+        + "1 Cuirassé\n "
+        + "2 Croisseurs\n"
+        + "3 Destroyeurs\n"
+        + "4 Sous-marins\n"
+        +"Vous pouvez jouer contre un humain ou un ordinateur\n"
         + "Bonne partie !!", "Commencer", JOptionPane.INFORMATION_MESSAGE);
          
     }
@@ -95,7 +95,7 @@ public class Graphique extends JFrame{
     
         JOptionPane charger = new JOptionPane();
 
-        String nom = charger.showInputDialog(null, "Veuillez saisir la partie que vous souhaiter charger\n"
+        String nom = charger.showInputDialog(null, "Veuillez saisir la partie que vous souhaitez charger\n"
         + "Sinon tapez 'exit' ", "charger une partie", JOptionPane.QUESTION_MESSAGE); // saisie du message
 
         return nom;
@@ -164,7 +164,7 @@ public class Graphique extends JFrame{
     public void PopUpGagne(String gagnant){
         JOptionPane gagne = new JOptionPane();
         
-        gagne.showMessageDialog(null,  "le "  +gagnant + "a gagné"  , "gagnant", JOptionPane.INFORMATION_MESSAGE);
+        gagne.showMessageDialog(null,  "Le "  +gagnant + "a gagné"  , "gagnant", JOptionPane.INFORMATION_MESSAGE);
     }  
     
     
@@ -207,7 +207,7 @@ public class Graphique extends JFrame{
         JOptionPane sauvegardeExit = new JOptionPane();
         boolean etat = false;
 
-        String nom_partie = sauvegardeExit.showInputDialog(null, " Si vous voulez sauvegarder la partie tapez tapez oui ", "Quitter", JOptionPane.QUESTION_MESSAGE); // saisie du message
+        String nom_partie = sauvegardeExit.showInputDialog(null, " Si vous voulez sauvegarder la partie tapez oui ", "Quitter", JOptionPane.QUESTION_MESSAGE); // saisie du message
         etat = "oui".equals(nom_partie);
             
         return etat;

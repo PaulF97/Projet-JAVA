@@ -704,15 +704,15 @@ public class Interface extends JFrame implements ActionListener{
                 id = graph.utilisateur("Comment tu t'appelles ?");
                 
                 if(id != null)
-                    JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id);
+                    JOptionPane.showMessageDialog(null, "Bienvenu(e) parmi nous " + id);
                 
             } else if (m_config_joueur == 2){
-                id1 = graph.utilisateur("Comment tu t'appelles joueur 1? ");
+                id1 = graph.utilisateur("Comment tu t'appelles joueur 1 ? ");
                 
                 if(id1 != null){
-                    id2 = graph.utilisateur("Comment tu t'appelles joueur 2 ");
+                    id2 = graph.utilisateur("Comment tu t'appelles joueur 2 ? ");
                     if(id2 != null){
-                        JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id1 + " et " +id2);
+                        JOptionPane.showMessageDialog(null, "Bienvenu(e) parmi nous " + id1 + " et " +id2);
                         m_deuxHumain = true;
                     }
                 }
