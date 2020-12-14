@@ -32,38 +32,72 @@ public abstract class Joueur {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean getDestroit(){
         return m_destroit;
     }
     
+    /**
+     *
+     * @param bool
+     */
     public void addDestroit(boolean bool){
         m_destroit = bool;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getNom(){
         return m_nom;
     }
     
-     public Map<Coord, Character> getEclairante(){
+    /**
+     *
+     * @return
+     */
+    public Map<Coord, Character> getEclairante(){
         return m_eclairante;
     }
      
-     public void addEclairante(Map<Coord, Character> map){
+    /**
+     *
+     * @param map
+     */
+    public void addEclairante(Map<Coord, Character> map){
          m_eclairante.clear();
          m_eclairante = new HashMap<>();
          m_eclairante = map;
          m_destroit = true;
      }
     
+    /**
+     *
+     * @param nom
+     */
     public void addNom(String nom){
         m_nom = nom;
     }
     
+    /**
+     *
+     * @param navires
+     */
     public void initNavires(ArrayList<Navire> navires){
         
         m_navires = navires;
     }
     
+    /**
+     *
+     * @param coord
+     * @param choix
+     * @param bool
+     */
     public void addPoint(Coord coord,int choix, Boolean bool){
         if(choix == 0)
             m_attaque.put(coord, bool);
@@ -71,18 +105,34 @@ public abstract class Joueur {
             m_defense.add(coord);
     }
     
+    /**
+     *
+     * @return
+     */
     public Map<Coord, Boolean> getAttaque (){
         return m_attaque;
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<Coord> getDefense(){
         return m_defense;
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<Navire> getNavire(){
         return m_navires;
     }
     
+    /**
+     *
+     * @param attaque
+     */
     public void addAttaque(Map<Coord, Boolean> attaque){
             
         attaque.keySet().forEach((coord) -> {
@@ -96,6 +146,11 @@ public abstract class Joueur {
                    
     }
         
+    /**
+     *
+     * @param coord
+     * @return
+     */
     public String typeNavire(Coord coord){
         
         int c_x = coord.getX();
@@ -122,6 +177,11 @@ public abstract class Joueur {
         return "RIEN";
     }
     
+    /**
+     *
+     * @param coord
+     * @return
+     */
     public boolean navireMort(Coord coord){
         
         int c_x = coord.getX();
@@ -148,7 +208,13 @@ public abstract class Joueur {
         return false;
     }
     
-     public boolean deplacer(Coord bateau, Coord deplace){
+    /**
+     *
+     * @param bateau
+     * @param deplace
+     * @return
+     */
+    public boolean deplacer(Coord bateau, Coord deplace){
          
          int navire = -1;
          int compt = 0;
@@ -223,7 +289,13 @@ public abstract class Joueur {
          }
      }
      
-     public Map<Coord, Boolean> tirer(ArrayList<Coord> coord, boolean sousmarin){
+    /**
+     *
+     * @param coord
+     * @param sousmarin
+     * @return
+     */
+    public Map<Coord, Boolean> tirer(ArrayList<Coord> coord, boolean sousmarin){
          
           Map<Coord, Boolean> caseTouche = new HashMap<>();
           
@@ -310,7 +382,11 @@ public abstract class Joueur {
          return caseTouche;
      }
      
-     public boolean perdant(){
+    /**
+     *
+     * @return
+     */
+    public boolean perdant(){
          int nbre = 0;
          int sm = 0;
          
@@ -325,7 +401,12 @@ public abstract class Joueur {
         return nbre == 10 || sm == 4;
      }
 
-      public Navire navireSelec(Coord coord){
+    /**
+     *
+     * @param coord
+     * @return
+     */
+    public Navire navireSelec(Coord coord){
         
         int c_x = coord.getX();
         int c_y = coord.getY();

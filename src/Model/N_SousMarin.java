@@ -13,6 +13,9 @@ import java.util.ArrayList;
  */
 public class N_SousMarin extends Navire{
     
+ /**
+ * Initialisation du sous-marin
+ */
     public N_SousMarin(){
 
         super();

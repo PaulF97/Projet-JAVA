@@ -20,7 +20,6 @@ import javazoom.jl.player.Player;
  * Auteur : Paul Fisher
  */
 
-
 public class Musique extends Thread {
     
     Graphique liaison = new Graphique();

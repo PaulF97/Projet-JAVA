@@ -13,6 +13,9 @@ import java.util.ArrayList;
  */
 public class N_Croiseur extends Navire{
     
+ /**
+ * Initialisation du croiseur
+ */
     public N_Croiseur(){
         super();
 

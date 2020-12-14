@@ -41,7 +41,7 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
+ * 
  * @author charl
  */
 public class Interface extends JFrame implements ActionListener{
@@ -87,7 +87,7 @@ public class Interface extends JFrame implements ActionListener{
     }
     
     /**
-     *
+     * boucle de jeu
      */
     public void jeu(){
             
@@ -138,7 +138,7 @@ public class Interface extends JFrame implements ActionListener{
     }
     
     /**
-     *
+     * Savoir si les coordonnées sont bon pour les popUps
      * @param one
      * @return
      */
@@ -152,7 +152,7 @@ public class Interface extends JFrame implements ActionListener{
     }
     
     /**
-     *
+     * choix entre les actions possibles
      * @param j1
      * @param j2
      */
@@ -293,6 +293,12 @@ public class Interface extends JFrame implements ActionListener{
 
     }
      
+    /**
+     * Retourne les coordonnées touchés par les dégats
+     * @param tire
+     * @param degat
+     * @return 
+     */
     public ArrayList<Coord> coordTouche(Coord tire, int degat){
          ArrayList<Coord> coord = new ArrayList<>();
          
@@ -324,7 +330,9 @@ public class Interface extends JFrame implements ActionListener{
          return coord;
      }
 
-       
+     /**
+     * ajouter un joueur
+     */
     public void addJoueur(){
         
         m_joueurs.clear();
@@ -343,6 +351,11 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
     
+    /**
+     * transforme la saisie en coordonnées
+     * @param coordNom
+     * @return 
+     */
     public Coord caseStringToCoord(String coordNom){
         int y = coordNom.charAt(0)-97;
         int x;
@@ -354,12 +367,15 @@ public class Interface extends JFrame implements ActionListener{
              x = Character.getNumericValue(coordNom.charAt(1));
         else{
             x = Character.getNumericValue(coordNom.charAt(1))*10;
-            x += Character.getNumericValue(coordNom.charAt(2))-1;
+            x += Character.getNumericValue(coordNom.charAt(2));
         }
         
         return new Coord(x-1,y);
     }
 
+    /**
+     * création des bateaux
+     */
     public void creation(){
                 
         ArrayList<Navire> one = new ArrayList<>();
@@ -400,6 +416,10 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
     
+     /**
+     *Place les navires dans la grille
+     * @param navire
+     */
     public void coordAlea(ArrayList<Navire> navire){
         
         ArrayList<Coord> coord = new ArrayList<>();
@@ -451,11 +471,21 @@ public class Interface extends JFrame implements ActionListener{
         
     }
     
+     /**
+ * Affiche la grille du jeu dans la console
+ * Auteur : Savinien Godineau 
+ * @param a
+ * @param b
+  * @return 
+ */
     public int intAlea(int a, int b){
         Random rand = new Random();
         return rand.nextInt(b-a+1)+a;
     }
     
+    /**
+    * Affiche créer le fichier de sauvegarde
+    */
      public void sauvegarde(){
         
         FileWriter monFichier = null;
@@ -469,6 +499,10 @@ public class Interface extends JFrame implements ActionListener{
             tampon = new BufferedWriter(monFichier);
 
             for(Joueur joueur : m_joueurs){
+                 if(joueur.getDestroit())
+                         tampon.write("1\n");
+                    else
+                        tampon.write("0\n");
                 for(Navire navire : joueur.getNavire()){
                     tampon.write(Integer.toString(Boolean.compare(navire.getHonrizontal(), false))+"\n");
                     tampon.write(Integer.toString(navire.getCoord().getX())+"\n");
@@ -510,6 +544,12 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
      
+     /**
+     * Méthode pour charger une partie existante
+     * @param one
+     * @param two
+     * @return 
+     */
     public boolean chargement(ArrayList<Navire> one, ArrayList<Navire> two){
         
         ArrayList<Integer> buffer = new ArrayList<>();
@@ -563,6 +603,12 @@ public class Interface extends JFrame implements ActionListener{
       
     }
     
+    /**
+     * rempli les attributs des navires après chargement des fichiers
+     * @param buffer
+     * @param one
+     * @param two
+     */
     public void remplirAttributs(ArrayList<Integer> buffer, ArrayList<Navire> one, ArrayList<Navire> two){
         
         boolean numero = true;
@@ -571,6 +617,13 @@ public class Interface extends JFrame implements ActionListener{
 
             boolean boucleDeux = true;
             int compt = 0;
+            
+            if(buffer.get(0) == 1)
+                joueur.addDestroit(true);
+            else
+                joueur.addDestroit(false);
+
+            buffer.remove(0);
             
             do{       
                 boolean boucleUne = true;
@@ -655,6 +708,9 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
     
+    /**
+     *Gère le menu sous forme graphique
+     */
     public void Container(){
         
         // phrase
@@ -693,6 +749,10 @@ public class Interface extends JFrame implements ActionListener{
         
     }
        
+    /**
+     * Méthode excécuté lors d'un clique sur la souris
+     * @param ae : action sur le bouton
+     */
     @Override // excécution après capture
     public void actionPerformed(ActionEvent ae) {
     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -704,15 +764,15 @@ public class Interface extends JFrame implements ActionListener{
                 id = graph.utilisateur("Comment tu t'appelles ?");
                 
                 if(id != null)
-                    JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id);
+                    JOptionPane.showMessageDialog(null, "Bienvenu(e) parmi nous " + id);
                 
             } else if (m_config_joueur == 2){
-                id1 = graph.utilisateur("Comment tu t'appelles joueur 1? ");
+                id1 = graph.utilisateur("Comment tu t'appelles joueur 1 ? ");
                 
                 if(id1 != null){
-                    id2 = graph.utilisateur("Comment tu t'appelles joueur 2 ");
+                    id2 = graph.utilisateur("Comment tu t'appelles joueur 2 ? ");
                     if(id2 != null){
-                        JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id1 + " et " +id2);
+                        JOptionPane.showMessageDialog(null, "Bienvenu(e) parmi nous " + id1 + " et " +id2);
                         m_deuxHumain = true;
                     }
                 }
@@ -774,6 +834,10 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
       
+    /**
+     * Affiche la grille
+     * @param joueur
+     */
     public void affichage(int joueur){
         if(m_console){
             Console console = new Console(m_joueurs);
@@ -787,6 +851,12 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
     
+    /**
+     * génère la fusée éclairante
+     * @param coordonnee
+     * @param joueur
+     * @return 
+     */
     public Map<Coord, Character> fusee_eclairante(Coord coordonnee, int joueur)
     {
                

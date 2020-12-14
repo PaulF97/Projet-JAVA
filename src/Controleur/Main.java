@@ -5,6 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+// sources : stack Overflow, developpez.dev, openClassroom, lix.polytechnique, emi.ac.ma, docle oracle et cours ece
 package Controleur;
 
 import Vue.Musique;
@@ -14,8 +16,8 @@ import Vue.Musique;
  *
  * @author charl
  */
-public class Main {
-
+public class Main{
+    
     /**
      * @param args the command line arguments
      */
@@ -24,9 +26,10 @@ public class Main {
         
         Interface test = new Interface();
         Musique son = new Musique();
-        
         son.start(); // lancement du thread
         test.Container();
         test.setVisible(true);
+         
+        
     }
 }
