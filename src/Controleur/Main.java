@@ -27,9 +27,5 @@ public class Main {
         son.start(); // lancement du thread
         test.Container();
         test.setVisible(true);
-        //test.jeu();
- 
-
     }
-
 }

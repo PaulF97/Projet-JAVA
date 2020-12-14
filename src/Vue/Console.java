@@ -141,25 +141,25 @@ public class Console {
                        
          if(grille == 0){
          
-            for(Navire elem : m_joueurs.get(joueur).getNavire()){
-                
-                for(int i=0;i<elem.getTaille();i++){
-                    //Cas bateau horizontal :
-                    if (elem.getHonrizontal()){
-                        int position = Case((char)(elem.getCoord().getY()+97),elem.getCoord().getX()+i);
-                        Bateau_Grille_Joueur[position] = elem.getCarac();
-                    }
-
-                    //Cas bateau vertical :
-                    else{
-                        int position = Case((char)(elem.getCoord().getY()+i+97),elem.getCoord().getX());
-                        Bateau_Grille_Joueur[position] = elem.getCarac();
-                    }
-                }
-         }
+             m_joueurs.get(joueur).getNavire().forEach((elem) -> {
+                 for(int i=0;i<elem.getTaille();i++){
+                     //Cas bateau horizontal :
+                     if (elem.getHonrizontal()){
+                         int position = Case((char)(elem.getCoord().getY()+97),elem.getCoord().getX()+i);
+                         Bateau_Grille_Joueur[position] = elem.getCarac();
+                     }
+                     
+                     //Cas bateau vertical :
+                     else{
+                         int position = Case((char)(elem.getCoord().getY()+i+97),elem.getCoord().getX());
+                         Bateau_Grille_Joueur[position] = elem.getCarac();
+                     }
+                 }
+             });
          
-            for(Coord elem : m_joueurs.get(joueur).getDefense())
-               Bateau_Grille_Joueur[Case((char)(elem.getY()+97),elem.getX())]='T';
+             m_joueurs.get(joueur).getDefense().forEach((elem) -> {
+                 Bateau_Grille_Joueur[Case((char)(elem.getY()+97),elem.getX())]='T';
+             });
 
             return Bateau_Grille_Joueur;
          }
@@ -183,8 +183,9 @@ public class Console {
        
         Robot robbie = new Robot();
         
+        robbie.delay(100);
         
-         robbie.mouseMove(800, 600);
+        robbie.mouseMove(800, 600);
         
         robbie.delay(100);
         
@@ -226,5 +227,4 @@ public class Console {
     } catch (AWTException ex) {}
       
     }
-         
 }

@@ -27,6 +27,23 @@ import javax.swing.JOptionPane;
 
 public class Graphique extends JFrame{
  
+    
+    public boolean nombreJoueur(){
+        JOptionPane nombre = new JOptionPane();
+        boolean config = false;
+        
+        String saisie = nombre.showInputDialog(null, "Tapez 1 si vous êtes seul,\n"
+                + "Tapez 2 si vous jouez en multijoueur", " Joueurs ", JOptionPane.QUESTION_MESSAGE);
+        
+        if("1".equals(saisie)){
+                config = true;
+            }else if("2".equals(saisie)){
+                config = false;
+            } else{
+                JOptionPane.showMessageDialog(null, "vous n'avez saisie un nombre incorrect","errur", JOptionPane.ERROR_MESSAGE);
+            }
+        return config;
+    }
 
   /**
  * Affiche règle du jeu à partir d'un .txt.
@@ -46,7 +63,7 @@ public class Graphique extends JFrame{
           System.exit(0);
         }
         
-        saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
+       // saisie.showMessageDialog(null, " Bienvenue " + nom, "Identification", JOptionPane.INFORMATION_MESSAGE);
 
         return nom;
     }
@@ -164,7 +181,7 @@ public class Graphique extends JFrame{
        
     }
     
-     /**
+ /**
  * Boite de dialogue pour sauvegarder en cours de jeu
  * Auteur : Paul Fisher 
  * @return nom de la partie  
