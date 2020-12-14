@@ -5,6 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+// sources : stack Overflow, developpez.dev, openClassroom, lix.polytechnique, emi.ac.ma, docle oracle et cours ece
 package Controleur;
 
 import Vue.Musique;
