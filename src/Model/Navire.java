@@ -14,7 +14,6 @@ import java.util.ArrayList;
     
      protected int m_taille;
      protected int m_puissanceTir;
-     protected int m_toucheNbre;
      
      protected Coord m_coord;
      
@@ -55,7 +54,6 @@ import java.util.ArrayList;
          m_honrizontal = honrizontal;
      }
      
-
      public void addTouche(boolean touche){
          m_touche = touche;
          
@@ -93,9 +91,5 @@ import java.util.ArrayList;
     
     public boolean getTouche(){
         return m_touche;
-    }
-    
-    public boolean getVie(){
-        return m_vie;
     }
 }

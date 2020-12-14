@@ -1,3 +1,4 @@
+
 package Vue;
 
 /*
@@ -6,12 +7,7 @@ package Vue;
  * and open the template in the editor.
  */
 
-
-
-import java.awt.Container;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,9 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -33,7 +27,7 @@ import javax.swing.JOptionPane;
 
 public class Graphique extends JFrame{
  
-    
+
   /**
  * Affiche règle du jeu à partir d'un .txt.
  * Auteur : Paul Fisher 
@@ -44,8 +38,7 @@ public class Graphique extends JFrame{
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
         
-       
-        String nom = saisie.showInputDialog(null, question_id, " Options ", JOptionPane.QUESTION_MESSAGE);
+        String nom = saisie.showInputDialog(null, question_id, " Identification ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
         if(nom == null){
@@ -96,52 +89,77 @@ public class Graphique extends JFrame{
     
     public String choixAction(){
         
-        JFrame f = new JFrame();
-        
+        JFrame position = new JFrame();
         setLayout(new FlowLayout());
-        
-        f.setSize(10,10);
-        f.setLocation(200, 500);
-        f.setVisible(true);
-
-        
+        position.setSize(10, 10); // taille du popUp
+        position.setLocation(200, 500); // localisation du PopUp dans la fenêtre
+        position.setVisible(true);
         
         JOptionPane choix = new JOptionPane();
-
         
-        String valeur = choix.showInputDialog(f, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
+        String valeur = choix.showInputDialog(position, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
                 + "Tapez 'tirer' si vous souhaitez effectuer un tir", "Choix action");
         
-        f.setVisible(false);
+        position.setVisible(false);
         return valeur;
     }
     
     public String PopUpTirer(){
         
+         JFrame position = new JFrame();
+        setLayout(new FlowLayout());
+        position.setSize(10, 10); // taille du popUp
+        position.setLocation(200, 500); // localisation du PopUp dans la fenêtre
+        position.setVisible(true);
+        
         JOptionPane tire = new JOptionPane();
         
-        String tirer = tire.showInputDialog(null, "Veuillez selectionner la case", "choix coordonnées");
+        String tirer = tire.showInputDialog(position, "Veuillez selectionner la case", "choix coordonnées");
 
+        position.setVisible(false);
+        
         return tirer;
        
     }
     
-      public String PopUpDeplacer(){
+    public String PopUpDeplacer(){
+        
+        JFrame position = new JFrame();
+        setLayout(new FlowLayout());
+        position.setSize(10, 10); // taille du popUp
+        position.setLocation(200, 500); // localisation du PopUp dans la fenêtre
+        position.setVisible(true);
         
         JOptionPane deplacer = new JOptionPane();
         
-        String mouvement = deplacer.showInputDialog(null, "Veuillez selectionner la nouvelle case", "choix coordonnées");
+        String mouvement = deplacer.showInputDialog(position, "Veuillez selectionner la nouvelle case", "choix coordonnées");
 
+        position.setVisible(false);
+        
         return mouvement;
        
     }
-    
-        public String SelectionBateau(){
+      
+    public void PopUpGagne(ArrayList gagnant){
+        JOptionPane gagne = new JOptionPane();
         
+        gagne.showMessageDialog(null,  "le "  +gagnant + "a gagné"  , "gagnant", JOptionPane.INFORMATION_MESSAGE);
+    }  
+    
+    
+    public String SelectionBateau(){
+        
+        JFrame position = new JFrame();
+        setLayout(new FlowLayout());
+        position.setSize(10, 10);        // taille du popUp
+        position.setLocation(200, 500); // localisation du PopUp dans la fenêtre
+        position.setVisible(true);
         JOptionPane choix = new JOptionPane();
         
-        String bateau = choix.showInputDialog(null, "Veuillez selectionner le bateau désiré", "choix navire");
+        String bateau = choix.showInputDialog(position, "Veuillez selectionner le bateau désiré", "choix navire");
 
+        position.setVisible(false);
+        
         return bateau;
        
     }
@@ -154,11 +172,28 @@ public class Graphique extends JFrame{
     public String MenuSauvegarde(){
     
         JOptionPane sauvegarde = new JOptionPane();
-
+        
         String nom_partie = sauvegarde.showInputDialog(null, " Saisir le nom de la partie ", "Sauvegarder", JOptionPane.QUESTION_MESSAGE); // saisie du message
 
         return nom_partie;
     }
+   
+    public boolean SauvegardeQuitter(){
+        
+        JOptionPane sauvegardeExit = new JOptionPane();
+        boolean etat = false;
+
+        String nom_partie = sauvegardeExit.showInputDialog(null, " Si vous voulez sauvegarder la partie tapez tapez oui ", "Quitter", JOptionPane.QUESTION_MESSAGE); // saisie du message
+    
+            if(!nom_partie.isEmpty()){
+                etat = true;
+            }else{
+                etat = false;
+            }
+    
+        return etat;
+    }
+    
     
  /**
  * Affiche pop si défault de sauvegarde
@@ -226,5 +261,4 @@ public class Graphique extends JFrame{
        
 }
 
-   
-
+ 

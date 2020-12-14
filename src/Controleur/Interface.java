@@ -51,6 +51,7 @@ public class Interface extends JFrame implements ActionListener{
     private boolean m_console;
     private boolean m_partie;
     private boolean m_quitter;
+    private boolean m_sauvegardeQuitter;
 
     Graphique graph = new Graphique();
     Musique son = new Musique();
@@ -63,11 +64,13 @@ public class Interface extends JFrame implements ActionListener{
     private JButton choix2 = new JButton("charger une partie");
     private JButton choix3 = new JButton("Sauvegarder");
     private JButton choix4 = new JButton("aide");
-    private JButton choix5 = new JButton("quitter");
+    private JButton choix5 = new JButton("Quitters");
+
     
 
     public Interface(){
         
+        m_sauvegardeQuitter = false;
         m_quitter = false;
         m_partie = false;
         m_joueurs = new ArrayList<Joueur>();
@@ -80,37 +83,40 @@ public class Interface extends JFrame implements ActionListener{
             
         m_console = true;
         creation();
-        
-        boolean gagnant = false;
-        
-               do{
+
         int j1 = 0;
         int j2 = 1;
+        boolean gagnant = false;
         
-        for(Joueur elem : m_joueurs){
-        
-        if(j1 == 0 || (m_deuxHumain && j1 == 1))
-        affichage(j1);
-        
-        choix(j1,j2);
-        
-        if(j1 == 0 || (m_deuxHumain && j1 == 1))
-        affichage(j1);
-        
-        j1+=1;
-        j2-=1;
-        
-        if(elem.perdant())
-        gagnant = true;
-        
-        try {
-        Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-        Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-        
+        do{
+            
+            for(Joueur elem : m_joueurs){
+
+                if(j1 == 0 || (m_deuxHumain && j1 == 1))
+                    affichage(j1);
+
+                    choix(j1,j2);
+
+                if(j1 == 0 || (m_deuxHumain && j1 == 1))
+                    affichage(j1);
+                    j1+=1;
+                    j2-=1;
+
+                    if(elem.perdant()) // J1 gagne
+                        gagnant = true;
+
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+
         }while(!gagnant);
+        
+
+        m_joueurs.get(j1);
+        graph.PopUpGagne(m_joueurs);
  
     }
     
@@ -564,12 +570,14 @@ public class Interface extends JFrame implements ActionListener{
         choix3.addActionListener(this);
         choix4.addActionListener(this);
         choix5.addActionListener(this);
+
         
         choix1.setBackground(Color.BLUE);
         choix2.setBackground(Color.WHITE);
         choix3.setBackground(Color.RED);
         choix4.setBackground(Color.GREEN);
         choix5.setBackground(Color.MAGENTA);
+
         
         // ajout des boutons & informations dans le conteneur
         Container.add(label);
@@ -578,6 +586,7 @@ public class Interface extends JFrame implements ActionListener{
         Container.add(choix3);
         Container.add(choix4);
         Container.add(choix5);
+
         
     }
        
@@ -613,13 +622,21 @@ public class Interface extends JFrame implements ActionListener{
                 Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             }
         
-        }else if (ae.getSource() == choix5){ // quitter
-           m_quitter = graph.MenuQuitter();
+        }else if(ae.getSource() == choix5){
+            m_quitter = graph.MenuQuitter();
            
-           if(m_quitter == true){ // sauvegarde si on souhaite quitter
-               sauvegarde();
-               System.exit(0); // ferme le jeu
-           }
+            if(m_quitter == true){ // sauvegarde si on souhaite quitter
+                m_sauvegardeQuitter = graph.SauvegardeQuitter();
+                System.out.println(m_sauvegardeQuitter);
+                if(m_sauvegardeQuitter){
+                    sauvegarde();
+                    System.exit(0); // ferme le jeu
+                }else {
+                    System.exit(0);
+               
+                }
+        }
+            
         }else {
             
         }
@@ -638,5 +655,3 @@ public class Interface extends JFrame implements ActionListener{
         }
     }
 }
-
-
