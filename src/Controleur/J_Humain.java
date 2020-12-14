@@ -12,5 +12,4 @@ package Controleur;
 public class J_Humain extends Joueur{
 
     
-    
 }

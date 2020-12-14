@@ -46,7 +46,6 @@ import java.util.ArrayList;
         m_eclairante = bool;
     }
      
-
      public void addVie(boolean bool){
          m_vie = bool;
      }
@@ -66,7 +65,6 @@ import java.util.ArrayList;
          
 
          if(touche && m_toucheNbre != m_taille)
-
              m_toucheNbre +=1;
      }
      

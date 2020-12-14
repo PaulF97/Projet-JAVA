@@ -167,7 +167,28 @@ public class Interface extends JFrame implements ActionListener{
         
         }
         else{
-            //Ordi
+               J_Ordinateur ordi = (J_Ordinateur)m_joueurs.get(j1);
+                
+               //Premiere possibilité : le tir d'avant a touché un bateau 
+               if (ordi.Cible_Touche())            
+                   tirer(j1,j2, ordi.Choix_bateau_Aleatoire(), ordi.Case_cible_Precis());                   
+                           
+
+               //Choix aléatoire d'une action : générer un nombre aléatoire entre 0 et 9
+               int Choix = intAlea(0, 9);
+
+               //Se déplacer dans 10% des cas : 
+               if (Choix == 0)
+               {
+                   Coord buffer[] = ordi.Cases_deplacement();   
+                   ordi.deplacer(buffer[0], buffer[1]);
+               }
+               else
+                    tirer(j1,j2, ordi.Choix_bateau_Aleatoire(), ordi.Case_cible());    
+               
+               m_joueurs.remove(j1);
+               m_joueurs.add(ordi);
+               
         }
     }
     

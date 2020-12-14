@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class N_Cuirasse extends Navire{
     
     public N_Cuirasse (){
+
         
         super();
         

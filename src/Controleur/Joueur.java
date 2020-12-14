@@ -16,9 +16,9 @@ import java.util.Map;
  */
 public abstract class Joueur {
     
-    private Map<Coord, Boolean>  m_attaque;
-    private ArrayList<Coord> m_defense;
-    private ArrayList<Navire> m_navires;
+    protected Map<Coord, Boolean>  m_attaque;
+    protected ArrayList<Coord> m_defense;
+    protected ArrayList<Navire> m_navires;
     
     public Joueur(){
         m_attaque = new HashMap<>();
