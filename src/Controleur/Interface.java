@@ -610,7 +610,7 @@ public class Interface extends JFrame implements ActionListener{
             m_config_joueur = graph.nombreJoueur();
                 if(m_config_joueur){ // un seul joueur
                     id = graph.utilisateur("Comment tu t'appelles ?");
-                    JOptionPane.showMessageDialog(null, "Bienvenue parmis nous " + id);
+                    JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id);
                 } else{
                     id1 = graph.utilisateur("Comment tu t'appelles joueur 1? ");
                     id2 = graph.utilisateur("Comment tu t'appelles joueur 2 ");
