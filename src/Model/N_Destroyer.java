@@ -13,6 +13,9 @@ import java.util.ArrayList;
  */
 public class N_Destroyer extends Navire{
     
+ /**
+ * Initialisation du destroyeur
+ */
     public N_Destroyer(){
         
         super();

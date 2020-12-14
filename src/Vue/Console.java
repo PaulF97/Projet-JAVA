@@ -28,6 +28,11 @@ public class Console {
          m_joueurs = joueurs;
      }
 
+  /**
+ * Affiche la grille du jeu dans la console
+ * Auteur : Savinien Godineau
+ * @param joueur 
+ */
      public void affichage(int joueur)
     {
        //----------------------------------------------------      
@@ -124,6 +129,13 @@ public class Console {
         
     }   
     
+ /**
+ * Transformer des coordonnées pour l'afficher dans la grille
+ * Auteur : Savinien Godineau
+ * @param y
+ * @param x 
+ * @return  
+ */
     public static int Case(char y,int x){   
         int a = (int)y - 97;
         int b = 15*a;
@@ -131,6 +143,13 @@ public class Console {
         return x+b;
  }
     
+ /**
+ * Placement des bateaux dans la console
+ * Auteur : Charles Hamery
+ * @param joueur 
+ * @param grille 
+ * @return
+ */
      public char[] Initialisation_Bateau(int joueur, int grille)
     {  
         
@@ -181,6 +200,10 @@ public class Console {
         }
     } 
 
+ /**
+ * Clear la console automatiquement
+ * Auteur : Charles Hamery
+ */
     public void clearScreen() {  
      
       try {

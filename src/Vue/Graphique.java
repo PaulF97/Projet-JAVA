@@ -28,7 +28,11 @@ import javax.swing.JOptionPane;
 
 public class Graphique extends JFrame{
  
-    
+ /**
+ * Permet de choisir de jouer en solo où à deux
+ * Auteur : Paul Fisher  
+ * @return config : le nombre de joueur souhaités
+ */
     public int nombreJoueur(){
         JOptionPane nombre = new JOptionPane();
         int config = 0;
@@ -101,6 +105,11 @@ public class Graphique extends JFrame{
         return nom;
     }
     
+    /**
+ * Permet de choisir l'action à effectuer, tirer où déplacer
+ * Auteur : Paul Fisher
+ * @return valeur : le choix de l'utilisateur
+ */
     public String choixAction(){
         
         JFrame position = new JFrame();
@@ -122,6 +131,11 @@ public class Graphique extends JFrame{
         return valeur;
     }
     
+ /**
+ * Permet d'effectuer un tir
+ * Auteur : Paul Fisher
+ * @return tirer : correspond à l'emplacement du tir 
+ */
     public String PopUpTirer(){
         
          JFrame position = new JFrame();
@@ -139,7 +153,12 @@ public class Graphique extends JFrame{
         return tirer;
        
     }
-    
+   
+ /**
+ * Permet de saisir de faire bouger un bateau
+ * Auteur : Paul Fisher
+ * @return la nouvelle position
+ */
     public String PopUpDeplacer(){
         
         JFrame position = new JFrame();
@@ -161,13 +180,24 @@ public class Graphique extends JFrame{
        
     }
       
+ /**
+ *Affiche un popUp si il y'a un gagnant
+ * Auteur : Paul Fisher
+ * @param gagnant : identité du joueur
+ */
+    
     public void PopUpGagne(String gagnant){
         JOptionPane gagne = new JOptionPane();
         
         gagne.showMessageDialog(null,  "Le "  +gagnant + "a gagné"  , "gagnant", JOptionPane.INFORMATION_MESSAGE);
     }  
     
-    
+ /**
+ * PopUp pour sélectionner le bateau souhaité
+ * Auteur : Paul Fisher
+ * @return coordonnées du bateau
+ */
+   
     public String SelectionBateau(){
         
         JFrame position = new JFrame();
@@ -193,6 +223,7 @@ public class Graphique extends JFrame{
  * Auteur : Paul Fisher 
  * @return nom de la partie  
  */
+    
     public String MenuSauvegarde(){
     
         JOptionPane sauvegarde = new JOptionPane();
@@ -201,6 +232,12 @@ public class Graphique extends JFrame{
 
         return nom_partie;
     }
+    
+    /**
+ * Générer le PopUp de sauvegarde si on souhaite quitter
+ * Auteur : Paul Fisher
+ * @return etat true si sauvegarder false si quitter
+ */
    
     public boolean SauvegardeQuitter(){
         

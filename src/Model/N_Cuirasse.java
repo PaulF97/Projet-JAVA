@@ -13,6 +13,9 @@ import java.util.ArrayList;
  */
 public class N_Cuirasse extends Navire{
     
+ /**
+ * Initialisation du croiseur
+ */
     public N_Cuirasse (){
 
         

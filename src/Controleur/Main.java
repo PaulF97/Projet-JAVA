@@ -14,8 +14,8 @@ import Vue.Musique;
  *
  * @author charl
  */
-public class Main {
-
+public class Main{
+    
     /**
      * @param args the command line arguments
      */
