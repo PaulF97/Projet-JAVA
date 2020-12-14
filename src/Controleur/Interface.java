@@ -71,8 +71,8 @@ public class Interface extends JFrame implements ActionListener{
     private JButton choix2 = new JButton("charger une partie");
     private JButton choix3 = new JButton("Sauvegarder");
     private JButton choix4 = new JButton("aide");
-    private JButton choix5 = new JButton("Pause");
-    private JButton choix6 = new JButton("Quitter");
+    private JButton choix5 = new JButton("Quitters");
+
     
 
     public Interface(){
@@ -575,7 +575,7 @@ public class Interface extends JFrame implements ActionListener{
         choix3.addActionListener(this);
         choix4.addActionListener(this);
         choix5.addActionListener(this);
-        choix6.addActionListener(this);
+
         
         choix1.setBackground(Color.BLUE);
         choix2.setBackground(Color.WHITE);
