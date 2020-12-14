@@ -6,6 +6,7 @@ package Vue;
  * and open the template in the editor.
  */
 
+import java.awt.FlowLayout;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,7 +36,7 @@ public class Graphique extends JFrame{
     public String utilisateur(String question_id){
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
-       
+        
         String nom = saisie.showInputDialog(null, question_id, " Identification ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
@@ -87,30 +88,53 @@ public class Graphique extends JFrame{
     
     public String choixAction(){
         
+        JFrame position = new JFrame();
+        setLayout(new FlowLayout());
+        position.setSize(10, 10); // taille du popUp
+        position.setLocation(200, 500); // localisation du PopUp dans la fenêtre
+        position.setVisible(true);
+        
         JOptionPane choix = new JOptionPane();
         
-        String valeur = choix.showInputDialog(null, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
+        String valeur = choix.showInputDialog(position, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
                 + "Tapez 'tirer' si vous souhaitez effectuer un tir", "Choix action");
         
+        position.setVisible(false);
         return valeur;
     }
     
     public String PopUpTirer(){
         
+         JFrame position = new JFrame();
+        setLayout(new FlowLayout());
+        position.setSize(10, 10); // taille du popUp
+        position.setLocation(200, 500); // localisation du PopUp dans la fenêtre
+        position.setVisible(true);
+        
         JOptionPane tire = new JOptionPane();
         
-        String tirer = tire.showInputDialog(null, "Veuillez selectionner la case", "choix coordonnées");
+        String tirer = tire.showInputDialog(position, "Veuillez selectionner la case", "choix coordonnées");
 
+        position.setVisible(false);
+        
         return tirer;
        
     }
     
     public String PopUpDeplacer(){
         
+        JFrame position = new JFrame();
+        setLayout(new FlowLayout());
+        position.setSize(10, 10); // taille du popUp
+        position.setLocation(200, 500); // localisation du PopUp dans la fenêtre
+        position.setVisible(true);
+        
         JOptionPane deplacer = new JOptionPane();
         
-        String mouvement = deplacer.showInputDialog(null, "Veuillez selectionner la nouvelle case", "choix coordonnées");
+        String mouvement = deplacer.showInputDialog(position, "Veuillez selectionner la nouvelle case", "choix coordonnées");
 
+        position.setVisible(false);
+        
         return mouvement;
        
     }
@@ -121,12 +145,20 @@ public class Graphique extends JFrame{
         gagne.showMessageDialog(null,  "le "  +gagnant + "a gagné"  , "gagnant", JOptionPane.INFORMATION_MESSAGE);
     }  
     
-        public String SelectionBateau(){
+    
+    public String SelectionBateau(){
         
+        JFrame position = new JFrame();
+        setLayout(new FlowLayout());
+        position.setSize(10, 10);        // taille du popUp
+        position.setLocation(200, 500); // localisation du PopUp dans la fenêtre
+        position.setVisible(true);
         JOptionPane choix = new JOptionPane();
         
-        String bateau = choix.showInputDialog(null, "Veuillez selectionner le bateau désiré", "choix navire");
+        String bateau = choix.showInputDialog(position, "Veuillez selectionner le bateau désiré", "choix navire");
 
+        position.setVisible(false);
+        
         return bateau;
        
     }
@@ -139,7 +171,7 @@ public class Graphique extends JFrame{
     public String MenuSauvegarde(){
     
         JOptionPane sauvegarde = new JOptionPane();
-
+        
         String nom_partie = sauvegarde.showInputDialog(null, " Saisir le nom de la partie ", "Sauvegarder", JOptionPane.QUESTION_MESSAGE); // saisie du message
 
         return nom_partie;
@@ -147,19 +179,18 @@ public class Graphique extends JFrame{
    
     public boolean SauvegardeQuitter(){
         
-    JOptionPane sauvegardeExit = new JOptionPane();
-    boolean etat = false;
-    
-    String nom_partie = sauvegardeExit.showInputDialog(null, " Si vous voulez sauvegarder la partie tapez tapez oui ", "Quitter", JOptionPane.QUESTION_MESSAGE); // saisie du message
-    
+        JOptionPane sauvegardeExit = new JOptionPane();
+        boolean etat = false;
 
-        if(!nom_partie.isEmpty()){
-            etat = true;
-        }else{
-            etat = false;
-        }
+        String nom_partie = sauvegardeExit.showInputDialog(null, " Si vous voulez sauvegarder la partie tapez tapez oui ", "Quitter", JOptionPane.QUESTION_MESSAGE); // saisie du message
     
-    return etat;
+            if(!nom_partie.isEmpty()){
+                etat = true;
+            }else{
+                etat = false;
+            }
+    
+        return etat;
     }
     
     
