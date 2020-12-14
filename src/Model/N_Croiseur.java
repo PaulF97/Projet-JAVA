@@ -15,6 +15,7 @@ public class N_Croiseur extends Navire{
     
     public N_Croiseur(){
         super();
+
         m_taille = 5;
         m_puissanceTir = 4;
         m_initCoord = false;

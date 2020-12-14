@@ -14,7 +14,10 @@ import java.util.ArrayList;
 public class N_Cuirasse extends Navire{
     
     public N_Cuirasse (){
+
+        
         super();
+        
         m_taille = 7;
         m_puissanceTir = 9;
         m_initCoord = false;

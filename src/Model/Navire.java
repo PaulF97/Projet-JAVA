@@ -31,6 +31,10 @@ import java.util.ArrayList;
          m_touche = false;
          m_vie = true;
          m_toucheNbre = 0;
+
+     }
+     
+
          m_eclairante = false;
      }
      
@@ -41,7 +45,6 @@ import java.util.ArrayList;
     public void addEclairante(boolean bool){
         m_eclairante = bool;
     }
-     
      
      public void addVie(boolean bool){
          m_vie = bool;
@@ -60,7 +63,8 @@ import java.util.ArrayList;
      public void addTouche(boolean touche){
          m_touche = touche;
          
-        if(touche && m_toucheNbre != m_taille)
+
+         if(touche && m_toucheNbre != m_taille)
              m_toucheNbre +=1;
      }
      
