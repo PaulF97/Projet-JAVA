@@ -113,7 +113,7 @@ public class Graphique extends JFrame{
         
         String valeur;
         valeur = choix.showInputDialog(position, "Tapez 'deplacer' si vous souhaitez vous déplacer,\n"
-                + "Tapez 'tirer' si vous souhaitez effectuer un tir", "Choix action");
+                + "Tapez 'tirer' si vous souhaitez effectuer un tir,\n"+"(quitter ou sauvegarder)", "Choix action");
         
         if(valeur ==  null)
             valeur = "a";
@@ -161,7 +161,7 @@ public class Graphique extends JFrame{
        
     }
       
-    public void PopUpGagne(Joueur gagnant){
+    public void PopUpGagne(String gagnant){
         JOptionPane gagne = new JOptionPane();
         
         gagne.showMessageDialog(null,  "le "  +gagnant + "a gagné"  , "gagnant", JOptionPane.INFORMATION_MESSAGE);
@@ -208,13 +208,8 @@ public class Graphique extends JFrame{
         boolean etat = false;
 
         String nom_partie = sauvegardeExit.showInputDialog(null, " Si vous voulez sauvegarder la partie tapez tapez oui ", "Quitter", JOptionPane.QUESTION_MESSAGE); // saisie du message
-    
-            if(!nom_partie.isEmpty()){
-                etat = true;
-            }else{
-                etat = false;
-            }
-    
+        etat = "oui".equals(nom_partie);
+            
         return etat;
     }
     
@@ -251,7 +246,6 @@ public class Graphique extends JFrame{
                     while((ligne = lecture.readLine()) != null){ // lorsque la ligne n'est pas vide
                         donnees.add(ligne); // stockage d'une ligne dans un ArrayList
                         donnees.add("\n");
-                       //  System.out.println(ligne);
                     }
              
                     aide.showMessageDialog(null, donnees , "Règles du jeu", JOptionPane.INFORMATION_MESSAGE); // affichage du contenu dans PopUp
@@ -260,7 +254,6 @@ public class Graphique extends JFrame{
   
                 // Exception     
                 }catch(FileNotFoundException e){ // dans le cas ou le fichier est introuvable
-                    System.err.println("le fichier " + regle.toString() + " est introuvable");
                 } 
     }
     
