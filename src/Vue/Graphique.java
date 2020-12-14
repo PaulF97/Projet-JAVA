@@ -6,8 +6,6 @@ package Vue;
  * and open the template in the editor.
  */
 
-
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +25,7 @@ import javax.swing.JOptionPane;
 
 public class Graphique extends JFrame{
  
-    
+
   /**
  * Affiche règle du jeu à partir d'un .txt.
  * Auteur : Paul Fisher 
@@ -38,7 +36,7 @@ public class Graphique extends JFrame{
         
         JOptionPane saisie = new JOptionPane(); // création de la boite de dialogue
        
-        String nom = saisie.showInputDialog(null, question_id, " Options ", JOptionPane.QUESTION_MESSAGE);
+        String nom = saisie.showInputDialog(null, question_id, " Identification ", JOptionPane.QUESTION_MESSAGE);
         //saisie.showMessageDialog(null, "Vous avez saisie " + nom, null , JOptionPane.INFORMATION_MESSAGE);
         
         if(nom == null){
@@ -107,7 +105,7 @@ public class Graphique extends JFrame{
        
     }
     
-      public String PopUpDeplacer(){
+    public String PopUpDeplacer(){
         
         JOptionPane deplacer = new JOptionPane();
         
