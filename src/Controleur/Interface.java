@@ -39,23 +39,12 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
-import javax.sound.sampled.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 
 
 /**
@@ -104,7 +93,7 @@ public class Interface extends JFrame implements ActionListener{
         int j1 = 0;
         int j2 = 1;
         boolean gagnant = false;
-      
+        
         do{
             
             for(Joueur elem : m_joueurs){
