@@ -55,15 +55,19 @@ public class Interface extends JFrame implements ActionListener{
     
     private ArrayList<Joueur> m_joueurs;
     private boolean m_sauvegarde;
+    private boolean m_config_joueur;
     private boolean m_console;
     private boolean m_partie;
     private boolean m_quitter;
     private boolean m_sauvegardeQuitter;
-
+    private String id;
+    private String id1;
+    private String id2;
+    private boolean m_deuxHumain;
+    
     Graphique graph = new Graphique();
     Musique son = new Musique();
-    private String id;
-    private boolean m_deuxHumain;
+
 
     
 
@@ -81,8 +85,12 @@ public class Interface extends JFrame implements ActionListener{
         m_quitter = false;
         m_partie = false;
         m_joueurs = new ArrayList<Joueur>();
-        id = graph.utilisateur("Comment tu t'appelles ?");
-        System.out.println(id);
+        m_config_joueur = false;
+        id = null;
+        id1 = null;
+        id2 = null;
+        /*        id = graph.utilisateur("Comment tu t'appelles ?");
+        System.out.println(id);*/
        
     }
     
@@ -599,6 +607,16 @@ public class Interface extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if (ae.getSource() == choix1){ // création de la partie
+            m_config_joueur = graph.nombreJoueur();
+                if(m_config_joueur){ // un seul joueur
+                    id = graph.utilisateur("Comment tu t'appelles ?");
+                    JOptionPane.showMessageDialog(null, "Bienvenue parmis nous " + id);
+                } else{
+                    id1 = graph.utilisateur("Comment tu t'appelles joueur 1? ");
+                    id2 = graph.utilisateur("Comment tu t'appelles joueur 2 ");
+                    JOptionPane.showMessageDialog(null, "Bienvenue parmi nous " + id1 + " et " +id2);
+                }
+                
             m_sauvegarde = false;
             m_partie = true;
             graph.MenuCommencer();
