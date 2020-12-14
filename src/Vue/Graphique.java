@@ -116,6 +116,12 @@ public class Graphique extends JFrame{
         return mouvement;
        
     }
+      
+    public void PopUpGagne(ArrayList gagnant){
+        JOptionPane gagne = new JOptionPane();
+        
+        gagne.showMessageDialog(null,  "le "  +gagnant + "a gagné"  , "gagnant", JOptionPane.INFORMATION_MESSAGE);
+    }  
     
         public String SelectionBateau(){
         
