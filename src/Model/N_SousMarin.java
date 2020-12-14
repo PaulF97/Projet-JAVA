@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class N_SousMarin extends Navire{
     
     public N_SousMarin(){
+        super();
         m_taille = 1;
         m_puissanceTir = 1;
         m_initCoord = false;
